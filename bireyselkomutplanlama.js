@@ -3,8 +3,8 @@ function sleep(ms) {
   }
   if (game_data.player.id === 5376322 && game_data.player.name === 'Lord Asitane' && server_utc_diff === 10800 ) {
 
-    var eminerdemir = 0; // KURULUM Ä°STEÄÄ° GEREKMEKTEDÄ°R...
-    if (eminerdemir === 0) {
+    var eminerdemir = 30; // KURULUM Ä°STEÄÄ° GEREKMEKTEDÄ°R...
+    if (eminerdemir === 30) {
         if (premium) {
 
     fetch("https://worldtimeapi.org/api/ip")
