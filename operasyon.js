@@ -1,315 +1,213 @@
-/* 
-	Yazar(Author): Konsantre
-	Forum: http://forum.klanlar.org
-	Iletisim(Contact): konsantre.op@gmail.com
+// Güncellenmiş ve Düzeltmiş Kod
 
-	TribalWars Turkey - JavaScript Moderator
-*/
-
-if (premium == false) {
+if (typeof premium === 'undefined' || !premium) {
     alert('Bu scripti çalıştırmak için premium hesabınız olması gerekir.');
-    end();
+    throw new Error('Premium hesap gereklidir.');
 }
-if (game_data.screen != 'info_player') {
+
+if (game_data.screen !== 'info_player') {
     alert('KNS Operasyon Planlayıcısı\n\nBu script sadece oyuncu profillerinde çalışır.');
-    end();
+    throw new Error('Oyuncu profili ekranında çalıştırılmalıdır.');
 }
 
-var Koor = $('#villages_list').html().match(/\d+\|\d+/g);
-var s1 = Koor.join('a');
-var s2 = s1.match(/\|/g);
-var s3 = s2.join('');
-var Sayi = s3.length;
-Koor4 = [];
-var Koor_a = $('#villages_list').html().match(/\d+\|\d+/g);
-var l = Koor_a.length;
-for (i = 0; i < l; i++) {
-    Koor4.push(Koor_a[i]);
-    Koor4.push(Koor_a[i]);
-    Koor4.push(Koor_a[i]);
-    Koor4.push(Koor_a[i]);
+var Koor = $('#villages_list').text().match(/\d+\|\d+/g);
+var Koor4 = [];
+for (var i = 0; i < Koor.length; i++) {
+    for (var j = 0; j < 4; j++) {
+        Koor4.push(Koor[i]);
+    }
 }
-var Oyuncu = $('h2[class=]').html().trim();
-if (Oyuncu.length > 32) {
-    var Oyuncu = game_data.player.name;
+var Oyuncu = $('h2').first().text().trim() || game_data.player.name;
+
+var z1 = "<select id='gun' disabled><option value='x'>Gün</option>";
+var z2 = "<select id='ay' disabled><option value='x'>Ay</option>";
+var z3 = "<select id='st' disabled><option value='x'>Saat</option>";
+var z4 = "<select id='dk' disabled><option value='x'>Dakika</option>";
+
+for (var i = 1; i <= 31; i++) {
+    z1 += "<option value='" + i + "'>" + (i < 10 ? "0" : "") + i + "</option>";
 }
-var z1 = "<select id='gun' onchange='' disabled><option value='x'>Gün</option><option value='1'>01</option><option value='2'>02</option><option value='3'>03</option><option value='4'>04</option><option value='5'>05</option><option value='6'>06</option><option value='7'>07</option><option value='8'>08</option><option value='9'>09</option><option value='10'>10</option><option value='11'>11</option><option value='12'>12</option><option value='13'>13</option><option value='14'>14</option><option value='15'>15</option><option value='16'>16</option><option value='17'>17</option><option value='18'>18</option><option value='19'>19</option><option value='20'>20</option><option value='21'>21</option><option value='22'>22</option><option value='23'>23</option><option value='24'>24</option><option value='25'>25</option><option value='26'>26</option><option value='27'>27</option><option value='28'>28</option><option value='29'>29</option><option value='30'>30</option><option value='31'>31</option></select>";
-var z2 = "<select id='ay' onchange='' disabled><option value='x'>Ay</option><option value='Ocak'>Ocak</option><option value='Şubat'>Şubat</option><option value='Mart'>Mart</option><option value='Nisan'>Nisan</option><option value='Mayıs'>Mayıs</option><option value='Haziran'>Haziran</option><option value='Temmuz'>Temmuz</option><option value='Ağustos'>Ağustos</option><option value='Eylül'>Eylül</option><option value='Ekim'>Ekim</option><option value='Kasım'>Kasım</option><option value='Aralık'>Aralık</option></select>";
-var z3 = "<select id='st' onchange='' disabled><option value='x'>Saat</option><option value='00'>00</option><option value='01'>01</option><option value='02'>02</option><option value='03'>03</option><option value='04'>04</option><option value='05'>05</option><option value='06'>06</option><option value='07'>07</option><option value='08'>08</option><option value='09'>09</option><option value='10'>10</option><option value='11'>11</option><option value='12'>12</option><option value='13'>13</option><option value='14'>14</option><option value='15'>15</option><option value='16'>16</option><option value='17'>17</option><option value='18'>18</option><option value='19'>19</option><option value='20'>20</option><option value='21'>21</option><option value='22'>22</option><option value='23'>23</option></select>";
-var z4 = "<select id='dk' onchange='' disabled><option value='x'>Dakika</option><option value='00'>00</option><option value='05'>05</option><option value='10'>10</option><option value='15'>15</option><option value='20'>20</option><option value='25'>25</option><option value='30'>30</option><option value='35'>35</option><option value='40'>40</option><option value='45'>45</option><option value='50'>50</option><option value='55'>55</option></select>";
+
+var aylar = ["Ocak", "Şubat", "Mart", "Nisan", "Mayıs", "Haziran", "Temmuz", "Ağustos", "Eylül", "Ekim", "Kasım", "Aralık"];
+for (var i = 0; i < aylar.length; i++) {
+    z2 += "<option value='" + aylar[i] + "'>" + aylar[i] + "</option>";
+}
+
+for (var i = 0; i < 24; i++) {
+    z3 += "<option value='" + i + "'>" + (i < 10 ? "0" : "") + i + "</option>";
+}
+
+for (var i = 0; i < 60; i += 5) {
+    z4 += "<option value='" + i + "'>" + (i < 10 ? "0" : "") + i + "</option>";
+}
+
+z1 += "</select>";
+z2 += "</select>";
+z3 += "</select>";
+z4 += "</select>";
+
 var Gra = {
-    Puan: ('[img]http://tr.twstats.com/image.php?type=playergraph&amp;graph=points&amp;id=' + InfoPlayer.player_id + '&amp;s=' + game_data.world + '[/img]'),
-    Koy: ('[img]http://tr.twstats.com/image.php?type=playergraph&amp;graph=villages&amp;id=' + InfoPlayer.player_id + '&amp;s=' + game_data.world + '[/img]'),
-    Oda: ('[img]http://tr.twstats.com/image.php?type=playergraph&amp;graph=oda&amp;id=' + InfoPlayer.player_id + '&amp;s=' + game_data.world + '[/img]'),
-    Odd: ('[img]http://tr.twstats.com/image.php?type=playergraph&amp;graph=odd&amp;id=' + InfoPlayer.player_id + '&amp;s=' + game_data.world + '[/img]'),
+    Puan: "[img]http://tr.twstats.com/image.php?type=playergraph&amp;graph=points&amp;id=" + InfoPlayer.player_id + "&amp;s=" + game_data.world + "[/img]",
+    Koy: "[img]http://tr.twstats.com/image.php?type=playergraph&amp;graph=villages&amp;id=" + InfoPlayer.player_id + "&amp;s=" + game_data.world + "[/img]",
+    Oda: "[img]http://tr.twstats.com/image.php?type=playergraph&amp;graph=oda&amp;id=" + InfoPlayer.player_id + "&amp;s=" + game_data.world + "[/img]",
+    Odd: "[img]http://tr.twstats.com/image.php?type=playergraph&amp;graph=odd&amp;id=" + InfoPlayer.player_id + "&amp;s=" + game_data.world + "[/img]"
 };
+
 var Script = {
-    Sah: ("[spoiler=Şahmerdan/Mancınık Scripti][code]javascript:Kont='" + Koor.join(" ") + "';$.getScript('https://media.innogamescdn.com/com_DS_TR/Scripts/80123.js')[/code][/spoiler]"),
-    Sah4: ("[spoiler=Şahmerdan/Mancınık Scripti (4'lü)][code]javascript:Kont='" + Koor4.join(" ") + "';$.getScript('https://media.innogamescdn.com/com_DS_TR/Scripts/80123.js')[/code][/spoiler]"),
-    Miz: ("[spoiler=Mızrakçı/Baltacı Scripti][code]javascript:Kont='" + Koor.join(" ") + "';$.getScript('https://media.innogamescdn.com/com_DS_TR/Scripts/90123.js')[/code][/spoiler]"),
-    Miz4: ("[spoiler=Mızrakçı/Baltacı Scripti (4'lü)][code]javascript:Kont='" + Koor4.join(" ") + "';$.getScript('https://media.innogamescdn.com/com_DS_TR/Scripts/90123.js')[/code][/spoiler]"),
+    Sah: "[spoiler=Şahmerdan/Mancınık Scripti][code]javascript:Kont='" + Koor.join(" ") + "';$.getScript('https://eksere.github.io/klanlar/operasyonsah.js')[/code][/spoiler]",
+    Sah4: "[spoiler=Şahmerdan/Mancınık Scripti (4\'lü)][code]javascript:Kont='" + Koor4.join(" ") + "';$.getScript('https://eksere.github.io/klanlar/operasyonsah.js')[/code][/spoiler]",
+    Miz: "[spoiler=Mızrakçı/Baltacı Scripti][code]javascript:Kont='" + Koor.join(" ") + "';$.getScript('https://eksere.github.io/klanlar/balta.js')[/code][/spoiler]",
+    Miz4: "[spoiler=Mızrakçı/Baltacı Scripti (4\'lü)][code]javascript:Kont='" + Koor4.join(" ") + "';$.getScript('https://eksere.github.io/klanlar/balta.js')[/code][/spoiler]"
 };
 
-for (i = 0; i < Sayi; i++) {
-    $('#villages_list').html($('#villages_list').html().replace(Koor[i], "<input class='kont' id='i" + i + "' placeholder='Oyuncu ismi girin'/>"));
-}
-$("input[id^='i']").hide();
+var apDiv = document.createElement('div');
+apDiv.id = 'div';
+apDiv.style.width = '300px';
+apDiv.style.height = 'auto';
+apDiv.style.left = '60%';
+apDiv.style.top = '30%';
+apDiv.style.position = 'fixed';
+apDiv.style.overflowY = 'hidden';
+apDiv.style.backgroundColor = '#FFccAA';
+apDiv.style.borderRadius = '20px';
+apDiv.style.border = '3px solid brown';
 
-function kapa() {
-    $('#div').remove();
-    location.reload();
+var tableHTML = "<table width='100%'><tr><th width='90%'><center><b id='isim' style='color:purple'>KNS Operasyon Planlayıcısı<sup>v1.1</sup></b></center></th><th width='10%'><button id='kapa' style='color:white;font-weight:bold;background-color:red;border:2px solid red;border-radius:20px;cursor:pointer;' type='button'>X</button></th></tr></table>";
+
+apDiv.innerHTML = tableHTML;
+var asDiv = document.createElement('div');
+asDiv.id = 'as';
+asDiv.style.paddingLeft = '20px';
+asDiv.style.paddingTop = '5px';
+asDiv.style.paddingBottom = '10px';
+asDiv.style.paddingRight = '0px';
+
+apDiv.appendChild(asDiv);
+document.getElementById('inner-border').appendChild(apDiv);
+
+asDiv.innerHTML += "<input id='zaman' type='checkbox' onclick='zaman();'/> Operasyon zamanını ayarla<br/>";
+asDiv.innerHTML += "&nbsp;&nbsp;&nbsp;&nbsp;" + z1 + "&nbsp;" + z2 + "&nbsp;" + z3 + "&nbsp;" + z4 + "<br/>";
+asDiv.innerHTML += "<input id='opmes' type='checkbox' onclick='opmesaj();'/> Operasyon anlatım mesajı ekle<br/>";
+asDiv.innerHTML += "<textarea id='mes' style='width:85%;height:70px;margin-left:20px;background-color:transparent;resize:none;display:none;border-radius:10px'></textarea>";
+asDiv.innerHTML += "<input id='koy' type='checkbox' onclick='koyler();'/> Köy koordinatlarını ekle<br/>";
+asDiv.innerHTML += "<input id='alin' type='checkbox' style='margin-left:15px' onclick='koyler();' disabled/> Köylerin dağıtımını yap<br/>";
+asDiv.innerHTML += "<input id='alsil' type='checkbox' style='margin-left:30px' onclick='' disabled/> Dağıtılmayan köyleri ekleme<br/>";
+asDiv.innerHTML += "<input id='gra' type='checkbox' onclick=''/> Gelişim grafiklerini ekle<br/>";
+asDiv.innerHTML += "<input id='scr' type='checkbox' onclick='scr();'/> Fake scriptleri ekle<br/>";
+asDiv.innerHTML += "<input id='scr1' type='checkbox' style='margin-left:15px' onclick='' disabled/> Şahmerdan/Mancınık Scripti<br/>";
+asDiv.innerHTML += "<input id='scr2' type='checkbox' style='margin-left:15px' onclick='' disabled/> Şahmerdan/Mancınık Scripti (4\'lü)<br/>";
+asDiv.innerHTML += "<input id='scr3' type='checkbox' style='margin-left:15px' onclick='' disabled/> Mızrakçı/Baltacı Scripti<br/>";
+asDiv.innerHTML += "<input id='scr4' type='checkbox' style='margin-left:15px' onclick='' disabled/> Mızrakçı/Baltacı Scripti (4\'lü)<br/>";
+asDiv.innerHTML += "<br/><button id='tamam' style='cursor:pointer;color:purple;margin-left:17%;font-weight:bold;background-color:#F4E4BC;height:30px;border:2px solid #765942;border-radius:10px;' type='button'>Forum Mesajını Hazırla</button>";
+asDiv.innerHTML += "<br/><textarea id='plan' style='width:90%;height:100px;background-color:transparent;resize:none;display:none;border-radius:10px' onfocus='this.select();' readonly></textarea>";
+
+document.getElementById('kapa').addEventListener('click', function () {
+    document.getElementById('div').remove();
+});
+
+function zaman() {
+    var checkbox = document.getElementById('zaman');
+    var disabled = !checkbox.checked;
+    document.getElementById('gun').disabled = disabled;
+    document.getElementById('ay').disabled = disabled;
+    document.getElementById('st').disabled = disabled;
+    document.getElementById('dk').disabled = disabled;
 }
 
 function opmesaj() {
-    if (document.getElementById('opmes').checked == false) {
-        document.getElementById('mes').style.display = 'none';
-    } else if (document.getElementById('opmes').checked == true) {
-        document.getElementById('mes').style.display = 'inline';
-    }
+    var checkbox = document.getElementById('opmes');
+    var textarea = document.getElementById('mes');
+    textarea.style.display = checkbox.checked ? 'inline' : 'none';
 }
 
 function koyler() {
-    if (document.getElementById('koy').checked == true) {
-        document.getElementById('alin').disabled = false;
-        if (document.getElementById('alin').checked == true) {
-            document.getElementById('alsil').disabled = false;
-            $("input[id^='i']").show();
-        } else if (document.getElementById('alin').checked == false) {
-            document.getElementById('alsil').checked = false;
-            document.getElementById('alsil').disabled = true;
-            $("input[id^='i']").hide();
-        }
-    } else if (document.getElementById('koy').checked == false) {
-        document.getElementById('alin').checked = false;
-        document.getElementById('alin').disabled = true;
-        document.getElementById('alsil').checked = false;
-        document.getElementById('alsil').disabled = true;
-        $("input[id^='i']").hide();
+    var checkbox = document.getElementById('koy');
+    var alinCheckbox = document.getElementById('alin');
+    var alsilCheckbox = document.getElementById('alsil');
+    var inputs = document.querySelectorAll("input[id^='i']");
+
+    alinCheckbox.disabled = !checkbox.checked;
+    if (!checkbox.checked) {
+        alinCheckbox.checked = false;
+        alsilCheckbox.checked = false;
+        alsilCheckbox.disabled = true;
+        inputs.forEach(function (input) {
+            input.style.display = 'none';
+        });
     }
 }
 
 function scr() {
-    if (document.getElementById('scr').checked == true) {
-        document.getElementById('scr1').disabled = false;
-        document.getElementById('scr1').checked = true;
-        document.getElementById('scr2').disabled = false;
-        document.getElementById('scr2').checked = true;
-        document.getElementById('scr3').disabled = false;
-        document.getElementById('scr3').checked = true;
-        document.getElementById('scr4').disabled = false;
-        document.getElementById('scr4').checked = true;
-    } else if (document.getElementById('scr').checked == false) {
-        document.getElementById('scr1').disabled = true;
-        document.getElementById('scr1').checked = false;
-        document.getElementById('scr2').disabled = true;
-        document.getElementById('scr2').checked = false;
-        document.getElementById('scr3').disabled = true;
-        document.getElementById('scr3').checked = false;
-        document.getElementById('scr4').disabled = true;
-        document.getElementById('scr4').checked = false;
-    }
-}
-
-function zaman() {
-    if (document.getElementById('zaman').checked == true) {
-        document.getElementById('gun').disabled = false;
-        document.getElementById('ay').disabled = false;
-        document.getElementById('st').disabled = false;
-        document.getElementById('dk').disabled = false;
-    }
-    if (document.getElementById('zaman').checked == false) {
-        document.getElementById('gun').getElementsByTagName('option')[0].selected = 'selected';
-        document.getElementById('ay').getElementsByTagName('option')[0].selected = 'selected';
-        document.getElementById('st').getElementsByTagName('option')[0].selected = 'selected';
-        document.getElementById('dk').getElementsByTagName('option')[0].selected = 'selected';
-        document.getElementById('gun').disabled = true;
-        document.getElementById('ay').disabled = true;
-        document.getElementById('st').disabled = true;
-        document.getElementById('dk').disabled = true;
-    }
+    var checkbox = document.getElementById('scr');
+    var checkboxes = document.querySelectorAll("input[id^='scr']");
+    checkboxes.forEach(function (cb) {
+        cb.disabled = !checkbox.checked;
+        cb.checked = checkbox.checked;
+    });
 }
 
 function Konsantre() {
-    Alacaklar = [];
-    for (i = 0; i < Sayi; i++) {
-        var al = $('.kont').eq(i).val().trim();
-        if (al.length > 0) {
-            Alacaklar.push(al);
-        } else if (al.length == 0) {
-            Alacaklar.push('');
-        }
-    }
     var pp = document.getElementById('plan');
     var mesaj = document.getElementById('mes').value;
-    var sk = $("input[id^='scr']:checked").length;
-    var gk = $("input:checked").length;
-    var kk = $("input[id^='al']:checked").length;
+    var gun = document.getElementById('gun').value;
+    var ay = document.getElementById('ay').value;
+    var st = document.getElementById('st').value;
+    var dk = document.getElementById('dk').value;
+    var gk = document.querySelectorAll("input:checked").length;
 
-    pp.innerHTML = "[size=12][u][player]" + Oyuncu + "[/player][/u][/size]&#13;&#10;";
+    pp.innerHTML = "[size=12][u][player]" + Oyuncu + "[/player][/u][/size]\n";
 
-    if (document.getElementById('zaman').checked == true) {
-        var gun = document.getElementById('gun').value;
-        var ay = document.getElementById('ay').value;
-        var st = document.getElementById('st').value;
-        var dk = document.getElementById('dk').value;
-        if (gun != 'x' && ay != 'x' && st != 'x' && dk != 'x') {
-            pp.innerHTML += "[b][color=#742e74]Operasyon Zamanı:[/color] " + gun + " " + ay + "[/b] saat [b][color=#ae0e0e]" + st + ":" + dk + ":00[/color][/b]&#13;&#10;";
-        }
+    if (gun !== 'x' && ay !== 'x' && st !== 'x' && dk !== 'x') {
+        pp.innerHTML += "[b][color=#742e74]Operasyon Zamanı:[/color] " + gun + " " + ay + "[/b] saat [b][color=#ae0e0e]" + st + ":" + dk + ":00[/color][/b]\n";
     }
 
-    if (document.getElementById('opmes').checked == true && mesaj.length > 0) {
-        pp.innerHTML += "&#13;&#10;[color=#0000ff][i]" + mesaj + "[/i][/color]&#13;&#10;";
+    if (document.getElementById('opmes').checked && mesaj.length > 0) {
+        pp.innerHTML += "[color=#0000ff][i]" + mesaj + "[/i][/color]\n";
     }
 
-    if (document.getElementById('gra').checked == true) {
-        pp.innerHTML += "&#13;&#10;[b][color=#742e74]Oyuncuya ait grafikler:[/color][/b]&#13;&#10;&#13;&#10;";
-        pp.innerHTML += "[table][*][b](Puan Grafiği)[/b]&#13;&#10;";
-        pp.innerHTML += Gra.Puan;
-        pp.innerHTML += "&#13;&#10;[|][b](Köy Grafiği)[/b]&#13;&#10;";
-        pp.innerHTML += Gra.Koy;
-        pp.innerHTML += "&#13;&#10;[*][b](Saldırı Puanı Grafiği)[/b]&#13;&#10;";
-        pp.innerHTML += Gra.Oda;
-        pp.innerHTML += "&#13;&#10;[|][b](Savunma Puanı Grafiği)[/b]&#13;&#10;";
-        pp.innerHTML += Gra.Odd;
-        pp.innerHTML += "&#13;&#10;[/table]";
+    if (document.getElementById('gra').checked) {
+        pp.innerHTML += "[b][color=#742e74]Oyuncuya ait grafikler:[/color][/b]\n\n";
+        pp.innerHTML += "[table][*][b](Puan Grafiği)[/b]\n";
+        pp.innerHTML += Gra.Puan + "\n";
+        pp.innerHTML += "[|][b](Köy Grafiği)[/b]\n";
+        pp.innerHTML += Gra.Koy + "\n";
+        pp.innerHTML += "[*][b](Saldırı Puanı Grafiği)[/b]\n";
+        pp.innerHTML += Gra.Oda + "\n";
+        pp.innerHTML += "[|][b](Savunma Puanı Grafiği)[/b]\n";
+        pp.innerHTML += Gra.Odd + "\n";
+        pp.innerHTML += "[/table]\n";
     }
 
-    if (document.getElementById('koy').checked == true) {
-        pp.innerHTML += "&#13;&#10;[b][color=#742e74]Oyuncuya ait köyler:[/color][/b]&#13;&#10;&#13;&#10;";
-        if (document.getElementById('alin').checked == false) {
-            pp.innerHTML += Koor.join('\n') + "&#13;&#10;&#13;&#10;";
-        }
-        if (document.getElementById('alin').checked == true) {
-            pp.innerHTML += "[table][**]Hedef Köy[||]Alacak Oyuncu[/**]&#13;&#10";
-            if (kk == 1) {
-                for (i = 0; i < Sayi; i++) {
-                    k1 = Koor[i];
-                    a1 = Alacaklar[i];
-                    pp.innerHTML += "[*] " + k1 + " [|][player]" + a1 + "[/player]&#13;&#10";
+    if (document.getElementById('koy').checked) {
+        pp.innerHTML += "[b][color=#742e74]Oyuncuya ait köyler:[/color][/b]\n\n";
+        if (document.getElementById('alin').checked) {
+            pp.innerHTML += "[table][**]Hedef Köy[||]Alacak Oyuncu[/**]\n";
+            var inputs = document.querySelectorAll("input[id^='i']");
+            inputs.forEach(function (input, index) {
+                var k1 = Koor[index];
+                var a1 = input.value.trim();
+                if (a1.length > 0) {
+                    pp.innerHTML += "[*] " + k1 + " [|][player]" + a1 + "[/player]\n";
                 }
-            }
-            if (kk == 2) {
-                for (i = 0; i < Sayi; i++) {
-                    k1 = Koor[i];
-                    a1 = Alacaklar[i];
-                    if (a1.length > 0) {
-                        pp.innerHTML += "[*] " + k1 + " [|][player]" + a1 + "[/player]&#13;&#10";
-                    }
-                }
-            }
-            pp.innerHTML += "[/table]";
+            });
+            pp.innerHTML += "[/table]\n";
+        } else {
+            pp.innerHTML += Koor.join('\n') + "\n";
         }
     }
 
-    if (document.getElementById('scr').checked == true) {
-        if (sk > 1) {
-            pp.innerHTML += "&#13;&#10;[b][color=#742e74]Oyuncuya ait fake scriptler:[/color][/b]&#13;&#10;&#13;&#10;";
-        }
-        if (document.getElementById('scr1').checked == true) {
-            pp.innerHTML += Script.Sah;
-        }
-        if (document.getElementById('scr2').checked == true) {
-            pp.innerHTML += Script.Sah4;
-        }
-        if (document.getElementById('scr3').checked == true) {
-            pp.innerHTML += Script.Miz;
-        }
-        if (document.getElementById('scr4').checked == true) {
-            pp.innerHTML += Script.Miz4;
-        }
+    if (document.getElementById('scr').checked) {
+        pp.innerHTML += "[b][color=#742e74]Oyuncuya ait fake scriptler:[/color][/b]\n\n";
+        var checkboxes = document.querySelectorAll("input[id^='scr']:checked");
+        checkboxes.forEach(function (cb) {
+            var scriptName = cb.getAttribute('data-script-name');
+            pp.innerHTML += Script[scriptName] + "\n";
+        });
     }
 
-    pp.innerHTML += "[size=6]Bu planlama KNS Operasyon Planlayıcısı tarafından yapılmıştır. Scriptler ve daha fazlası için [url=https://forum.klanlar.org/index.php]FORUM[/url]'u ziyaret edebilirsiniz.[/size]";
-
-    if (gk > 0) {
-        pp.style.display = 'inline';
-    }
-    if (gk == 0) {
-        pp.style.display = 'none';
-    }
+    pp.innerHTML += "[size=6]Bu planlama KNS Operasyon Planlayıcısı tarafından yapılmıştır. Scriptler ve daha fazlası için [url=https://forum.klanlar.org/konu/45987/]buraya tıklayınız[/url].[/size]";
 }
 
-$('#inner-border').append("<div id='div' style='width:300px;height:auto;left:60%;top:30%;position:fixed;overflow-y:hidden;background-color:#FFccAA;border-radius:20px;border:3px solid brown'><table width='100%'><tr><th width='90%'><center><b id='isim' style='color:purple'>KNS Operasyon Planlayıcısı<sup>v1.0</sup></b></center></th><th width='10%'><button id='kapa' onclick='kapa()'><b>X</b></button></th></tr></table><hr style='border-color:brown'><center><font color='black'><b>[player]" + Oyuncu + "[/player]</b></font></center><hr style='border-color:brown'><font color='black'><b>Oyuncuya ait köy sayısı: " + Sayi + "</b></font><hr style='border-color:brown'><input type='checkbox' id='zaman' onclick='zaman()'><b>Operasyon zamanı belirle</b> " + z1 + " " + z2 + "<br>" + z3 + " " + z4 + "<hr style='border-color:brown'><input type='checkbox' id='opmes' onclick='opmesaj()'><b>Operasyon mesajı ekle</b><br><textarea id='mes' rows='2' cols='35'></textarea><hr style='border-color:brown'><input type='checkbox' id='koy' onclick='koyler()'><b>Köyler eklensin</b><br><input type='checkbox' id='alin' disabled><b>Alınacak köyler</b> (örn: 1. köy -> o1, 2. köy -> o2)<br>");
-for (i = 0; i < Sayi; i++) {
-    $('#div').append("<input type='checkbox' id='al" + i + "'><font color='black'> " + Koor[i] + "</font><br>");
-}
-$('#div').append("<hr style='border-color:brown'><input type='checkbox' id='scr' onclick='scr()'><b>Fake scriptler eklensin</b><br>");
-$('#div').append("<input type='checkbox' id='scr1' disabled><font color='black'> " + Script.Sah + "</font><br>");
-$('#div').append("<input type='checkbox' id='scr2' disabled><font color='black'> " + Script.Sah4 + "</font><br>");
-$('#div').append("<input type='checkbox' id='scr3' disabled><font color='black'> " + Script.Miz + "</font><br>");
-$('#div').append("<input type='checkbox' id='scr4' disabled><font color='black'> " + Script.Miz4 + "</font><br>");
-$('#div').append("<hr style='border-color:brown'><center><button id='cikar' onclick='Konsantre()'><b>Oyuncuya ait operasyon planını oluştur</b></button></center><hr style='border-color:brown'></div>");
-$('#div').append("<hr style='border-color:brown'><textarea id='plan' rows='10' cols='35'></textarea><hr style='border-color:brown'></div>");
-
-function kapa() {
-    $('#div').remove();
-    location.reload();
-}
-
-function opmesaj() {
-    if (document.getElementById('opmes').checked == false) {
-        document.getElementById('mes').style.display = 'none';
-    } else if (document.getElementById('opmes').checked == true) {
-        document.getElementById('mes').style.display = 'inline';
-    }
-}
-
-function koyler() {
-    if (document.getElementById('koy').checked == true) {
-        document.getElementById('alin').disabled = false;
-        if (document.getElementById('alin').checked == true) {
-            $("input[id^='al']").removeAttr('disabled');
-        } else if (document.getElementById('alin').checked == false) {
-            $("input[id^='al']").attr('disabled', 'disabled');
-        }
-    } else if (document.getElementById('koy').checked == false) {
-        document.getElementById('alin').checked = false;
-        document.getElementById('alin').disabled = true;
-        $("input[id^='al']").attr('disabled', 'disabled');
-    }
-}
-
-function scr() {
-    if (document.getElementById('scr').checked == true) {
-        $("input[id^='scr']").removeAttr('disabled');
-    } else if (document.getElementById('scr').checked == false) {
-        $("input[id^='scr']").attr('disabled', 'disabled');
-    }
-}
-
-function zaman() {
-    if (document.getElementById('zaman').checked == true) {
-        document.getElementById('gun').disabled = false;
-        document.getElementById('ay').disabled = false;
-        document.getElementById('st').disabled = false;
-        document.getElementById('dk').disabled = false;
-    } else if (document.getElementById('zaman').checked == false) {
-        document.getElementById('gun').value = 'x';
-        document.getElementById('ay').value = 'x';
-        document.getElementById('st').value = 'x';
-        document.getElementById('dk').value = 'x';
-        document.getElementById('gun').disabled = true;
-        document.getElementById('ay').disabled = true;
-        document.getElementById('st').disabled = true;
-        document.getElementById('dk').disabled = true;
-    }
-}
-
-$('#gun').on('change', function () {
+document.getElementById('tamam').addEventListener('click', function () {
     Konsantre();
 });
-$('#ay').on('change', function () {
-    Konsantre();
-});
-$('#st').on('change', function () {
-    Konsantre();
-});
-$('#dk').on('change', function () {
-    Konsantre();
-});
-
-function Konsantre() {
-    // Kodun geri kalanını buraya ekleyin
-}
-
-// Orijinal kodun sonuna dönüp kodu burada tamamlayabilirsiniz.
