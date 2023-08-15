@@ -54,10 +54,10 @@ var Gra = {
 };
 
 var Script = {
-    Sah: "[spoiler=Şahmerdan/Mancınık Scripti][code]javascript:Kont='" + Koor.join(" ") + "';$.getScript('https://media.innogamescdn.com/com_DS_TR/Scripts/80123.js')[/code][/spoiler]",
-    Sah4: "[spoiler=Şahmerdan/Mancınık Scripti (4\'lü)][code]javascript:Kont='" + Koor4.join(" ") + "';$.getScript('https://media.innogamescdn.com/com_DS_TR/Scripts/80123.js')[/code][/spoiler]",
-    Miz: "[spoiler=Mızrakçı/Baltacı Scripti][code]javascript:Kont='" + Koor.join(" ") + "';$.getScript('https://media.innogamescdn.com/com_DS_TR/Scripts/90123.js')[/code][/spoiler]",
-    Miz4: "[spoiler=Mızrakçı/Baltacı Scripti (4\'lü)][code]javascript:Kont='" + Koor4.join(" ") + "';$.getScript('https://media.innogamescdn.com/com_DS_TR/Scripts/90123.js')[/code][/spoiler]"
+    Sah: "[spoiler=Şahmerdan/Mancınık Scripti][code]javascript:Kont='" + Koor.join(" ") + "';$.getScript('https://eksere.github.io/klanlar/operasyonsah.js')[/code][/spoiler]",
+    Sah4: "[spoiler=Şahmerdan/Mancınık Scripti (4\'lü)][code]javascript:Kont='" + Koor4.join(" ") + "';$.getScript('https://eksere.github.io/klanlar/operasyonsah.js')[/code][/spoiler]",
+    Miz: "[spoiler=Mızrakçı/Baltacı Scripti][code]javascript:Kont='" + Koor.join(" ") + "';$.getScript('https://eksere.github.io/klanlar/balta.js')[/code][/spoiler]",
+    Miz4: "[spoiler=Mızrakçı/Baltacı Scripti (4\'lü)][code]javascript:Kont='" + Koor4.join(" ") + "';$.getScript('https://eksere.github.io/klanlar/balta.js')[/code][/spoiler]"
 };
 
 var apDiv = document.createElement('div');
