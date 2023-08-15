@@ -10,6 +10,7 @@ if (premium == false) {
     alert('Bu scripti çalıştırmak için premium hesabınız olması gerekir.');
     end();
 }
+
 if (game_data.screen != 'info_player') {
     alert('KNS Operasyon Planlayıcısı\n\nBu script sadece oyuncu profillerinde çalışır.');
     end();
@@ -23,16 +24,20 @@ var Sayi = s3.length;
 Koor4 = [];
 var Koor_a = $('#villages_list').html().match(/\d+\|\d+/g);
 var l = Koor_a.length;
+
 for (i = 0; i < l; i++) {
     Koor4.push(Koor_a[i]);
     Koor4.push(Koor_a[i]);
     Koor4.push(Koor_a[i]);
     Koor4.push(Koor_a[i]);
 }
+
 var Oyuncu = $('h2[class=]').html().trim();
+
 if (Oyuncu.length > 32) {
     var Oyuncu = game_data.player.name;
-};
+}
+
 var z1 = "<select id='gun' onchange='' disabled><option value='x'>Gün</option><option value='1'>01</option><option value='2'>02</option><option value='3'>03</option><option value='4'>04</option><option value='5'>05</option><option value='6'>06</option><option value='7'>07</option><option value='8'>08</option><option value='9'>09</option><option value='10'>10</option><option value='11'>11</option><option value='12'>12</option><option value='13'>13</option><option value='14'>14</option><option value='15'>15</option><option value='16'>16</option><option value='17'>17</option><option value='18'>18</option><option value='19'>19</option><option value='20'>20</option><option value='21'>21</option><option value='22'>22</option><option value='23'>23</option><option value='24'>24</option><option value='25'>25</option><option value='26'>26</option><option value='27'>27</option><option value='28'>28</option><option value='29'>29</option><option value='30'>30</option><option value='31'>31</option></select>";
 var z2 = "<select id='ay' onchange='' disabled><option value='x'>Ay</option><option value='Ocak'>Ocak</option><option value='Şubat'>Şubat</option><option value='Mart'>Mart</option><option value='Nisan'>Nisan</option><option value='Mayıs'>Mayıs</option><option value='Haziran'>Haziran</option><option value='Temmuz'>Temmuz</option><option value='Ağustos'>Ağustos</option><option value='Eylül'>Eylül</option><option value='Ekim'>Ekim</option><option value='Kasım'>Kasım</option><option value='Aralık'>Aralık</option></select>";
 var z3 = "<select id='st' onchange='' disabled><option value='x'>Saat</option><option value='00'>00</option><option value='01'>01</option><option value='02'>02</option><option value='03'>03</option><option value='04'>04</option><option value='05'>05</option><option value='06'>06</option><option value='07'>07</option><option value='08'>08</option><option value='09'>09</option><option value='10'>10</option><option value='11'>11</option><option value='12'>12</option><option value='13'>13</option><option value='14'>14</option><option value='15'>15</option><option value='16'>16</option><option value='17'>17</option><option value='18'>18</option><option value='19'>19</option><option value='20'>20</option><option value='21'>21</option><option value='22'>22</option><option value='23'>23</option></select>";
@@ -41,13 +46,14 @@ var Gra = {
     Puan: ('[img]http://tr.twstats.com/image.php?type=playergraph&amp;graph=points&amp;id=' + InfoPlayer.player_id + '&amp;s=' + game_data.world + '[/img]'),
     Koy: ('[img]http://tr.twstats.com/image.php?type=playergraph&amp;graph=villages&amp;id=' + InfoPlayer.player_id + '&amp;s=' + game_data.world + '[/img]'),
     Oda: ('[img]http://tr.twstats.com/image.php?type=playergraph&amp;graph=oda&amp;id=' + InfoPlayer.player_id + '&amp;s=' + game_data.world + '[/img]'),
-    Odd: ('[img]http://tr.twstats.com/image.php?type=playergraph&amp;graph=odd&amp;id=' + InfoPlayer.player_id + '&amp;s=' + game_data.world + '[/img]'),
+    Odd: ('[img]http://tr.twstats.com/image.php?type=playergraph&amp;graph=odd&amp;id=' + InfoPlayer.player_id + '&amp;s=' + game_data.world + '[/img]')
 };
+
 var Script = {
     Sah: ("[spoiler=Şahmerdan/Mancınık Scripti][code]javascript:Kont='" + Koor.join(" ") + "';$.getScript('https://media.innogamescdn.com/com_DS_TR/Scripts/80123.js')[/code][/spoiler]"),
     Sah4: ("[spoiler=Şahmerdan/Mancınık Scripti (4\'lü)][code]javascript:Kont='" + Koor4.join(" ") + "';$.getScript('https://media.innogamescdn.com/com_DS_TR/Scripts/80123.js')[/code][/spoiler]"),
     Miz: ("[spoiler=Mızrakçı/Baltacı Scripti][code]javascript:Kont='" + Koor.join(" ") + "';$.getScript('https://media.innogamescdn.com/com_DS_TR/Scripts/90123.js')[/code][/spoiler]"),
-    Miz4: ("[spoiler=Mızrakçı/Baltacı Scripti (4\'lü)][code]javascript:Kont='" + Koor4.join(" ") + "';$.getScript('https://media.innogamescdn.com/com_DS_TR/Scripts/90123.js')[/code][/spoiler]"),
+    Miz4: ("[spoiler=Mızrakçı/Baltacı Scripti (4\'lü)][code]javascript:Kont='" + Koor4.join(" ") + "';$.getScript('https://media.innogamescdn.com/com_DS_TR/Scripts/90123.js')[/code][/spoiler]")
 };
 
 for (i = 0; i < Sayi; i++) {
@@ -73,31 +79,27 @@ function koyler() {
         document.getElementById('alin').disabled = false;
         if (document.getElementById('alin').checked == true) {
             document.getElementById('alsil').disabled = false;
-            $("input[id^='i']").show()
+            $("input[id^='i']").show();
         } else if (document.getElementById('alin').checked == false) {
             document.getElementById('alsil').checked = false;
             document.getElementById('alsil').disabled = true;
-            $("input[id^='i']").hide()
+            $("input[id^='i']").hide();
         }
     } else if (document.getElementById('koy').checked == false) {
         document.getElementById('alin').checked = false;
         document.getElementById('alin').disabled = true;
         document.getElementById('alsil').checked = false;
         document.getElementById('alsil').disabled = true;
-        $("input[id^='i']").hide()
+        $("input[id^='i']").hide();
     }
 }
 
 function scr() {
     if (document.getElementById('scr').checked == true) {
         document.getElementById('scr1').disabled = false;
-        document.getElementById('scr1').checked = true;
         document.getElementById('scr2').disabled = false;
-        document.getElementById('scr2').checked = true;
         document.getElementById('scr3').disabled = false;
-        document.getElementById('scr3').checked = true;
         document.getElementById('scr4').disabled = false;
-        document.getElementById('scr4').checked = true
     } else if (document.getElementById('scr').checked == false) {
         document.getElementById('scr1').disabled = true;
         document.getElementById('scr1').checked = false;
@@ -106,7 +108,7 @@ function scr() {
         document.getElementById('scr3').disabled = true;
         document.getElementById('scr3').checked = false;
         document.getElementById('scr4').disabled = true;
-        document.getElementById('scr4').checked = false
+        document.getElementById('scr4').checked = false;
     }
 }
 
@@ -115,9 +117,8 @@ function zaman() {
         document.getElementById('gun').disabled = false;
         document.getElementById('ay').disabled = false;
         document.getElementById('st').disabled = false;
-        document.getElementById('dk').disabled = false
-    }
-    if (document.getElementById('zaman').checked == false) {
+        document.getElementById('dk').disabled = false;
+    } else if (document.getElementById('zaman').checked == false) {
         document.getElementById('gun').getElementsByTagName('option')[0].selected = 'selected';
         document.getElementById('ay').getElementsByTagName('option')[0].selected = 'selected';
         document.getElementById('st').getElementsByTagName('option')[0].selected = 'selected';
@@ -125,7 +126,7 @@ function zaman() {
         document.getElementById('gun').disabled = true;
         document.getElementById('ay').disabled = true;
         document.getElementById('st').disabled = true;
-        document.getElementById('dk').disabled = true
+        document.getElementById('dk').disabled = true;
     }
 }
 
@@ -202,7 +203,7 @@ function Konsantre() {
     }
 
     if (document.getElementById('scr').checked == true) {
-        if (sk > 1) {
+        if (sk > 0) {
             pp.innerHTML += "&#13;&#10;[b][color=#742e74]Oyuncuya ait fake scriptler:[/color][/b]&#13;&#10;&#13;&#10;";
         }
         if (document.getElementById('scr1').checked == true) {
@@ -219,7 +220,7 @@ function Konsantre() {
         }
     }
 
-    pp.innerHTML += "[size=6]Bu planlama KNS Operasyon Planlayıcısı tarafından yapılmıştır. Scriptler ve daha fazlası için [url=https://forum.klanlar.org/index.php]FORUM[/url]'u ziyaret edebilirsiniz.[/size]";
+    pp.innerHTML += "[size=6]Bu planlama KNS Operasyon Planlayıcısı tarafından yapılmıştır.Scriptler ve daha fazlası için [url=https://forum.klanlar.org/index.php]FORUM[/url]'u ziyaret edebilirsiniz.[/size]";
 
     if (gk > 0) {
         pp.style.display = 'inline';
@@ -229,6 +230,17 @@ function Konsantre() {
     }
 }
 
-$('#inner-border').append("<div id='div'style='width:300px;height:auto;left:60%;top:30%;position:fixed;overflow-y:hidden;background-color:#FFccAA;border-radius:20px;border:3px solid brown'><table width='100%'><tr><th width='90%'><center><b id='isim'style='color:purple'>KNS Operasyon Planlayıcısı<sup>v1.0</sup></b></center></th><th width='10%'><center><a href='javascript:void(0);'onclick='kapa()'>X</a></center></th></tr></table><table width='100%'><tr><td><textarea id='mes'placeholder='Operasyon mesajı (isteğe bağlı)'style='width:298px;height:75px;background-color:#FFccAA;color:#000000;border-color:#ff0000'></textarea></td></tr><tr><td colspan='2'><input type='checkbox'id='opmes'onclick='opmesaj()'style='color:blue'>Operasyon mesajı ekle</input></td></tr><tr><td colspan='2'><input type='checkbox'id='zaman'onclick='zaman()'style='color:blue'>Operasyon zamanı ekle</input></td></tr><tr><td colspan='2'><input type='checkbox'id='gra'style='color:blue'>Grafikler ekle</input></td></tr><tr><td colspan='2'><input type='checkbox'id='koy'onclick='koyler()'style='color:blue'>Köyler ekle</input></td></tr><tr><td colspan='2'><input type='checkbox'id='scr'onclick='scr()'style='color:blue'>Scriptler ekle</input></td></tr></table><table width='100%'><tr><td colspan='2'><input type='checkbox'id='scr1'style='color:blue'checked>Şahmerdan/Mancınık</input></td></tr><tr><td colspan='2'><input type='checkbox'id='scr2'style='color:blue'checked>Şahmerdan/Mancınık (4'lü)</input></td></tr><tr><td colspan='2'><input type='checkbox'id='scr3'style='color:blue'checked>Mızrakçı/Baltacı</input></td></tr><tr><td colspan='2'><input type='checkbox'id='scr4'style='color:blue'checked>Mızrakçı/Baltacı (4'lü)</input></td></tr><tr><td colspan='2'><input type='checkbox'id='alin'style='color:red'disabled>Alınacak oyuncuları belirt</input></td></tr><tr><td colspan='2'><input type='checkbox'id='alsil'style='color:red'disabled>Alınacak oyuncuları sil</input></td></tr><tr><td colspan='2'><center><button id='btn'type='button'onclick='Konsantre()'style='background-color:green;width:110px;height:30px;color:white'><b>Oyuncu Planı Yap</b></button></center></td></tr></table></div>");
+$('#inner-border').append("<div id='div'style='width:300px;height:auto;left:60%;top:30%;position:fixed;overflow-y:hidden;background-color:#FFccAA;border-radius:20px;border:3px solid #7A2907;z-index:100'><div id='baslik'style='cursor:move;width:96%;padding:3px;background-color:#FABD42;border-radius:20px 20px 0px 0px;border:2px solid #7A2907;z-index:100;text-align:center'><font color='#7A2907' size='4'>KNS Operasyon Planlayıcısı</font><font color='#ffccaa'size='2'>v1.4</font><img src='https://raw.githubusercontent.com/Konsantre/konsantre.github.io/main/k.png'style='cursor:pointer;float:right'onclick=kapa()></div><div id='govde'style='width:96%;padding:10px;background-color:#FFccAA;border-radius:0px 0px 20px 20px;border:2px solid #7A2907;z-index:100;text-align:center'>&#13;&#10;Bir oyuncu profiline gidin.&#13;&#10;Seçenekleri işaretleyin ve aşağıdaki butona tıklayın.&#13;&#10;<hr style='background-color:#7A2907;height:2px;border:none'>&#13;&#10;<input id='opmes' type='checkbox' style='cursor:pointer'onclick=opmesaj();><font color='#7A2907'> Operasyon anlatım mesajı ekle</font>&#13;&#10;<input id='koy' type='checkbox' style='cursor:pointer'onclick=koyler();><font color='#7A2907'> Köy koordinatlarını ekle</font>&#13;&#10;<input id='alin' type='checkbox' style='cursor:pointer;margin-left:10px'onclick=koyler();disabled><font color='#7A2907'> Köylerin dağıtımını yap</font>&#13;&#10;<input id='alsil' type='checkbox' style='cursor:pointer;margin-left:25px'onclick=disabled><font color='#7A2907'> Dağıtılmayan köyleri ekleme</font>&#13;&#10;<input id='gra' type='checkbox' style='cursor:pointer'onclick=disabled><font color='#7A2907'> Gelişim grafiklerini ekle</font>&#13;&#10;<input id='scr' type='checkbox' style='cursor:pointer'onclick=scr();><font color='#7A2907'> Fake scriptleri ekle</font>&#13;&#10;<hr style='background-color:#7A2907;height:2px;border:none'>&#13;&#10;<div id='saat' style='width:40%;margin:auto;display:none'>&#13;&#10;<select id='gun' disabled><option value='x'>Gün</option><option value='01'>01</option><option value='02'>02</option><option value='03'>03</option><option value='04'>04</option><option value='05'>05</option><option value='06'>06</option><option value='07'>07</option><option value='08'>08</option><option value='09'>09</option><option value='10'>10</option><option value='11'>11</option><option value='12'>12</option><option value='13'>13</option><option value='14'>14</option><option value='15'>15</option><option value='16'>16</option><option value='17'>17</option><option value='18'>18</option><option value='19'>19</option><option value='20'>20</option><option value='21'>21</option><option value='22'>22</option><option value='23'>23</option><option value='24'>24</option><option value='25'>25</option><option value='26'>26</option><option value='27'>27</option><option value='28'>28</option><option value='29'>29</option><option value='30'>30</option><option value='31'>31</option></select>&#13;&#10;<select id='ay' disabled><option value='x'>Ay</option><option value='Ocak'>Ocak</option><option value='Şubat'>Şubat</option><option value='Mart'>Mart</option><option value='Nisan'>Nisan</option><option value='Mayıs'>Mayıs</option><option value='Haziran'>Haziran</option><option value='Temmuz'>Temmuz</option><option value='Ağustos'>Ağustos</option><option value='Eylül'>Eylül</option><option value='Ekim'>Ekim</option><option value='Kasım'>Kasım</option><option value='Aralık'>Aralık</option></select>&#13;&#10;<select id='st' disabled><option value='x'>Saat</option><option value='00'>00</option><option value='01'>01</option><option value='02'>02</option><option value='03'>03</option><option value='04'>04</option><option value='05'>05</option><option value='06'>06</option><option value='07'>07</option><option value='08'>08</option><option value='09'>09</option><option value='10'>10</option><option value='11'>11</option><option value='12'>12</option><option value='13'>13</option><option value='14'>14</option><option value='15'>15</option><option value='16'>16</option><option value='17'>17</option><option value='18'>18</option><option value='19'>19</option><option value='20'>20</option><option value='21'>21</option><option value='22'>22</option><option value='23'>23</option></select>&#13;&#10;<select id='dk' disabled><option value='x'>Dakika</option><option value='00'>00</option><option value='05'>05</option><option value='10'>10</option><option value='15'>15</option><option value='20'>20</option><option value='25'>25</option><option value='30'>30</option><option value='35'>35</option><option value='40'>40</option><option value='45'>45</option><option value='50'>50</option><option value='55'>55</option></select>&#13;&#10;</div>&#13;&#10;<textarea id='mes'style='resize:none;width:96%;height:70px;background-color:#FABD42;border-radius:10px;border:2px solid #7A2907;z-index:100'></textarea>&#13;&#10;<br><input type='button'value='Operasyon Planı Oluştur'style='cursor:pointer;width:96%;height:35px;background-color:#7A2907;border-radius:10px;border:2px solid #7A2907;color:#FFccAA;font-weight:bold;z-index:100;text-align:center'onclick=Konsantre()></div></div>");
 
-$('#plan').remove();
+$('#baslik').mousedown(function (e) {
+    var div = $('#div');
+    var X = e.pageX - div.offset().left;
+    var Y = e.pageY - div.offset().top;
+    $(document).mousemove(function (e) {
+        div.css({ left: e.pageX - X, top: e.pageY - Y });
+    });
+});
+$(document).mouseup(function () {
+    $(document).unbind('mousemove');
+});
+</script>
