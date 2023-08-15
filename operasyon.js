@@ -32,7 +32,7 @@ for (var i = 0; i < l; i++) {
     Koor4.push(Koor_a[i]);
 }
 
-var Oyuncu = $('h2[class=]').html().trim();
+var Oyuncu = $('h2').attr('class').trim();
 if (Oyuncu.length > 32) {
     Oyuncu = game_data.player.name;
 }
