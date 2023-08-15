@@ -1,44 +1,44 @@
 /*
-    Yazar(Author): Konsantre
-    Iletisim(Contact): konsantre.op@gmail.com
+    Yazar(Author)     : Konsantre
+    Forum             : http://forum.klanlar.org
+    Iletisim(Contact) : konsantre.op@gmail.com
 
-    Tribal Wars Turkey - JavaScript Moderator
+    TribalWars Turkey - JavaScript Moderator
 */
 
 if (premium === false) {
     alert('Bu scripti çalıştırmak için premium hesabınız olması gerekir.');
-    throw new Error('Premium hesap gereklidir.');
+    end();
 }
-
 if (game_data.screen !== 'info_player') {
     alert('KNS Fake Script Hazırlayıcı\n\nBu script sadece oyuncu profillerinde çalışır.');
-    throw new Error('Oyuncu profili ekranında çalışmalıdır.');
+    end();
 }
 
 if ($('#anadiv').length > 0) {
-    if ($('#duzenle').prop('checked') === true) {
-        $('#duzenle').prop('checked', false);
+    if (document.getElementById('duzenle').checked === true) {
+        document.getElementById('duzenle').checked = false;
         duzenle();
     }
-    if ($('#karisik').prop('checked') === true) {
-        $('#karisik').prop('checked', false);
+    if (document.getElementById('karisik').checked === true) {
+        document.getElementById('karisik').checked = false;
         karisik();
     }
-    if ($('#dortlu').prop('checked') === true) {
-        $('#dortlu').prop('checked', false);
+    if (document.getElementById('dortlu').checked === true) {
+        document.getElementById('dortlu').checked = false;
         dortlu();
     }
-    if ($('#casus').prop('checked') === true) {
-        $('#casus').prop('checked', false);
+    if (document.getElementById('casus').checked === true) {
+        document.getElementById('casus').checked = false;
         casus();
     }
-    if ($('#uyar').prop('checked') === true) {
-        $('#uyar').prop('checked', false);
+    if (document.getElementById('uyar').checked === true) {
+        document.getElementById('uyar').checked = false;
         uyar();
     }
     var Duzenlemesaj = "Oyuncu profilinden alınan \"" + Sayi + "\" köy aşağıdaki gibidir;\n\n" + Koor.join(' ') + " ";
     mesaj();
-    throw new Error('Script zaten çalışıyor.');
+    end();
 }
 
 var Koor = $('#villages_list').html().match(/\d+\|\d+/g);
@@ -46,16 +46,15 @@ var Sayi;
 var s1 = Koor.join('a');
 var s2 = s1.match(/\|/g);
 var s3 = s2.join('');
-var Sayi = s3.length;
+Sayi = s3.length;
 
-var Oyuncu = $('h2[class^="village"]').text().trim();
+var Oyuncu = $('h2[class^="player_name"]').text().trim();
 if (Oyuncu.length > 32) {
     Oyuncu = game_data.player.name;
 }
 
 var Duzenlemesaj = document.cookie;
-Duzenlemesaj = "Oyuncu profilinden alınan '" + Sayi + "' köy aşağıdaki gibidir;\n\n" + Koor.join(' ') + " ";
-
+Duzenlemesaj = "Oyuncu profilinden alınan \'" + Sayi + "\' köy aşağıdaki gibidir;\n\n" + Koor.join(' ') + " ";
 var Mesajlar = [];
 
 function mpush() {
@@ -75,18 +74,16 @@ function mpush() {
 }
 mpush();
 
-$('#inner-border').prepend("<div id='anadiv' style='width:820px;height:320px;position:relative;top:5px;bottom:20px;left:10px;background-color:transparent;border-radius:20px;border:4px solid #765942'><div style='padding:5px 10px 5px 10px;'><table width='800px' height='310px'><tr><th width='30%' height='5%'><div style='text-align:center;'><b id='isim' style='color:purple'><small>KNS Fake Script Hazırlayıcı<sup>v4.1</sup></small></b></div></th><td rowspan='2' width='70%' height='100%'><textarea rows=5 id='ustta' style='margin-left:5px;margin-right:5px;width:98%;resize:none;border-radius:10px;background-color:transparent;' onfocus='' disabled>Koordinatları düzenle seçeneğini aktif ederek, istemediğin koordintları\nçıkarabilir yada yenilerini ekleyebilirsin.\nYenileri eklemek için herhangi bir profilden 'Köyler Koordinatlar Puan'\nkısmından ya bir kısmını yada tamamını kopyala ve buraya yapıştır.</textarea><center><font id='ortamesaj' style='font-weight:bold;color:red'></font></center><textarea rows=13 id='altta' style='margin-left:5px;margin-right:5px;width:98%;resize:none;border-radius:10px;background-color:transparent;' onfocus='this.select();'></textarea></td></tr><tr><td width='30%' height='95%' style='padding-right:10px;font-weight:bold;font-size:15;'><div id='ayarlama'></div></td></tr></table></div></div>");
-
+$('#inner-border').prepend("<div id='anadiv'style='width:820px;height:320px;position:relative;top:5px;bottom:20px;left:10px;background-color:transparent;border-radius:20px;border:4px solid #765942'><div style='padding:5px 10px 5px 10px;'><table width='800px'height='310px'><tr><th width='30%'height='5%'><div style='text-align:center;'><b id='isim'style='color:purple'><small>KNS Fake Script Hazırlayıcı<sup>v4.1</sup></small></b></div></th><td rowspan='2'width='70%'height='100%'><textarea rows=5 id='ustta'style='margin-left:5px;margin-right:5px;width:98%;resize:none;border-radius:10px;background-color:transparent'onfocus=''disabled>Koordinatları düzenle seçeneğini aktif ederek, istemediğin koordintları\nçıkarabilir yada yenilerini ekleyebilirsin.\nYenileri eklemek için herhangi bir profilden \'Köyler Koordinatlar Puan\'\nkısmından ya bir kısmını yada tamamını kopyala ve buraya yapıştır.</textarea><center><font id='ortamesaj'style='font-weight:bold;color:red'></font></center><textarea rows=13 id='altta'style='margin-left:5px;margin-right:5px;width:98%;resize:none;border-radius:10px;background-color:transparent'onfocus='this.select();'></textarea></td></tr><tr><td width='30%'height='95%'style='padding-right:10px;font-weight:bold;font-size:15;'><div id='ayarlama'></div></td></tr></table></div></div>");
 var ap = document.getElementById('ayarlama');
-ap.innerHTML += "<br/><br/><select size='3' id='birim' style='width:100%;text-align:center;font-weight:bold;color:purple;cursor:pointer;background-color:transparent;overflow:hidden;border:2px solid dimgray;border-radius:10px;' onchange='secenek();'><option value='b0'>Sadece Koordinat</option><option value='b1' selected>Şahmerdan / Mancınık</option><option value='b2'>Mızrakçı / Baltacı</option></select><br/><br/>";
-ap.innerHTML += "<input id='duzenle' type='checkbox' onclick='duzenle();' /><font id='duzenlef' color='dimgray'><label for='duzenle'> Koordinatları düzenle</label></font><br/>";
-ap.innerHTML += "<input id='karisik' type='checkbox' onclick='karisik();' /><font id='karisikf' color='dimgray'><label for='karisik'> Koordinatları karıştır</label></font><br/>";
-ap.innerHTML += "<input id='dortlu' type='checkbox' onclick='dortlu();' /><font id='dortluf' color='dimgray'><label for='dortlu'> Koordinatları 4'er kere ekle</label></font><br/>";
-ap.innerHTML += "<input id='casus' type='checkbox' onclick='casus();' /><font id='casusf' color='dimgray'><label for='casus'> Saldırılara 1'er casus ekle</label></font><br/>";
-ap.innerHTML += "<input id='uyar' type='checkbox' onclick='uyar();' /><font id='uyarf' color='dimgray'><label for='uyar'> Hedefler bittiğinde uyarı ver</label></font><br/>";
-ap.innerHTML += "<br/><br/><button id='hazir' style='cursor:pointer;color:purple;margin-left:60px;font-weight:bold;background-color:#FFccAA;height:30px;border:2px solid #765942;border-radius:10px;' type='button' onclick='Konsantre();'>Scripti Hazırla</button>";
-ap.innerHTML += "<br/><br/><br/><div align='center'><font size='1' face='Comic Sans MS' color='purple'><a href='https://forum.klanlar.org' target='_blank'>Klanlar Forum</a>’una uğradın mı?</font></div>";
-
+ap.innerHTML += "<br/><br/><select size='3'id='birim'style='width:100%;text-align:center;font-weight:bold;color:purple;cursor:pointer;background-color:transparent;overflow:hidden;border:2px solid dimgray;border-radius:10px;' onchange='secenek();'><option value='b0'>Sadece Koordinat</option><option value='b1'selected>Şahmerdan / Mancınık</option><option value='b2'>Mızrakçı / Baltacı</option></select><br/><br/>";
+ap.innerHTML += "<input id='duzenle'type='checkbox'onclick='duzenle();'/><font id='duzenlef'color='dimgray'><label for='duzenle'> Koordinatları düzenle</label></font><br/>";
+ap.innerHTML += "<input id='karisik'type='checkbox'onclick='karisik();'/><font id='karisikf'color='dimgray'><label for='karisik'> Koordinatları karıştır</label></font><br/>";
+ap.innerHTML += "<input id='dortlu'type='checkbox'onclick='dortlu();'/><font id='dortluf'color='dimgray'><label for='dortlu'> Koordinatları 4\'er kere ekle</label></font><br/>";
+ap.innerHTML += "<input id='casus'type='checkbox'onclick='casus();'/><font id='casusf'color='dimgray'><label for='casus'> Saldırılara 1\'er casus ekle</label></font><br/>";
+ap.innerHTML += "<input id='uyar'type='checkbox'onclick='uyar();'/><font id='uyarf'color='dimgray'><label for='uyar'> Hedefler bittiğinde uyarı ver</label></font><br/>";
+ap.innerHTML += "<br/><br/><button id='hazir' style='cursor:pointer;color:purple;margin-left:60px;font-weight:bold;background-color:#FFccAA;height:30px;border:2px solid #765942;border-radius:10px;'type='button'onclick='Konsantre();'>Scripti Hazırla</button>";
+ap.innerHTML += "<br/><br/><br/><div align='center'><font size='1' face='Comic Sans MS' color='purple'><a href='https://forum.klanlar.org' target='_blank'>Klanlar Forum</a>\'una uğradın mı?</font></div>";
 var dustta = document.getElementById('ustta');
 var daltta = document.getElementById('altta');
 var dortamesaj = document.getElementById('ortamesaj');
@@ -153,14 +150,13 @@ function duzenle() {
         daltta.value = "";
         dustta.rows = "8";
         daltta.rows = "10";
-    }
-    if (dduzenle.checked === false) {
+    } else {
         Duzenlemesaj = dustta.value;
         dduzenlef.color = 'dimgray';
         dortamesaj.innerHTML = 'Başka eklemeye ne gerek var, <font color="#603000">' + Oyuncu + '</font> yeterli...';
         dustta.rows = "5";
         daltta.rows = "13";
-        dustta.value = "Koordinatları düzenle seçeneğini aktif ederek, istemediğin koordintları\nçıkarabilir yada yenilerini ekleyebilirsin.\nYenileri eklemek için herhangi bir profilden 'Köyler Koordinatlar Puan'\nkısmından ya bir kısmını yada tamamını kopyala ve buraya yapıştır.";
+        dustta.value = "Koordinatları düzenle seçeneğini aktif ederek, istemediğin koordintları\nçıkarabilir yada yenilerini ekleyebilirsin.\nYenileri eklemek için herhangi bir profilden \'Köyler Koordinatlar Puan\'\nkısmından ya bir kısmını yada tamamını kopyala ve buraya yapıştır.";
         daltta.value = "";
         dustta.disabled = true;
     }
@@ -174,8 +170,7 @@ function karisik() {
         ddortlu.disabled = true;
         ddortluf.color = 'gray';
         daltta.value = "";
-    }
-    if (dkarisik.checked === false) {
+    } else {
         dkarisikf.color = 'dimgray';
         dortamesaj.innerHTML = 'At işte sırayla karışık neyine yarayacak...';
         ddortlu.disabled = false;
@@ -192,8 +187,7 @@ function dortlu() {
         dkarisik.disabled = true;
         dkarisikf.color = 'gray';
         daltta.value = "";
-    }
-    if (ddortlu.checked === false) {
+    } else {
         ddortluf.color = 'dimgray';
         dortamesaj.innerHTML = 'Kim uğraşacak 4\'er sefer saldırmakla...';
         dkarisik.disabled = false;
@@ -205,12 +199,11 @@ function dortlu() {
 function casus() {
     if (dcasus.checked === true) {
         dcasusf.color = 'green';
-        dortamesaj.innerHTML = 'Her hedefe 1 casus göndereceksin.';
+        dortamesaj.innerHTML = 'Her sefere 1\'er casus ekleyecek.';
         daltta.value = "";
-    }
-    if (dcasus.checked === false) {
+    } else {
         dcasusf.color = 'dimgray';
-        dortamesaj.innerHTML = 'Aaaa casus atmasak da olur aslında...';
+        dortamesaj.innerHTML = 'Üzgünüm ama buna gerek yok...';
         daltta.value = "";
     }
 }
@@ -218,110 +211,56 @@ function casus() {
 function uyar() {
     if (duyar.checked === true) {
         duyarf.color = 'green';
-        dortamesaj.innerHTML = 'Hedefler bittiğinde uyarı verir.';
+        dortamesaj.innerHTML = 'Hedef kalmayınca uyarı verilecek.';
         daltta.value = "";
-    }
-    if (duyar.checked === false) {
+    } else {
         duyarf.color = 'dimgray';
-        dortamesaj.innerHTML = 'Uyarı olayı tamamen göz zevkin, istersen kullan...';
+        dortamesaj.innerHTML = 'Her şeyi önceden bilemem ama bu kadarı yeterli...';
         daltta.value = "";
     }
 }
 
 function Konsantre() {
-    var GondBas = 0;
-    var GondCas = 0;
-    var GondTop = 0;
-    var GondFak = 0;
-    var GondTam = 0;
-    var GondBos = 0;
-    var arr = Duzenlemesaj.split(/\s+/);
-    var lon = arr.length;
-    var al1 = "";
-    var al2 = "";
-    var al3 = "";
-    var al4 = "";
-
-    if (dbirim.value === 'b1') {
-        if (casus.checked === true) {
-            al2 = "&unit[spy]=1";
-        }
-        if (duzenle.checked === false) {
-            al3 = Duzenlemesaj.replace(/\n/g, '%0A');
-        }
+    secenek();
+    if (dduzenle.checked === true) {
+        Duzenlemesaj = dustta.value;
+        Koor = Duzenlemesaj.match(/\d+\|\d+/g);
     }
-
-    if (dbirim.value === 'b2') {
-        if (casus.checked === true) {
-            al2 = "&unit[spy]=1";
-        }
-        if (duzenle.checked === false) {
-            al3 = Duzenlemesaj.replace(/\n/g, '%0A');
-        }
-    }
-
-    if (dbirim.value === 'b0') {
-        al1 = arr.join('%0A');
-        if (casus.checked === true) {
-            al2 = "&unit[spy]=1";
-        }
-        if (uyar.checked === true) {
-            al4 = "&order=down";
-        }
-        if (duzenle.checked === false) {
-            al3 = Duzenlemesaj.replace(/\n/g, '%0A');
-        }
-    }
-
-    if (duzenle.checked === true) {
-        al3 = dustta.value.replace(/\n/g, '%0A');
-    }
-
-    for (i = 0; i < lon; i++) {
-        if (dbirim.value === 'b1') {
-            al1 = arr[i];
-        }
-        if (dbirim.value === 'b2') {
-            al1 = arr[i];
-        }
-
-        var params = 'village=' + al1 + '&target_type=coord&target_minput=' + al1 + '&target=' + al1 + al2 + al3 + al4 + '&support=0&attack=1&lc=tr';
-        var xhr = new XMLHttpRequest();
-        xhr.open('POST', 'https://' + game_data.world + '.tribalwars.com.tr/game.php?village=' + game_data.village.id + '&screen=place&try=confirm&h=' + game_data.csrf + '&action=command', true);
-        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-        xhr.onreadystatechange = function () {
-            if (xhr.readyState === 4) {
-                if (xhr.status === 200) {
-                    GondTop++;
-                    if (xhr.responseText.match(/error box/) == null) {
-                        GondBas++;
-                    }
-                    else {
-                        GondFak++;
-                    }
-                    GondTam = GondBas + GondFak;
-                    if (GondTam == lon) {
-                        $('#anadiv').remove();
-                        $('#contentContainer').html("<div id='hedef'>" + GondTop + " hedefe saldırı yapılıyor</div><div id='sonuc'>Başarılı: <font color='green'><b>" + GondBas + "</b></font> / Hata: <font color='red'><b>" + GondFak + "</b></font> / Toplam: <font color='purple'><b>" + GondTam + "</b></font></div>");
-                    }
-                }
-            }
-        };
-        xhr.send(params);
-        if (duyar.checked === true) {
-            xhr.onload = function () {
-                if (xhr.status === 200) {
-                    if (GondTam == lon) {
-                        alert("Saldırı tamamlandı!\n\nBaşarılı: " + GondBas + " / Hata: " + GondFak + " / Toplam: " + GondTam);
-                    }
-                }
+    if (ddortlu.checked === true) {
+        var s1 = Koor.join('a');
+        var s2 = s1.match(/\|/g);
+        var s3 = s2.join('');
+        var Sayi = s3.length;
+        var a = Koor.length;
+        var b = Math.ceil(a / 4);
+        for (var i = 0; i < 4; i++) {
+            var sonuc = "";
+            var n = Koor.slice(i * b, (i + 1) * b);
+            if (n !== "") {
+                sonuc = n.join(' ') + " ";
+                daltta.value += "\n\n\n" + sonuc + '         ' + Sayi + ' Köy';
             }
         }
-        else {
-            if (GondTam == lon) {
-                $('#anadiv').remove();
-                $('#contentContainer').html("<div id='hedef'>" + GondTop + " hedefe saldırı yapılıyor</div><div id='sonuc'>Başarılı: <font color='green'><b>" + GondBas + "</b></font> / Hata: <font color='red'><b>" + GondFak + "</b></font> / Toplam: <font color='purple'><b>" + GondTam + "</b></font></div>");
-            }
-        }
+    } else {
+        var sonuc = "";
+        sonuc = Koor.join(' ') + " ";
+        daltta.value += "\n\n\n" + sonuc + '         ' + Sayi + ' Köy';
     }
+    if (dkarisik.checked === true) {
+        Koor.sort(function() {
+            return 0.5 - Math.random();
+        });
+        var sonuc = "";
+        sonuc = Koor.join(' ') + " ";
+        daltta.value = "\n\n\n" + sonuc + '         ' + Sayi + ' Köy';
+    }
+    if (dcasus.checked === true) {
+        daltta.value = daltta.value.replace(/\n\n\n/g, "\n\n🕵️‍♂️🕵️‍♂️\n\n");
+    }
+    if (duyar.checked === true) {
+        daltta.value += "\n\n\nHedef kalmayınca uyarı ver!";
+    }
+    mesaj();
+    alert('Script hazırlandı. Hemen gönder butonuna bas ve köylere saldırı planını yap.');
+    end();
 }
