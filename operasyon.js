@@ -235,7 +235,23 @@ function Konsantre() {
         pp.style.display = 'none';
     }
 }
-
+$('#inner-border').append("<div id='div'style='width:300px;height:auto;left:60%;top:30%;position:fixed;overflow-y:hidden;background-color:#FFccAA;border-radius:20px;border:3px solid brown'><table width='100%'><tr><th width='90%'><center><b id='isim'style='color:purple'>KNS Operasyon Planlayıcısı<sup>v1.0</sup></b></center></th><th width='10%'><button id='kapa'style='color:white;font-weight:bold;background-color:red;border:2px solid red;border-radius:20px;cursor:pointer;'type='button'onclick='kapa();'>X</button></th></tr></table><div id='as' style='padding-left:20px;padding-top:5px;padding-bottom:10px;padding-right:0px'></div></div>");var ap = document.getElementById('as');
+ap.innerHTML += "<input id='zaman' type='checkbox' onclick='zaman();'/> Operasyon zamanını ayarla<br/>";
+ap.innerHTML += "&nbsp;&nbsp;&nbsp;&nbsp;"+z1+"&nbsp;"+z2+"&nbsp;"+z3+"&nbsp;"+z4+"<br/>";
+ap.innerHTML +="<input id='opmes' type='checkbox' onclick='opmesaj();'/><label for='opmes'> Operasyon anlatım mesajı ekle</label><br/>";
+ap.innerHTML +="<textarea id='mes' style='width:85%;height:70px;margin-left:20px;background-color:transparent;resize:none;display:none;border-radius:10px'></textarea>";
+ap.innerHTML +="<input id='koy' type='checkbox' onclick='koyler();'/><label for='koy'> Köy koordinatlarını ekle</label><br/>";
+ap.innerHTML +="<input id='alin' type='checkbox' style='margin-left:15px' onclick='koyler();' disabled/><label for='alin'> Köylerin dağıtımını yap</label><br/>";
+ap.innerHTML +="<input id='alsil' type='checkbox' style='margin-left:30px' onclick='' disabled/><label for='alsil'> Dağıtılmayan köyleri ekleme</label><br/>";
+ap.innerHTML +="<input id='gra' type='checkbox' onclick=''/><label for='gra'> Gelişim grafiklerini ekle</label><br/>";
+ap.innerHTML +="<input id='scr' type='checkbox' onclick='scr();'/><label for='scr'> Fake scriptleri ekle</label><br/>";
+ap.innerHTML +="<input id='scr1' type='checkbox' style='margin-left:15px' onclick='' disabled/><label for='scr1'> Şahmerdan/Mancınık Scripti</label><br/>";
+ap.innerHTML +="<input id='scr2' type='checkbox' style='margin-left:15px' onclick='' disabled/><label for='scr2'> Şahmerdan/Mancınık Scripti (4\'lü)</label><br/>";
+ap.innerHTML +="<input id='scr3' type='checkbox' style='margin-left:15px' onclick='' disabled/><label for='scr3'> Mızrakçı/Baltacı Scripti</label><br/>";
+ap.innerHTML +="<input id='scr4' type='checkbox' style='margin-left:15px' onclick='' disabled/><label for='scr4'> Mızrakçı/Baltacı Scripti (4\'lü)</label><br/>";
+ap.innerHTML +="<br/><button id='tamam' style='cursor:pointer;color:purple;margin-left:17%;font-weight:bold;background-color:#F4E4BC;height:30px;border:2px solid #765942;border-radius:10px;' type='button' onclick='Konsantre();'/>Forum Mesajını Hazırla</button>";
+ap.innerHTML +="<br/><textarea id='plan' style='width:90%;height:100px;background-color:transparent;resize:none;display:none;border-radius:10px' onfocus='this.select();' readonly></textarea>";
+/*
 $('#inner-border').append("<div id='div' style='width:300px;height:auto;left:60%;top:30%;position:fixed;overflow-y:hidden;background-color:#FFccAA;border-radius:20px;border:3px solid brown'><table width='100%'><tr><th width='90%'><center><b id='isim' style='color:purple'>KNS Operasyon Planlayıcısı<sup>v1.0</sup></b></center></th><th width='10%'><button id='kapa' style='color:white;font-weight:bold;background-color:red;border:2px solid red;border-radius:20px;cursor:pointer;' type='button' onclick='kapa();'>X</button></th></tr></table><div id='as' style='padding-left:20px;padding-top:5px;padding-bottom:10px;padding-right:0px'></div></div>");
 var ap = document.getElementById('as');
 ap.innerHTML += "<input id='zaman' type='checkbox' onclick='zaman();'/> Operasyon zamanını ayarla<br/>";
@@ -258,7 +274,7 @@ ap.innerHTML += "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input id='scr2' type='checkbox' 
 ap.innerHTML += "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input id='scr3' type='checkbox' disabled/> Mızrakçı/Baltacı";
 ap.innerHTML += "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input id='scr4' type='checkbox' disabled/> Mızrakçı/Baltacı (4'lü)";
 ap.innerHTML += "<div style='padding-left:15px;padding-top:10px;'>Scriptler hedef köy isimleri boş bırakıldığında bile eklenir.</div>";
-ap.innerHTML += "<br/><input id='gonder' type='button' value='Planı Oluştur' onclick='Konsantre();'/><br/><br/><div id='plan'></div>";
+ap.innerHTML += "<br/><input id='gonder' type='button' value='Planı Oluştur' onclick='Konsantre();'/><br/><br/><div id='plan'></div>";*/
 
 if (premium) {
     document.getElementById('div').style.display = 'block';
