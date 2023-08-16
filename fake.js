@@ -54,8 +54,7 @@ var s2 = s1.match(/\|/g);
 var s3 = s2.join('');
 var Sayi = s3.length;
 
-var Oyuncu = $('h2.your-class-name').html().trim();
-
+var Oyuncu = $('h2').html().trim();
 
 // Eğer oyuncu adı çok uzunsa, adı kendi adı olarak kullan
 if (Oyuncu.length > 32) {
