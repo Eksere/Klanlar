@@ -32,9 +32,9 @@ if ($('#anadiv').length > 0) {
         document.getElementById('dortlu').checked = false;
         dortlu();
     }
-    if (document.getElementById('casus').checked == true) {
-        document.getElementById('casus').checked = false;
-        casus();
+    if (document.getElementById('spy').checked == true) {
+        document.getElementById('spy').checked = false;
+        spy();
     }
     if (document.getElementById('uyar').checked == true) {
         document.getElementById('uyar').checked = false;
@@ -86,7 +86,7 @@ ap.innerHTML += "<br/><br/><select size='3'id='birim'style='width:100%;text-alig
 ap.innerHTML += "<input id='duzenle'type='checkbox'onclick='duzenle();'/><font id='duzenlef'color='dimgray'><label for='duzenle'> Koordinatları düzenle</label></font><br/>";
 ap.innerHTML += "<input id='karisik'type='checkbox'onclick='karisik();'/><font id='karisikf'color='dimgray'><label for='karisik'> Koordinatları karıştır</label></font><br/>";
 ap.innerHTML += "<input id='dortlu'type='checkbox'onclick='dortlu();'/><font id='dortluf'color='dimgray'><label for='dortlu'> Koordinatları 4\'er kere ekle</label></font><br/>";
-ap.innerHTML += "<input id='casus'type='checkbox'onclick='casus();'/><font id='casusf'color='dimgray'><label for='casus'> Saldırılara 1\'er casus ekle</label></font><br/>";
+ap.innerHTML += "<input id='spy'type='checkbox'onclick='spy();'/><font id='spyf'color='dimgray'><label for='spy'> Saldırılara 1\'er spy ekle</label></font><br/>";
 ap.innerHTML += "<input id='uyar'type='checkbox'onclick='uyar();'/><font id='uyarf'color='dimgray'><label for='uyar'> Hedefler bittiğinde uyarı ver</label></font><br/>";
 ap.innerHTML += "<br/><br/><button id='hazir' style='cursor:pointer;color:purple;margin-left:60px;font-weight:bold;background-color:#FFccAA;height:30px;border:2px solid #765942;border-radius:10px;'type='button'onclick='Konsantre();'>Betiği Oluştur</button>";
 ap.innerHTML += "<br/><br/><br/><div align='center'><font size='1' face='Comic Sans MS' color='purple'><a href='https://forum.klanlar.org' target='_blank'>Klanlar Forum</a>\'una uğradın mı?</font></div>";
@@ -101,8 +101,8 @@ var ddortlu = document.getElementById('dortlu');
 var ddortluf = document.getElementById('dortluf');
 var dkarisik = document.getElementById('karisik');
 var dkarisikf = document.getElementById('karisikf');
-var dcasus = document.getElementById('casus');
-var dcasusf = document.getElementById('casusf');
+var dspay = document.getElementById('spy');
+var dspayf = document.getElementById('spyf');
 var duyar = document.getElementById('uyar');
 var duyarf = document.getElementById('uyarf');
 
@@ -124,24 +124,24 @@ function mesaj() {
 // Seçeneği güncelle
 function secenek() {
     if (dbirim.value == 'b0') {
-        dcasus.checked = false;
-        dcasus.disabled = true;
-        dcasusf.color = 'gray';
+        dspy.checked = false;
+        dspy.disabled = true;
+        dspyf.color = 'gray';
         duyar.checked = false;
         duyar.disabled = true;
         duyarf.color = 'gray';
         dortamesaj.innerHTML = 'Köylerin sadece koordinatlarını listeler';
     }
     if (dbirim.value == 'b1') {
-        dcasus.disabled = false;
-        dcasusf.color = 'dimgray';
+        dspy.disabled = false;
+        dspyf.color = 'dimgray';
         duyar.disabled = false;
         duyarf.color = 'dimgray';
         dortamesaj.innerHTML = 'Köyünde şahmerdan varsa şahmerdan, yoksa mancınık gönderir';
     }
     if (dbirim.value == 'b2') {
-        dcasus.disabled = false;
-        dcasusf.color = 'dimgray';
+        dspy.disabled = false;
+        dspyf.color = 'dimgray';
         duyar.disabled = false;
         duyarf.color = 'dimgray';
         dortamesaj.innerHTML = 'Köyünde mızrakçı varsa mızrakçı, yoksa baltacı gönderir';
@@ -210,16 +210,16 @@ function dortlu() {
     }
 }
 
-// Saldırılara casus ekle seçeneğini işle
-function casus() {
-    if (dcasus.checked == true) {
-        dcasusf.color = 'green';
-        dortamesaj.innerHTML = 'Her saldırının yanına 1 casus ekle.';
+// Saldırılara spy ekle seçeneğini işle
+function spy() {
+    if (dspy.checked == true) {
+        dspyf.color = 'green';
+        dortamesaj.innerHTML = 'Her saldırının yanına 1 spy ekle.';
         daltta.value = "";
     }
-    if (dcasus.checked == false) {
-        dcasusf.color = 'dimgray';
-        dortamesaj.innerHTML = 'Casus mu? Önemli değil...';
+    if (dspy.checked == false) {
+        dspyf.color = 'dimgray';
+        dortamesaj.innerHTML = 'spy mu? Önemli değil...';
         daltta.value = "";
     }
 }
@@ -323,7 +323,7 @@ function Konsantre() {
     if (dbirim.value == 'b1') {
         dortamesaj.innerHTML = '<font color="black">' + Koysayisi + '</font> köyün şahmerdan / mancınık hedefleri hazırlanmıştır.';
         daltta.value = silk + '\')';
-        if (dcasus.checked == true) {
+        if (dspy.checked == true) {
             daltta.value += silk + '\')';
         }
         if (duyar.checked == true) {
@@ -333,7 +333,7 @@ function Konsantre() {
     if (dbirim.value == 'b2') {
         dortamesaj.innerHTML = '<font color="black">' + Koysayisi + '</font> köyün mızrakçı / baltacı hedefleri hazırlanmıştır.';
         daltta.value = silk + '\')';
-        if (dcasus.checked == true) {
+        if (dspy.checked == true) {
             daltta.value += silk + '\')';
         }
         if (duyar.checked == true) {
