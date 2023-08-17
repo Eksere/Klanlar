@@ -322,9 +322,9 @@ function Konsantre() {
     }
     if (dbirim.value == 'b1') {
         dortamesaj.innerHTML = '<font color="black">' + Koysayisi + '</font> köyün şahmerdan / mancınık hedefleri hazırlanmıştır.';
-        daltta.value = silk + ' ')';
+        daltta.value = silk + 'Şahmerda=50')';
         if (dcasus.checked == true) {
-            daltta.value += silk + ' ')';
+            daltta.value += silk + 'Şahmerda=50 ')';
         }
         if (duyar.checked == true) {
             daltta.value += 'alert(\'Hazırlık tamamlandı. Saldırılara başlayabilirsin.\');';
@@ -332,9 +332,9 @@ function Konsantre() {
     }
     if (dbirim.value == 'b2') {
         dortamesaj.innerHTML = '<font color="black">' + Koysayisi + '</font> köyün mızrakçı / baltacı hedefleri hazırlanmıştır.';
-        daltta.value = silk + ' ')';
+        daltta.value = silk + ' Şahmerda=50')';
         if (dcasus.checked == true) {
-            daltta.value += silk + ' ')';
+            daltta.value += silk + 'Şahmerda=50')';
         }
         if (duyar.checked == true) {
             daltta.value += 'alert(\'Hazırlık tamamlandı. Saldırılara başlayabilirsin.\');';
