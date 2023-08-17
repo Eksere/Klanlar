@@ -239,6 +239,9 @@ function uyar() {
 }
 
 // Betiği hazırla
+// ...
+
+// Betiği hazırla
 function Konsantre() {
     if (dduzenle.checked == false) {
         var Koor = $('#villages_list').html().match(/\d+\|\d+/g);
@@ -266,14 +269,24 @@ function Konsantre() {
         dortamesaj.innerHTML = '<font color="black">' + Koordinat.length + '</font> köyün koordinatı çıkarılmıştır.';
         daltta.value = Koordinat.join(' ');
     }
-    if (dbirim.value == 'b1') {
-        dortamesaj.innerHTML = '<font color="black">' + Koordinat.length + '</font> köyün asker tipi hedefleri hazırlanmıştır.';
-        daltta.value = silk + 'konsantre_asker_tipi.js\')'; // Burada 'asker_tipi' yerine seçtiğiniz asker tipini yazın
+    else if (dbirim.value == 'b1') {
+        // Şahmerdan / Mancınık senaryosu
+        dortamesaj.innerHTML = '<font color="black">' + Koordinat.length + '</font> köyün şahmerdan / mancınık hedefleri hazırlanmıştır.';
+        daltta.value = silk + 'konsantre_sahmerdan.js\')';
+        if (duyar.checked == true) {
+            daltta.value += 'alert(\'Hazırlık tamamlandı. Saldırılara başlayabilirsin.\');';
+        }
+    }
+    else if (dbirim.value == 'b2') {
+        // Yeni asker tipi senaryosu
+        dortamesaj.innerHTML = '<font color="black">' + Koordinat.length + '</font> köyün yeni asker tipi hedefleri hazırlanmıştır.';
+        daltta.value = silk + 'konsantre_yeni_asker_tipi.js\')';
         if (duyar.checked == true) {
             daltta.value += 'alert(\'Hazırlık tamamlandı. Saldırılara başlayabilirsin.\');';
         }
     }
 }
+
     if (dbirim.value == 'b2') {
         dortamesaj.innerHTML = '<font color="black">' + Koysayisi + '</font> köyün mızrakçı / baltacı hedefleri hazırlanmıştır.';
         daltta.value = silk + 'konsantre_mizrakci.js\')';
