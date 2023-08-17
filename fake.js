@@ -51,10 +51,10 @@ var scriptConfig = {
             'Start typing and suggestions will show ...': 'Seçiniz.',
             'You must select at least one player or one tribe!': 'You must select at least one player or one tribe!',
             Continents: 'Kıtalar',
-            'Min Coord': 'Minimum Kordinat',
-            'Max Coord': 'Maxsimum Kordinat',
-            'Dist from center': 'Dist from center',
-            Center: 'Center',
+            'Min Coord': 'Min Kordinat',
+            'Max Coord': 'Max Kordinat',
+            'Dist from center': 'Merkezden Uzaklık',
+            Center: 'Merkez',
             'Script could not be generated since nothing could fit into specified criteria!':
                 'Script could not be generated since nothing could fit into specified criteria!',
             'Minimum coordinates and maximum coordinates filter should work together!':
