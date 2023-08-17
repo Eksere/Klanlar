@@ -297,4 +297,3 @@ function Konsantre() {
             daltta.value += 'alert(\'Hazırlık tamamlandı. Saldırılara başlayabilirsin.\');';
         }
     }
-}
