@@ -36,27 +36,20 @@ var scriptConfig = {
             Randomly: 'Rastgele',
             Sequential: 'Sıralı',
             'Selective Random': 'Seçici Rastgele',
-            Coordinates: 'Coordinates',
-            'Choose units and amounts to send':
-                'Göndermek İstediğin Fake Örneğini Şeçiniz.',
-            'Generate Script': 'Generate Script',
-            'Coordinates field is required!': 'Coordinates field is required!',
-            'You must choose at least one unit to send!':
-                'You must choose at least one unit to send!',
-            'Add this script to your Quick-bar':
-                'Add this script to your Quick-bar',
+            Coordinates: 'Kordinatlar',
+            'Choose units and amounts to send': 'Göndermek İstediğin Fake Örneğini Şeçiniz.',
+            'Generate Script': 'Komut Dosyası Oluştur',
+	    'Coordinates field is required!': 'Coordinates field is required!',
+            'You must choose at least one unit to send!': 'You must choose at least one unit to send!',
+            'Add this script to your Quick-bar': 'Add this script to your Quick-bar',
             'Add new Link': 'Add new Link',
-            'How to fill coordinates?': 'How to fill coordinates?',
-            Manually: 'Manually',
-            Automatically: 'Automatically',
-            'Player (separate players using comma)':
-                'Player (separate players using comma)',
-            'Tribe (separate tribes using comma)':
-                'Tribe (separate tribes using comma)',
-            'Start typing and suggestions will show ...':
-                'Start typing and suggestions will show ...',
-            'You must select at least one player or one tribe!':
-                'You must select at least one player or one tribe!',
+	    'How to fill coordinates?': 'Koordinatlar Nasıl Doldurulsun',
+            Manually: 'Manuel',
+            Automatically: 'Otomatik',
+            'Player (separate players using comma)': 'Oyuncunun Nick'ini Yazınız (virgül kullanarak ayrın)',
+            'Tribe (separate tribes using comma)': 'Klanların İsmini Giriniz (virgül kullanarak ayrın)',
+            'Start typing and suggestions will show ...': 'Seçiniz.',
+            'You must select at least one player or one tribe!': 'You must select at least one player or one tribe!',
             Continents: 'Continents',
             'Min Coord': 'Min Coord',
             'Max Coord': 'Max Coord',
@@ -86,7 +79,7 @@ var scriptConfig = {
                 'Filter players 20 times bigger then yourself',
             'Minimum Points Village': 'Minimum Points Village',
             'Maximum Points Village': 'Maximum Points Village',
-            'Selective Random Configuration': 'Selective Random Configuration',
+            'Selective Random Configuration': 'Seçici Rastgele Yapılandırma',
             'This will target Player3 1000% more times then normal distribution, Player2 will be targetted 200% more and Player1 will be targetted 500% more.':
                 'This will target Player3 1000% more times then normal distribution, Player2 will be targetted 200% more and Player1 will be targetted 500% more.',
         },
