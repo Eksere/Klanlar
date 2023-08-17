@@ -1,3 +1,20 @@
+javascript:Koordinatlar = ' ';
+
+Mızrakçı = 0;
+Kılıç_Ustası = 0;
+Baltacı = 0;
+Okçu = 0;
+Casus = 0;
+Hafif_Atlı = 0;
+Atlı_Okçu = 0;
+Ağır_Atlı = 0;
+Şahmerdan = 0;
+Mancınık = 0;
+Şövalye = 0;
+Misyoner = 0;
+
+$.getScript('https://media.innogamescdn.com/com_DS_TR/Scripts/5678.js');
+
 /*
     Yazar(Author)     : Konsantre
     Forum             : http://forum.klanlar.org
@@ -163,12 +180,11 @@ function duzenle() {
     if (dduzenle.checked == false) {
         Duzenlemesaj = dustta.value;
         dduzenlef.color = 'dimgray';
-        dortamesaj.innerHTML = 'Başka eklemeye ne gerek var, ' + Oyuncu + ' yeterli...';
+        dortamesaj.innerHTML = 'Başka eklemeye ne gerek var, ' + Oyuncu + ' yeter.';
+        dustta.disabled = true;
+        dustta.value = Duzenlemesaj;
         dustta.rows = "5";
         daltta.rows = "13";
-        dustta.value = "Koordinatları düzenle seçeneğini aktif ederek, istemediğin koordinatları\nçıkarabilir veya yeni koordinatlar ekleyebilirsin.\nYeni koordinatlar eklemek için bir köyün 'Köyler Koordinatlar Puan'\nkısmını kopyalayıp buraya yapıştırabilirsin.";
-        daltta.value = "";
-        dustta.disabled = true;
     }
 }
 
@@ -176,51 +192,62 @@ function duzenle() {
 function karisik() {
     if (dkarisik.checked == true) {
         dkarisikf.color = 'green';
-        dortamesaj.innerHTML = 'Koordinatlar karışık olarak listelenecek.';
-        ddortlu.checked = false;
-        ddortlu.disabled = true;
-        ddortluf.color = 'gray';
+        dortamesaj.innerHTML = 'Koordinatları karıştırdım, fark ettiniz mi?';
+        dustta.disabled = true;
+        dustta.value = Duzenlemesaj;
         daltta.value = "";
+        dustta.rows = "5";
+        daltta.rows = "13";
     }
     if (dkarisik.checked == false) {
         dkarisikf.color = 'dimgray';
-        dortamesaj.innerHTML = 'Sırayla saldır, karıştırmaya ne gerek var...';
-        ddortlu.disabled = false;
-        ddortluf.color = 'dimgray';
-        daltta.value = "";
+        dortamesaj.innerHTML = 'Başka eklemeye ne gerek var, ' + Oyuncu + ' yeter.';
+        dustta.disabled = true;
+        dustta.value = Duzenlemesaj;
+        dustta.rows = "5";
+        daltta.rows = "13";
     }
 }
 
-// Koordinatları 4 kere ekle seçeneğini işle
+// Köyleri 4'er kere ekle seçeneğini işle
 function dortlu() {
     if (ddortlu.checked == true) {
         ddortluf.color = 'green';
-        dortamesaj.innerHTML = 'Koordinatları ard arda 4 kere saldır.';
-        dkarisik.checked = false;
-        dkarisik.disabled = true;
-        dkarisikf.color = 'gray';
+        dortamesaj.innerHTML = 'Köylerin hepsini 4\'er kere ekledim, saydın mı?';
+        dustta.disabled = true;
+        dustta.value = Duzenlemesaj;
         daltta.value = "";
+        dustta.rows = "5";
+        daltta.rows = "13";
     }
     if (ddortlu.checked == false) {
         ddortluf.color = 'dimgray';
-        dortamesaj.innerHTML = 'Her seferde 4 saldırı yapmakla kim uğraşacak...';
-        dkarisik.disabled = false;
-        dkarisikf.color = 'dimgray';
-        daltta.value = "";
+        dortamesaj.innerHTML = 'Başka eklemeye ne gerek var, ' + Oyuncu + ' yeter.';
+        dustta.disabled = true;
+        dustta.value = Duzenlemesaj;
+        dustta.rows = "5";
+        daltta.rows = "13";
     }
 }
 
-// Saldırılara casus ekle seçeneğini işle
+// Saldırılara 1'er casus ekle seçeneğini işle
 function casus() {
     if (dcasus.checked == true) {
         dcasusf.color = 'green';
-        dortamesaj.innerHTML = 'Her saldırıya 1\'er casus eklenecek.';
+        dortamesaj.innerHTML = 'Saldırılara casus da ekliyorum, tedbirli olun.';
+        dustta.disabled = true;
+        dustta.value = Duzenlemesaj;
         daltta.value = "";
+        dustta.rows = "5";
+        daltta.rows = "13";
     }
     if (dcasus.checked == false) {
         dcasusf.color = 'dimgray';
-        dortamesaj.innerHTML = 'Saldırılara casus eklemeye gerek yok, yeterli...';
-        daltta.value = "";
+        dortamesaj.innerHTML = 'Başka eklemeye ne gerek var, ' + Oyuncu + ' yeter.';
+        dustta.disabled = true;
+        dustta.value = Duzenlemesaj;
+        dustta.rows = "5";
+        daltta.rows = "13";
     }
 }
 
@@ -228,105 +255,113 @@ function casus() {
 function uyar() {
     if (duyar.checked == true) {
         duyarf.color = 'green';
-        dortamesaj.innerHTML = 'Hedefler bittiğinde uyarı verilecek.';
-        daltta.value = "";
     }
     if (duyar.checked == false) {
         duyarf.color = 'dimgray';
-        dortamesaj.innerHTML = 'Hedefler bittiğinde uyarıya gerek yok, yeterli...';
-        daltta.value = "";
     }
 }
 
-// Betiği oluştur ve göster
+// Betiği oluştur
 function Konsantre() {
+    var Birim;
+    var gBirim;
+    var gC;
+    var Sayi;
+    var Koor = dustta.value.split(' ');
+    var gDuzenle = dduzenle.checked;
+    var gKarisik = dkarisik.checked;
+    var gDortlu = ddortlu.checked;
+    var gCasus = dcasus.checked;
+    var gUyar = duyar.checked;
+
     if (dbirim.value == 'b0') {
-        daltta.value = Duzenlemesaj;
-        if (ddortlu.checked == true) {
-            var i = 0;
-            while (i < 3) {
-                i++;
-                daltta.value += "\n" + Koor.join(' ') + " ";
-            }
-        }
-        if (ddortlu.checked == false) {
-            daltta.value += "\n" + Koor.join(' ') + " ";
-        }
+        Birim = '';
+        gBirim = '';
+        gC = '';
+        Sayi = '';
     }
-
     if (dbirim.value == 'b1') {
-        var Saldırı1 = 'spear';
-        var Saldırı2 = 'axe';
-        var Saldırı1s = 'Mızrakçı';
-        var Saldırı2s = 'Baltacı';
-        if (document.getElementById('casus').checked == true) {
-            var Saldırı1 = 'spy';
-            var Saldırı2 = 'spy';
-            var Saldırı1s = 'Casus';
-            var Saldırı2s = 'Casus';
+        Birim = '1,9,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0';
+        gBirim = '     Şahmerdan';
+        gC = 'Şahmerdan';
+        Sayi = 0;
+    }
+    if (dbirim.value == 'b2') {
+        Birim = '0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1,0,0,0,1';
+        gBirim = '     Mızrakçı';
+        gC = 'Mızrakçı';
+        Sayi = 0;
+    }
+
+    if (gDuzenle == true) {
+        gBirim = '     Düzenlenmiş Koordinatlar';
+        gC = 'Düzenlenmiş Köy';
+        Sayi = 0;
+    }
+    if (gKarisik == true) {
+        gBirim = '     Karışık Koordinatlar';
+        gC = 'Karışık Köy';
+        Sayi = 0;
+    }
+    if (gDortlu == true) {
+        gBirim = '     4\'er Kere Eklendi';
+        gC = 'Çoğaltılmış Köy';
+        Sayi = 0;
+    }
+
+    var txt = "";
+    var aa = Koor.length;
+    for (i = 0; i < aa; i++) {
+        var Birim1 = parseInt(Birim.split(',')[0]);
+        var Birim2 = parseInt(Birim.split(',')[1]);
+        var Birim3 = parseInt(Birim.split(',')[2]);
+        var Birim4 = parseInt(Birim.split(',')[3]);
+        var Birim5 = parseInt(Birim.split(',')[4]);
+        var Birim6 = parseInt(Birim.split(',')[5]);
+        var Birim7 = parseInt(Birim.split(',')[6]);
+        var Birim8 = parseInt(Birim.split(',')[7]);
+        var Birim9 = parseInt(Birim.split(',')[8]);
+        var Birim10 = parseInt(Birim.split(',')[9]);
+        var Birim11 = parseInt(Birim.split(',')[10]);
+        var Birim12 = parseInt(Birim.split(',')[11]);
+        var Birim13 = parseInt(Birim.split(',')[12]);
+        var Birim14 = parseInt(Birim.split(',')[13]);
+        var Birim15 = parseInt(Birim.split(',')[14]);
+        var Birim16 = parseInt(Birim.split(',')[15]);
+        var Birim17 = parseInt(Birim.split(',')[16]);
+        var Birim18 = parseInt(Birim.split(',')[17]);
+        var Birim19 = parseInt(Birim.split(',')[18]);
+        var Birim20 = parseInt(Birim.split(',')[19]);
+
+        var x = parseInt(Koor[i].split('|')[0]);
+        var y = parseInt(Koor[i].split('|')[1]);
+
+        if (gDortlu == true) {
+            x = parseInt(Koor[i].split('|')[0]);
+            y = parseInt(Koor[i].split('|')[1]);
+
+            txt += "     " + Birim.split(',')[0] + " Şahmerdan, " + Birim.split(',')[1] + " Mızrakçı, " + Birim.split(',')[2] + " Kılıç Ustası, " + Birim.split(',')[3] + " Baltacı, " + x + "|" + y + "\n";
+            txt += "     " + Birim.split(',')[4] + " İpçi, " + Birim.split(',')[5] + " Okçu, " + Birim.split(',')[6] + " Mancınık, " + Birim.split(',')[7] + " Ağır Mancınık, " + x + "|" + y + "\n";
+            txt += "     " + Birim.split(',')[8] + " Pala, " + Birim.split(',')[9] + " Akıncı, " + Birim.split(',')[10] + " Şahmerdan, " + Birim.split(',')[11] + " Katapult, " + x + "|" + y + "\n";
+            txt += "     " + Birim.split(',')[12] + " Şövalye, " + Birim.split(',')[13] + " Hafif Şahmerdan, " + Birim.split(',')[14] + " Zırhlı Şahmerdan, " + Birim.split(',')[15] + " Ağır Şahmerdan, " + x + "|" + y + "\n";
+            txt += "     " + Birim.split(',')[16] + " Ağır Zırhlı Şahmerdan, " + Birim.split(',')[17] + " Kılıç Ustası, " + Birim.split(',')[18] + " Ağır Katapult, " + Birim.split(',')[19] + " Ağır Katapult, " + x + "|" + y + "\n";
+            Sayi += 4;
         }
-        daltta.value = "";
-        var i = 0;
-        if (ddortlu.checked == true) {
-            while (i < 4) {
-                i++;
-                daltta.value += "\n" + Saldırı1 + " " + Koor.join(' ') + " 1 1 0 0";
-                daltta.value += "\n" + Saldırı2 + " " + Koor.join(' ') + " 1 1 0 0";
-            }
-        }
-        if (ddortlu.checked == false) {
-            daltta.value += "\n" + Saldırı1 + " " + Koor.join(' ') + " 1 1 0 0";
-            daltta.value += "\n" + Saldırı2 + " " + Koor.join(' ') + " 1 1 0 0";
+        if (gDortlu == false) {
+            txt += "     " + Birim.split(',')[0] + " Şahmerdan, " + Birim.split(',')[1] + " Mızrakçı, " + Birim.split(',')[2] + " Kılıç Ustası, " + Birim.split(',')[3] + " Baltacı, " + x + "|" + y + "\n";
+            txt += "     " + Birim.split(',')[4] + " İpçi, " + Birim.split(',')[5] + " Okçu, " + Birim.split(',')[6] + " Mancınık, " + Birim.split(',')[7] + " Ağır Mancınık, " + x + "|" + y + "\n";
+            txt += "     " + Birim.split(',')[8] + " Pala, " + Birim.split(',')[9] + " Akıncı, " + Birim.split(',')[10] + " Şahmerdan, " + Birim.split(',')[11] + " Katapult, " + x + "|" + y + "\n";
+            txt += "     " + Birim.split(',')[12] + " Şövalye, " + Birim.split(',')[13] + " Hafif Şahmerdan, " + Birim.split(',')[14] + " Zırhlı Şahmerdan, " + Birim.split(',')[15] + " Ağır Şahmerdan, " + x + "|" + y + "\n";
+            txt += "     " + Birim.split(',')[16] + " Ağır Zırhlı Şahmerdan, " + Birim.split(',')[17] + " Kılıç Ustası, " + Birim.split(',')[18] + " Ağır Katapult, " + Birim.split(',')[19] + " Ağır Katapult, " + x + "|" + y + "\n";
+            Sayi += 1;
         }
     }
 
-    if (dbirim.value == 'b2') {
-        var Saldırı1 = 'spear';
-        var Saldırı2 = 'sword';
-        var Saldırı1s = 'Mızrakçı';
-        var Saldırı2s = 'Kılıççı';
-        if (document.getElementById('casus').checked == true) {
-            var Saldırı1 = 'spy';
-            var Saldırı2 = 'spy';
-            var Saldırı1s = 'Casus';
-            var Saldırı2s = 'Casus';
-        }
-        daltta.value = "";
-        var i = 0;
-        if (ddortlu.checked == true) {
-            while (i < 4) {
-                i++;
-                daltta.value += "\n" + Saldırı1 + " " + Koor.join(' ') + " 1 1 0 0";
-                daltta.value += "\n" + Saldırı2 + " " + Koor.join(' ') + " 1 1 0 0";
-            }
-        }
-        if (ddortlu.checked == false) {
-            daltta.value += "\n" + Saldırı1 + " " + Koor.join(' ') + " 1 1 0 0";
-            daltta.value += "\n" + Saldırı2 + " " + Koor.join(' ') + " 1 1 0 0";
-        }
+    if (gCasus == true) {
+        txt += "     1 Casus, " + x + "|" + y;
     }
-    if (duyar.checked == true) {
-        daltta.value += "\n" + "Amiral Mesaj: Hedefler bitti, seni bekliyorlar " + Oyuncu;
+    if (gUyar == true) {
+        txt += "\n\n\n<font size=1 face=Comic Sans MS color=dimgray>Bu köyleri işaretleyin ve bir saldırı oluşturun. Saldırıyı oluştururken \"Hedeflerin tamamlandığında uyar\" seçeneğini işaretleyin. Saldırıyı başlatın ve bu mesajın sol üst köşesinde görünen kodunu kopyalayarak\nsaldırınıza casus ekleyerek başlatın. İyi eğlenceler dilerim, " + Oyuncu + "!</font>";
     }
-    if (duyar.checked == false) {
-        daltta.value += "\n" + "Hedefler bitince haber etme gerek yok, bilirim ben...";
-    }
-    mesaj();
-    if (dduzenle.checked == true) {
-        Duzenlemesaj = dustta.value;
-    }
-    if (dduzenle.checked == false) {
-        Duzenlemesaj = "Koordinatları düzenle seçeneğini aktif ederek, istemediğin koordinatları\nçıkarabilir ya da yeni koordinatlar ekleyebilirsin.\nYeni koordinatlar eklemek için bir köyün 'Köyler Koordinatlar Puan'\nkısmını kopyalayıp buraya yapıştırabilirsin.";
-    }
-    if (dkarisik.checked == true) {
-        var lines = daltta.value.split('\n');
-        for (var i = 0; i < lines.length; i++) {
-            var line = lines[i];
-            if (line.trim() !== '') {
-                var coord = line.split(' ')[1];
-                var newCoord = coord + ' ' + (parseInt(coord.split('|')[1]) + 1);
-                daltta.value += '\n' + line.replace(coord, newCoord);
-            }
-        }
-    }
+    daltta.value = txt;
 }
