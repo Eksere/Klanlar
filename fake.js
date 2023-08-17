@@ -214,130 +214,119 @@ function dortlu() {
 function casus() {
     if (dcasus.checked == true) {
         dcasusf.color = 'green';
-        dortamesaj.innerHTML = 'Her saldırının yanına 1 casus ekle.';
+        dortamesaj.innerHTML = 'Her saldırıya 1\'er casus eklenecek.';
         daltta.value = "";
     }
     if (dcasus.checked == false) {
         dcasusf.color = 'dimgray';
-        dortamesaj.innerHTML = 'Casus mu? Önemli değil...';
+        dortamesaj.innerHTML = 'Saldırılara casus eklemeye gerek yok, yeterli...';
         daltta.value = "";
     }
 }
 
-// Uyarı ver seçeneğini işle
+// Hedefler bittiğinde uyarı ver seçeneğini işle
 function uyar() {
     if (duyar.checked == true) {
         duyarf.color = 'green';
-        dortamesaj.innerHTML = 'Son köyde uyarı mesajı alacaksın.';
+        dortamesaj.innerHTML = 'Hedefler bittiğinde uyarı verilecek.';
         daltta.value = "";
     }
     if (duyar.checked == false) {
         duyarf.color = 'dimgray';
-        dortamesaj.innerHTML = 'Uyarıyı kapat, tekrar düşün...';
+        dortamesaj.innerHTML = 'Hedefler bittiğinde uyarıya gerek yok, yeterli...';
         daltta.value = "";
     }
 }
 
-// Betiği hazırla
+// Betiği oluştur ve göster
 function Konsantre() {
-    if (dduzenle.checked == false) {
-        var Koor = $('#villages_list').html().match(/\d+\|\d+/g);
-        var Sayi;
-        var s1 = Koor.join('a');
-        var s2 = s1.match(/\|/g);
-        var s3 = s2.join('');
-        var Sayi = s3.length;
-        var Sayi4 = Sayi * 4;
-
-        var Koor4 = [];
-        var Koor_a = $('#villages_list').html().match(/\d+\|\d+/g);
-        var l = Koor_a.length;
-        for (i = 0; i < l; i++) {
-            Koor4.push(Koor_a[i]);
-            Koor4.push(Koor_a[i]);
-            Koor4.push(Koor_a[i]);
-            Koor4.push(Koor_a[i]);
-        }
-
-        var Koordinat = Koor;
-        var Koysayisi = Sayi;
-
-        if (dkarisik.checked == true) {
-            for (i = 0; i < Koordinat.length; i++) {
-                var x = Math.floor(Math.random() * Koordinat.length);
-                var y = Math.floor(Math.random() * Koordinat.length);
-                Koordinat[x] = Koordinat.splice(y, 1, Koordinat[x])[0];
-            }
-        }
-
-        if (ddortlu.checked == true) {
-            var Koordinat = Koor4;
-            var Koysayisi = Sayi4;
-        }
-    }
-
-    if (dduzenle.checked == true) {
-        var Koord = dustta.value.match(/\d+\|\d+/g);
-        var Sayid;
-        var sd1 = Koord.join('a');
-        var sd2 = sd1.match(/\|/g);
-        var sd3 = sd2.join('');
-        var Sayid = sd3.length;
-        var Sayid4 = Sayid * 4;
-
-        Koord4 = [];
-        var Koord_a = dustta.value.match(/\d+\|\d+/g);
-        var ld = Koord_a.length;
-        for (i = 0; i < ld; i++) {
-            Koord4.push(Koord_a[i]);
-            Koord4.push(Koord_a[i]);
-            Koord4.push(Koord_a[i]);
-            Koord4.push(Koord_a[i]);
-        }
-
-        var Koordinat = Koord;
-        var Koysayisi = Sayid;
-
-        if (dkarisik.checked == true) {
-            for (i = 0; i < Koordinat.length; i++) {
-                var x = Math.floor(Math.random() * Koordinat.length);
-                var y = Math.floor(Math.random() * Koordinat.length);
-                Koordinat[x] = Koordinat.splice(y, 1, Koordinat[x])[0];
-            }
-        }
-
-        if (ddortlu.checked == true) {
-            var Koordinat = Koord4;
-            var Koysayisi = Sayid4;
-        }
-    }
-
-    var silk = "javascript:Koordinatlar='" + Koordinat.join(' ') + "';$.getScript('https://media.innogamescdn.com/com_DS_TR/Scripts/5678.js";
-
-    dortamesaj.innerHTML = 'Betik <font color="black">\'' + Koysayisi + '\'</font> köy için hazırlanmıştır';
-
     if (dbirim.value == 'b0') {
-        dortamesaj.innerHTML = '<font color="black">' + Koysayisi + '</font> köyün koordinatı çıkarılmıştır.';
-        daltta.value = Koordinat.join(' ');
+        daltta.value = Duzenlemesaj;
+        if (ddortlu.checked == true) {
+            var i = 0;
+            while (i < 3) {
+                i++;
+                daltta.value += "\n" + Koor.join(' ') + " ";
+            }
+        }
+        if (ddortlu.checked == false) {
+            daltta.value += "\n" + Koor.join(' ') + " ";
+        }
     }
+
     if (dbirim.value == 'b1') {
-        dortamesaj.innerHTML = '<font color="black">' + Koysayisi + '</font> köyün şahmerdan / mancınık hedefleri hazırlanmıştır.';
-        daltta.value = silk + 'konsantre_sahmerdan.js\')';
-        if (dcasus.checked == true) {
-            daltta.value += silk + 'konsantre_casus.js\')';
+        var Saldırı1 = 'spear';
+        var Saldırı2 = 'axe';
+        var Saldırı1s = 'Mızrakçı';
+        var Saldırı2s = 'Baltacı';
+        if (document.getElementById('casus').checked == true) {
+            var Saldırı1 = 'spy';
+            var Saldırı2 = 'spy';
+            var Saldırı1s = 'Casus';
+            var Saldırı2s = 'Casus';
         }
-        if (duyar.checked == true) {
-            daltta.value += 'alert(\'Hazırlık tamamlandı. Saldırılara başlayabilirsin.\');';
+        daltta.value = "";
+        var i = 0;
+        if (ddortlu.checked == true) {
+            while (i < 4) {
+                i++;
+                daltta.value += "\n" + Saldırı1 + " " + Koor.join(' ') + " 1 1 0 0";
+                daltta.value += "\n" + Saldırı2 + " " + Koor.join(' ') + " 1 1 0 0";
+            }
+        }
+        if (ddortlu.checked == false) {
+            daltta.value += "\n" + Saldırı1 + " " + Koor.join(' ') + " 1 1 0 0";
+            daltta.value += "\n" + Saldırı2 + " " + Koor.join(' ') + " 1 1 0 0";
         }
     }
+
     if (dbirim.value == 'b2') {
-        dortamesaj.innerHTML = '<font color="black">' + Koysayisi + '</font> köyün mızrakçı / baltacı hedefleri hazırlanmıştır.';
-        daltta.value = silk + 'konsantre_mizrakci.js\')';
-        if (dcasus.checked == true) {
-            daltta.value += silk + 'konsantre_casus.js\')';
+        var Saldırı1 = 'spear';
+        var Saldırı2 = 'sword';
+        var Saldırı1s = 'Mızrakçı';
+        var Saldırı2s = 'Kılıççı';
+        if (document.getElementById('casus').checked == true) {
+            var Saldırı1 = 'spy';
+            var Saldırı2 = 'spy';
+            var Saldırı1s = 'Casus';
+            var Saldırı2s = 'Casus';
         }
-        if (duyar.checked == true) {
-            daltta.value += 'alert(\'Hazırlık tamamlandı. Saldırılara başlayabilirsin.\');';
+        daltta.value = "";
+        var i = 0;
+        if (ddortlu.checked == true) {
+            while (i < 4) {
+                i++;
+                daltta.value += "\n" + Saldırı1 + " " + Koor.join(' ') + " 1 1 0 0";
+                daltta.value += "\n" + Saldırı2 + " " + Koor.join(' ') + " 1 1 0 0";
+            }
+        }
+        if (ddortlu.checked == false) {
+            daltta.value += "\n" + Saldırı1 + " " + Koor.join(' ') + " 1 1 0 0";
+            daltta.value += "\n" + Saldırı2 + " " + Koor.join(' ') + " 1 1 0 0";
+        }
+    }
+    if (duyar.checked == true) {
+        daltta.value += "\n" + "Amiral Mesaj: Hedefler bitti, seni bekliyorlar " + Oyuncu;
+    }
+    if (duyar.checked == false) {
+        daltta.value += "\n" + "Hedefler bitince haber etme gerek yok, bilirim ben...";
+    }
+    mesaj();
+    if (dduzenle.checked == true) {
+        Duzenlemesaj = dustta.value;
+    }
+    if (dduzenle.checked == false) {
+        Duzenlemesaj = "Koordinatları düzenle seçeneğini aktif ederek, istemediğin koordinatları\nçıkarabilir ya da yeni koordinatlar ekleyebilirsin.\nYeni koordinatlar eklemek için bir köyün 'Köyler Koordinatlar Puan'\nkısmını kopyalayıp buraya yapıştırabilirsin.";
+    }
+    if (dkarisik.checked == true) {
+        var lines = daltta.value.split('\n');
+        for (var i = 0; i < lines.length; i++) {
+            var line = lines[i];
+            if (line.trim() !== '') {
+                var coord = line.split(' ')[1];
+                var newCoord = coord + ' ' + (parseInt(coord.split('|')[1]) + 1);
+                daltta.value += '\n' + line.replace(coord, newCoord);
+            }
         }
     }
 }
