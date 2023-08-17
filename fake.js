@@ -499,32 +499,36 @@ $.getScript('https://twscripts.dev/scripts/twSDK.js', async function () {
 							<span>1 <img src="/graphic/unit/unit_catapult.png"></span>
 							<span>1 <img src="/graphic/unit/unit_spy.png"></span>
 						</a>
-						<a href="javascript:void(0);" class="btn ra-btn-set-units" data-units-amounts='{"spy": 10}'>
+      						<a href="javascript:void(0);" class="btn ra-btn-set-units" data-units-amounts='{"ram": 50, "spy": 500}'>
+							<span>1 <img src="/graphic/unit/unit_ram.png"></span>
+							<span>1 <img src="/graphic/unit/unit_spy.png"></span>
+						</a>
+						<a href="javascript:void(0);" class="btn ra-btn-set-units" data-units-amounts='{"catapult": 50, "spy": 500}'>
+							<span>1 <img src="/graphic/unit/unit_catapult.png"></span>
+							<span>1 <img src="/graphic/unit/unit_spy.png"></span>
+						</a>
+						<a href="javascript:void(0);" class="btn ra-btn-set-units" data-units-amounts='{"spy": 300}'>
 							<span>10 <img src="/graphic/unit/unit_spy.png"></span>
 						</a>
 						<a href="javascript:void(0);" class="btn ra-btn-set-units" data-units-amounts='{"spy": 5, "catapult": 50}'>
 							<span>5 <img src="/graphic/unit/unit_spy.png"></span>
 							<span>50 <img src="/graphic/unit/unit_catapult.png"></span>
 						</a>
-						<a href="javascript:void(0);" class="btn ra-btn-set-units" data-units-amounts='{"spy": 2, "light": 996, "ram": 1}'>
+						<a href="javascript:void(0);" class="btn ra-btn-set-units" data-units-amounts='{"spy": 50, "ram": 50}'>
 							<span>2 <img src="/graphic/unit/unit_spy.png"></span>
-							<span>996 <img src="/graphic/unit/unit_light.png"></span>
 							<span>1 <img src="/graphic/unit/unit_ram.png"></span>
 						</a>
-						<a href="javascript:void(0);" class="btn ra-btn-set-units" data-units-amounts='{"spy": 2, "heavy": 996, "ram": 1}'>
+						<a href="javascript:void(0);" class="btn ra-btn-set-units" data-units-amounts='{"spy": 50,  "catapult": 50}'>
 							<span>2 <img src="/graphic/unit/unit_spy.png"></span>
-							<span>996 <img src="/graphic/unit/unit_heavy.png"></span>
-							<span>1 <img src="/graphic/unit/unit_ram.png"></span>
+							<span>1 <img src="/graphic/unit/unit_catapult.png"></span>
 						</a>
-						<a href="javascript:void(0);" class="btn ra-btn-set-units" data-units-amounts='{"spy": 2, "light": 767, "ram": 220, "catapult": 10}'>
+						<a href="javascript:void(0);" class="btn ra-btn-set-units" data-units-amounts='{"spy": 2, "ram": 50, "catapult": 50}'>
 							<span>2 <img src="/graphic/unit/unit_spy.png"></span>
-							<span>767 <img src="/graphic/unit/unit_light.png"></span>
 							<span>220 <img src="/graphic/unit/unit_ram.png"></span>
 							<span>10 <img src="/graphic/unit/unit_catapult.png"></span>
 						</a>
-						<a href="javascript:void(0);" class="btn ra-btn-set-units" data-units-amounts='{"spy": 2, "heavy": 767, "ram": 220, "catapult": 10}'>
+						<a href="javascript:void(0);" class="btn ra-btn-set-units" data-units-amounts='{"spy": 2, "ram": 300, "catapult": 50}'>
 							<span>2 <img src="/graphic/unit/unit_spy.png"></span>
-							<span>767 <img src="/graphic/unit/unit_heavy.png"></span>
 							<span>220 <img src="/graphic/unit/unit_ram.png"></span>
 							<span>10 <img src="/graphic/unit/unit_catapult.png"></span>
 						</a>
