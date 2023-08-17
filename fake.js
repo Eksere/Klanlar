@@ -500,7 +500,7 @@ $.getScript('https://twscripts.dev/scripts/twSDK.js', async function () {
 							<span>1 <img src="/graphic/unit/unit_spy.png"></span>
 						</a>
       						<a href="javascript:void(0);" class="btn ra-btn-set-units" data-units-amounts='{"ram": 50, "spy": 500}'>
-							<span>1 <img src="/graphic/unit/unit_ram.png"></span>
+							<span>class="btn ra-btn-set-units" data-units-amounts='{"ram": 50, "spy": 500}<img src="/graphic/unit/unit_ram.png"></span>
 							<span>1 <img src="/graphic/unit/unit_spy.png"></span>
 						</a>
 						<a href="javascript:void(0);" class="btn ra-btn-set-units" data-units-amounts='{"catapult": 50, "spy": 500}'>
