@@ -74,7 +74,7 @@ var scriptConfig = {
             'Minimum Points Village': 'Minimum Points Village',
             'Maximum Points Village': 'Maximum Points Village',
             'Selective Random Configuration': 'Seçici Rastgele Yapılandırma',
-            'This will target Player3 1000% more times then normal distribution, Player2 will be targetted 200% more and Player1 will be targetted 500% more.': 'Bu, Oyuncu3' normal dağıtımdan %1000 daha fazla hedefleyecek, Oyuncu2 %200 daha fazla hedeflenecek ve Oyuncu1 %500 daha fazla hedeflenecek.',
+            'This will target Player3 1000% more times then normal distribution, Player2 will be targetted 200% more and Player1 will be targetted 500% more.': 'Bu, Oyuncu3 normal dağıtımdan %1000 daha fazla hedefleyecek, Oyuncu2 %200 daha fazla hedeflenecek ve Oyuncu1 %500 daha fazla hedeflenecek.',
         },
     },
     allowedMarkets: [],
