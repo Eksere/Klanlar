@@ -31,8 +31,8 @@ var scriptConfig = {
     translations: {
         tr_TR: {
             'Fake Script Hazırlama': 'Fake Script Hazırlama',
-            Help: 'Yardım',
-            'How to send fakes?': 'How to send fakes?',
+            Yardım: 'Yardım',
+            'How to send fakes?': 'Sahte nasıl gönderilinsin ',
             Randomly: 'Rastgele',
             Sequential: 'Sequential',
             'Selective Random': 'Selective Random',
