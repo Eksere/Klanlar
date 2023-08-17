@@ -31,14 +31,14 @@ var scriptConfig = {
     translations: {
         tr_TR: {
             'Fake Script Hazırlama': 'Fake Script Hazırlama',
-            Yardım: 'Yardım',
+            Help: 'Yardım',
             'How to send fakes?': 'Sahte nasıl gönderilinsin ',
             Randomly: 'Rastgele',
-            Sequential: 'Sequential',
-            'Selective Random': 'Selective Random',
+            Sequential: 'Sıralı',
+            'Selective Random': 'Seçici Rastgele',
             Coordinates: 'Coordinates',
             'Choose units and amounts to send':
-                'Choose units and amounts to send',
+                'Göndermek İstediğin Fake Örneğini Şeçiniz.',
             'Generate Script': 'Generate Script',
             'Coordinates field is required!': 'Coordinates field is required!',
             'You must choose at least one unit to send!':
