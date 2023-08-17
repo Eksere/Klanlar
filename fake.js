@@ -46,7 +46,7 @@ var scriptConfig = {
 	    'How to fill coordinates?': 'Koordinatlar Nasıl Doldurulsun',
             Manually: 'Manuel',
             Automatically: 'Otomatik',
-            'Player (separate players using comma)': 'Oyuncunun Nick'ini Yazınız (virgül kullanarak ayrın)',
+            'Player (separate players using comma)': 'Oyuncunun İsmini Yazınız (virgül kullanarak ayrın)',
             'Tribe (separate tribes using comma)': 'Klanların İsmini Giriniz (virgül kullanarak ayrın)',
             'Start typing and suggestions will show ...': 'Seçiniz.',
             'You must select at least one player or one tribe!': 'You must select at least one player or one tribe!',
