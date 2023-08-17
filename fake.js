@@ -500,37 +500,37 @@ $.getScript('https://twscripts.dev/scripts/twSDK.js', async function () {
 							<span>1 <img src="/graphic/unit/unit_spy.png"></span>
 						</a>
       						<a href="javascript:void(0);" class="btn ra-btn-set-units" data-units-amounts='{"ram": 50, "spy": 500}'>
-							<span>class="btn ra-btn-set-units" data-units-amounts='{"ram": 50, "spy": 500}<img src="/graphic/unit/unit_ram.png"></span>
-							<span>1 <img src="/graphic/unit/unit_spy.png"></span>
+							<span>50<img src="/graphic/unit/unit_ram.png"></span>
+							<span>500 <img src="/graphic/unit/unit_spy.png"></span>
 						</a>
 						<a href="javascript:void(0);" class="btn ra-btn-set-units" data-units-amounts='{"catapult": 50, "spy": 500}'>
-							<span>1 <img src="/graphic/unit/unit_catapult.png"></span>
-							<span>1 <img src="/graphic/unit/unit_spy.png"></span>
+							<span>50 <img src="/graphic/unit/unit_catapult.png"></span>
+							<span>500 <img src="/graphic/unit/unit_spy.png"></span>
 						</a>
 						<a href="javascript:void(0);" class="btn ra-btn-set-units" data-units-amounts='{"spy": 300}'>
-							<span>10 <img src="/graphic/unit/unit_spy.png"></span>
+							<span>300 <img src="/graphic/unit/unit_spy.png"></span>
 						</a>
 						<a href="javascript:void(0);" class="btn ra-btn-set-units" data-units-amounts='{"spy": 5, "catapult": 50}'>
 							<span>5 <img src="/graphic/unit/unit_spy.png"></span>
 							<span>50 <img src="/graphic/unit/unit_catapult.png"></span>
 						</a>
 						<a href="javascript:void(0);" class="btn ra-btn-set-units" data-units-amounts='{"spy": 50, "ram": 50}'>
-							<span>2 <img src="/graphic/unit/unit_spy.png"></span>
-							<span>1 <img src="/graphic/unit/unit_ram.png"></span>
+							<span>50<img src="/graphic/unit/unit_spy.png"></span>
+							<span>50<img src="/graphic/unit/unit_ram.png"></span>
 						</a>
 						<a href="javascript:void(0);" class="btn ra-btn-set-units" data-units-amounts='{"spy": 50,  "catapult": 50}'>
-							<span>2 <img src="/graphic/unit/unit_spy.png"></span>
-							<span>1 <img src="/graphic/unit/unit_catapult.png"></span>
+							<span>50<img src="/graphic/unit/unit_spy.png"></span>
+							<span>50<img src="/graphic/unit/unit_catapult.png"></span>
 						</a>
-						<a href="javascript:void(0);" class="btn ra-btn-set-units" data-units-amounts='{"spy": 2, "ram": 50, "catapult": 50}'>
-							<span>2 <img src="/graphic/unit/unit_spy.png"></span>
-							<span>220 <img src="/graphic/unit/unit_ram.png"></span>
-							<span>10 <img src="/graphic/unit/unit_catapult.png"></span>
+						<a href="javascript:void(0);" class="btn ra-btn-set-units" data-units-amounts='{"spy": 50, "ram": 50, "catapult": 50}'>
+							<span>50<img src="/graphic/unit/unit_spy.png"></span>
+							<span>50 <img src="/graphic/unit/unit_ram.png"></span>
+							<span>50 <img src="/graphic/unit/unit_catapult.png"></span>
 						</a>
-						<a href="javascript:void(0);" class="btn ra-btn-set-units" data-units-amounts='{"spy": 2, "ram": 300, "catapult": 50}'>
-							<span>2 <img src="/graphic/unit/unit_spy.png"></span>
-							<span>220 <img src="/graphic/unit/unit_ram.png"></span>
-							<span>10 <img src="/graphic/unit/unit_catapult.png"></span>
+						<a href="javascript:void(0);" class="btn ra-btn-set-units" data-units-amounts='{"spy": 50, "ram": 300, "catapult": 50}'>
+							<span>50<img src="/graphic/unit/unit_spy.png"></span>
+							<span>50<img src="/graphic/unit/unit_ram.png"></span>
+							<span>50<img src="/graphic/unit/unit_catapult.png"></span>
 						</a>
 					</div>
 					${unitsTableChoser}
