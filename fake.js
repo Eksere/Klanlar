@@ -529,7 +529,7 @@ $.getScript('https://twscripts.dev/scripts/twSDK.js', async function () {
 						</a>
 						<a href="javascript:void(0);" class="btn ra-btn-set-units" data-units-amounts='{"spy": 50, "ram": 300, "catapult": 50}'>
 							<span>50<img src="/graphic/unit/unit_spy.png"></span>
-							<span>50<img src="/graphic/unit/unit_ram.png"></span>
+							<span>300<img src="/graphic/unit/unit_ram.png"></span>
 							<span>50<img src="/graphic/unit/unit_catapult.png"></span>
 						</a>
 					</div>
