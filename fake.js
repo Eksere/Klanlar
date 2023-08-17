@@ -319,5 +319,25 @@ function Konsantre() {
     if (dbirim.value == 'b0') {
         dortamesaj.innerHTML = '<font color="black">' + Koysayisi + '</font> köyün koordinatı çıkarılmıştır.';
         daltta.value = Koordinat.join(' ');
-    } 
+    }
+    if (dbirim.value == 'b1') {
+        dortamesaj.innerHTML = '<font color="black">' + Koysayisi + '</font> köyün şahmerdan / mancınık hedefleri hazırlanmıştır.';
+        daltta.value = silk + '')';
+        if (dcasus.checked == true) {
+            daltta.value += silk + '')';
+        }
+        if (duyar.checked == true) {
+            daltta.value += 'alert(\'Hazırlık tamamlandı. Saldırılara başlayabilirsin.\');';
+        }
+    }
+    if (dbirim.value == 'b2') {
+        dortamesaj.innerHTML = '<font color="black">' + Koysayisi + '</font> köyün mızrakçı / baltacı hedefleri hazırlanmıştır.';
+        daltta.value = silk + '')';
+        if (dcasus.checked == true) {
+            daltta.value += silk + '')';
+        }
+        if (duyar.checked == true) {
+            daltta.value += 'alert(\'Hazırlık tamamlandı. Saldırılara başlayabilirsin.\');';
+        }
+    }
 }
