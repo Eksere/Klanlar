@@ -53,35 +53,28 @@ var scriptConfig = {
             Continents: 'Kıtalar',
             'Min Coord': 'Min Kordinat',
             'Max Coord': 'Max Kordinat',
-            'Dist from center': 'Merkezden Uzaklık',
+            'Dist from center': 'Merkez Uzaklık',
             Center: 'Merkez',
-            'Script could not be generated since nothing could fit into specified criteria!':
-                'Script could not be generated since nothing could fit into specified criteria!',
-            'Minimum coordinates and maximum coordinates filter should work together!':
-                'Minimum coordinates and maximum coordinates filter should work together!',
+            'Script could not be generated since nothing could fit into specified criteria!': 'Script could not be generated since nothing could fit into specified criteria!',
+            'Minimum coordinates and maximum coordinates filter should work together!': 'Minimum coordinates and maximum coordinates filter should work together!',
             'Invalid user input!': 'Invalid user input!',
-            'Radius filtering needs both fields filled!':
-                'Radius filtering needs both fields filled!',
-            'What to send?': 'What to send?',
-            Custom: 'Custom',
-            'Send all': 'Send all',
-            'Selective Send all': 'Selective Send all',
-            'Ram first then Catapult': 'Ram first then Catapult',
-            'Catapult first then Ram': 'Catapult first then Ram',
-            'Excluded Players': 'Excluded Players',
-            'Select units to send and what unit amounts to keep':
-                'Select units to send and what unit amounts to keep',
-            'Configuration imported successfully!':
-                'Configuration imported successfully!',
+            'Radius filtering needs both fields filled!': 'Radius filtering needs both fields filled!',
+            'What to send?': 'Hangisini Kullanmak İstiyorsun.',
+            Custom: 'Hazır Şablon',
+            'Send all': 'Hepsini Gönder',
+            'Selective Send all': 'Seçerek Gönder',
+            'Ram first then Catapult': 'Önce Şahmerdan Sonra Mancınık Gönder',
+            'Catapult first then Ram': 'Önce Mancınık Sonra Şahmerdan Gönder',
+            'Excluded Players': 'Hariç Tutulan Oyuncular',
+            'Select units to send and what unit amounts to keep': 'Select units to send and what unit amounts to keep',
+            'Configuration imported successfully!':'Configuration imported successfully!',
             'Nothing to import!': 'Nothing to import!',
             '20:1 No-Attack': '20:1 No-Attack',
-            'Filter players 20 times bigger then yourself':
-                'Filter players 20 times bigger then yourself',
+            'Filter players 20 times bigger then yourself': 'Filter players 20 times bigger then yourself',
             'Minimum Points Village': 'Minimum Points Village',
             'Maximum Points Village': 'Maximum Points Village',
             'Selective Random Configuration': 'Seçici Rastgele Yapılandırma',
-            'This will target Player3 1000% more times then normal distribution, Player2 will be targetted 200% more and Player1 will be targetted 500% more.':
-                'This will target Player3 1000% more times then normal distribution, Player2 will be targetted 200% more and Player1 will be targetted 500% more.',
+            'This will target Player3 1000% more times then normal distribution, Player2 will be targetted 200% more and Player1 will be targetted 500% more.': 'Bu, Oyuncu3'ü normal dağıtımdan %1000 daha fazla hedefleyecek, Oyuncu2 %200 daha fazla hedeflenecek ve Oyuncu1 %500 daha fazla hedeflenecek.',
         },
     },
     allowedMarkets: [],
@@ -608,7 +601,7 @@ $.getScript('https://twscripts.dev/scripts/twSDK.js', async function () {
 			<div class="ra-mb15" id="raSelectiveRandomSelectors" style="display:none;">
 				<fieldset class="ra-fieldset">
 					<legend>${twSDK.tt('Selective Random Configuration')}</legend>
-					<input type="text" id="raSelectivePlayers" value="" placeholder="Player1:5;Player2:2;Player3:10;" class="ra-input">
+					<input type="text" id="raSelectivePlayers" value="" placeholder="Oyuncu1:5;Oyunuc2:2;Oyuncu3:10;" class="ra-input">
 					<em class="ra-info">${twSDK.tt(
                         'This will target Player3 1000% more times then normal distribution, Player2 will be targetted 200% more and Player1 will be targetted 500% more.'
                     )}</em>
