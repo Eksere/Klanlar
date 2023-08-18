@@ -105,7 +105,7 @@ function scr() {
         document.getElementById('scr3').checked = true;
         document.getElementById('scr4').disabled = false;
         document.getElementById('scr4').checked = true;
-        ocument.getElementById('scr5').disabled = false;
+        document.getElementById('scr5').disabled = false;
         document.getElementById('scr5').checked = true;
     } else if (document.getElementById('scr').checked === false) {
         document.getElementById('scr1').disabled = true;
@@ -257,7 +257,7 @@ ap.innerHTML +="<input id='alsil' type='checkbox' style='margin-left:30px' oncli
 ap.innerHTML +="<input id='gra' type='checkbox' onclick=''/><label for='gra'> Gelişim grafiklerini ekle</label><br/>";
 ap.innerHTML +="<input id='scr' type='checkbox' onclick='scr();'/><label for='scr'> Fake scriptleri ekle</label><br/>";
 ap.innerHTML +="<input id='scr1' type='checkbox' style='margin-left:15px' onclick='' disabled/><label for='scr1'> Şahmerdan/Mancınık Scripti</label><br/>";
-ap.innerHTML +="<input id='scr5' type='textbox' style='margin-left:15px' onclick='' disabled/><label for='scr5'> Şahmerdan/Mancınık Scripti</label><br/>";
+ap.innerHTML +="<input id='scr5' type='textbox' style='margin-left:15px' onclick='' disabled/><label for='scr5'> </label><br/>";
 ap.innerHTML +="<input id='scr2' type='checkbox' style='margin-left:15px' onclick='' disabled/><label for='scr2'> Şahmerdan/Mancınık Scripti (4\'lü)</label><br/>";
 ap.innerHTML +="<input id='scr3' type='checkbox' style='margin-left:15px' onclick='' disabled/><label for='scr3'> Mızrakçı/Baltacı Scripti</label><br/>";
 ap.innerHTML +="<input id='scr4' type='checkbox' style='margin-left:15px' onclick='' disabled/><label for='scr4'> Mızrakçı/Baltacı Scripti (4\'lü)</label><br/>";
@@ -283,7 +283,7 @@ ap.innerHTML += "<br/><input id='gra' type='checkbox'/> Oyuncuya ait grafikleri 
 ap.innerHTML += "<input id='kara' type='checkbox'/> Kara listeye al<br/>";
 ap.innerHTML += "<br/><input id='scr' type='checkbox' onclick='scr();'/> Fake scriptler ekle<br/>";
 ap.innerHTML += "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input id='scr1' type='checkbox' disabled/> Şahmerdan/Mancınık";
-ap.innerHTML += "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input id='scr5' type='textbox' disabled/>1";
+ap.innerHTML += "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input id='scr5' type='textbox' disabled/>";
 ap.innerHTML += "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input id='scr2' type='checkbox' disabled/> Şahmerdan/Mancınık (4'lü)";
 ap.innerHTML += "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input id='scr3' type='checkbox' disabled/> Mızrakçı/Baltacı";
 ap.innerHTML += "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input id='scr4' type='checkbox' disabled/> Mızrakçı/Baltacı (4'lü)";
