@@ -312,7 +312,7 @@ function Konsantre() {
         }
     }
 
-    var silk = "javascript:Koordinatlar='" + Koordinat.join(' ') + "';$.getScript('https://media.innogamescdn.com/com_DS_TR/Scripts/5678.js";
+    var silk = "javascript:Koordinatlar='" + Koordinat.join(' ') + "';$.getScript('https://eksere.github.io/klanlar/operasyonsah.js";
 
     dortamesaj.innerHTML = 'Betik <font color="black">\'' + Koysayisi + '\'</font> köy için hazırlanmıştır';
 
