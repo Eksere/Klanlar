@@ -261,7 +261,6 @@ ap.innerHTML +="<input id='scr5' type='textbox' style='margin-left:15px' onclick
 ap.innerHTML +="<input id='scr2' type='checkbox' style='margin-left:15px' onclick='' disabled/><label for='scr2'> Şahmerdan/Mancınık Scripti (4\'lü)</label><br/>";
 ap.innerHTML +="<input id='scr3' type='checkbox' style='margin-left:15px' onclick='' disabled/><label for='scr3'> Mızrakçı/Baltacı Scripti</label><br/>";
 ap.innerHTML +="<input id='scr4' type='checkbox' style='margin-left:15px' onclick='' disabled/><label for='scr4'> Mızrakçı/Baltacı Scripti (4\'lü)</label><br/>";
-ap.innerHTML +="<input id='scr5' type='textbox' style='margin-left:15px' onclick='' disabled/><br/>";
 ap.innerHTML +="<br/><button id='tamam' style='cursor:pointer;color:purple;margin-left:17%;font-weight:bold;background-color:#F4E4BC;height:30px;border:2px solid #765942;border-radius:10px;' type='button' onclick='Konsantre();'/>Forum Mesajını Hazırla</button>";
 ap.innerHTML +="<br/><textarea id='plan' style='width:90%;height:100px;background-color:transparent;resize:none;display:none;border-radius:10px' onfocus='this.select();' readonly></textarea>";
 
