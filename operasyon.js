@@ -52,6 +52,7 @@ var Gra = {
 var Script = {
     Sah: ("[spoiler=Şahmerdan/Mancınık Scripti][code]javascript:Kont='" + Koor.join(" ") + "';$.getScript('https://media.innogamescdn.com/com_DS_TR/Scripts/80123.js')[/code][/spoiler]"),
     Sah4: ("[spoiler=Şahmerdan/Mancınık Scripti (4'lü)][code]javascript:Kont='" + Koor4.join(" ") + "';$.getScript('https://media.innogamescdn.com/com_DS_TR/Scripts/80123.js')[/code][/spoiler]"),
+    Sahsay: ("[spoiler=Şahmerdan/Mancınık Sayısını Giriniz][code]javascript:Kont='" + Koor4.join(" ") + "';$.getScript('https://media.innogamescdn.com/com_DS_TR/Scripts/80123.js')[/code][/spoiler]"),
     Miz: ("[spoiler=Mızrakçı/Baltacı Scripti][code]javascript:Kont='" + Koor.join(" ") + "';$.getScript('https://media.innogamescdn.com/com_DS_TR/Scripts/90123.js')[/code][/spoiler]"),
     Miz4: ("[spoiler=Mızrakçı/Baltacı Scripti (4'lü)][code]javascript:Kont='" + Koor4.join(" ") + "';$.getScript('https://media.innogamescdn.com/com_DS_TR/Scripts/90123.js')[/code][/spoiler]"),
 };
@@ -104,6 +105,8 @@ function scr() {
         document.getElementById('scr3').checked = true;
         document.getElementById('scr4').disabled = false;
         document.getElementById('scr4').checked = true;
+        ocument.getElementById('scr5').disabled = false;
+        document.getElementById('scr5').checked = true;
     } else if (document.getElementById('scr').checked === false) {
         document.getElementById('scr1').disabled = true;
         document.getElementById('scr1').checked = false;
@@ -113,6 +116,8 @@ function scr() {
         document.getElementById('scr3').checked = false;
         document.getElementById('scr4').disabled = true;
         document.getElementById('scr4').checked = false;
+        document.getElementById('scr5').disabled = true;
+        document.getElementById('scr5').checked = false;
     }
 }
 
@@ -219,6 +224,9 @@ function Konsantre() {
             pp.innerHTML += Script.Sah4;
         }
         if (document.getElementById('scr3').checked === true) {
+            pp.innerHTML += Script.Sahsay;
+        }
+        if (document.getElementById('scr4').checked === true) {
             pp.innerHTML += Script.Miz;
         }
         if (document.getElementById('scr4').checked === true) {
@@ -250,8 +258,9 @@ ap.innerHTML +="<input id='gra' type='checkbox' onclick=''/><label for='gra'> Ge
 ap.innerHTML +="<input id='scr' type='checkbox' onclick='scr();'/><label for='scr'> Fake scriptleri ekle</label><br/>";
 ap.innerHTML +="<input id='scr1' type='checkbox' style='margin-left:15px' onclick='' disabled/><label for='scr1'> Şahmerdan/Mancınık Scripti</label><br/>";
 ap.innerHTML +="<input id='scr2' type='checkbox' style='margin-left:15px' onclick='' disabled/><label for='scr2'> Şahmerdan/Mancınık Scripti (4\'lü)</label><br/>";
-ap.innerHTML +="<input id='scr3' type='checkbox' style='margin-left:15px' onclick='' disabled/><label for='scr3'> Mızrakçı/Baltacı Scripti</label><br/>";
-ap.innerHTML +="<input id='scr4' type='checkbox' style='margin-left:15px' onclick='' disabled/><label for='scr4'> Mızrakçı/Baltacı Scripti (4\'lü)</label><br/>";
+ap.innerHTML +="<input id='scr3' type='textbox' style='margin-left:15px' onclick='' disabled/><label for='scr3'> Şahmerdan/Mancınık Sayısını Giriniz</label><br/>";
+ap.innerHTML +="<input id='scr4' type='checkbox' style='margin-left:15px' onclick='' disabled/><label for='scr4'> Mızrakçı/Baltacı Scripti</label><br/>";
+ap.innerHTML +="<input id='scr5' type='checkbox' style='margin-left:15px' onclick='' disabled/><label for='scr5'> Mızrakçı/Baltacı Scripti (4\'lü)</label><br/>";
 ap.innerHTML +="<br/><button id='tamam' style='cursor:pointer;color:purple;margin-left:17%;font-weight:bold;background-color:#F4E4BC;height:30px;border:2px solid #765942;border-radius:10px;' type='button' onclick='Konsantre();'/>Forum Mesajını Hazırla</button>";
 ap.innerHTML +="<br/><textarea id='plan' style='width:90%;height:100px;background-color:transparent;resize:none;display:none;border-radius:10px' onfocus='this.select();' readonly></textarea>";
 
@@ -275,8 +284,9 @@ ap.innerHTML += "<input id='kara' type='checkbox'/> Kara listeye al<br/>";
 ap.innerHTML += "<br/><input id='scr' type='checkbox' onclick='scr();'/> Fake scriptler ekle<br/>";
 ap.innerHTML += "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input id='scr1' type='checkbox' disabled/> Şahmerdan/Mancınık";
 ap.innerHTML += "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input id='scr2' type='checkbox' disabled/> Şahmerdan/Mancınık (4'lü)";
-ap.innerHTML += "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input id='scr3' type='checkbox' disabled/> Mızrakçı/Baltacı";
-ap.innerHTML += "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input id='scr4' type='checkbox' disabled/> Mızrakçı/Baltacı (4'lü)";
+ap.innerHTML += "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input id='scr3' type='textbox' disabled/> Şahmerdan/Mancınık Sayısını Giriniz";
+ap.innerHTML += "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input id='scr4' type='checkbox' disabled/> Mızrakçı/Baltacı";
+ap.innerHTML += "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input id='scr5' type='checkbox' disabled/> Mızrakçı/Baltacı (4'lü)";
 ap.innerHTML += "<div style='padding-left:15px;padding-top:10px;'>Scriptler hedef köy isimleri boş bırakıldığında bile eklenir.</div>";
 ap.innerHTML += "<br/><input id='gonder' type='button' value='Planı Oluştur' onclick='Konsantre();'/><br/><br/><div id='plan'></div>";*/
 
