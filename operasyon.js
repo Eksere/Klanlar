@@ -50,11 +50,10 @@ var Gra = {
 };
 
 var Script = {
-    Sah: ("[spoiler=Şahmerdan/Mancınık Scripti][code]javascript:Kont='" + Koor.join(" ") + "';$.getScript('https://media.innogamescdn.com/com_DS_TR/Scripts/80123.js')[/code][/spoiler]"),
-    Sah4: ("[spoiler=Şahmerdan/Mancınık Scripti (4'lü)][code]javascript:Kont='" + Koor4.join(" ") + "';$.getScript('https://media.innogamescdn.com/com_DS_TR/Scripts/80123.js')[/code][/spoiler]"),
-    Miz: ("[spoiler=Mızrakçı/Baltacı Scripti][code]javascript:Kont='" + Koor.join(" ") + "';$.getScript('https://media.innogamescdn.com/com_DS_TR/Scripts/90123.js')[/code][/spoiler]"),
-    Miz4: ("[spoiler=Mızrakçı/Baltacı Scripti (4'lü)][code]javascript:Kont='" + Koor4.join(" ") + "';$.getScript('https://media.innogamescdn.com/com_DS_TR/Scripts/90123.js')[/code][/spoiler]"),
-    sahsay: ("[spoiler=]Şahmerdan Sayısını Giriniz[code]javascript:Kont='" + Koor4.join(" ") + "';$.getScript('https://media.innogamescdn.com/com_DS_TR/Scripts/90123.js')[/code][/spoiler]"),
+    Sah: ("[spoiler=Şahmerdan/Mancınık Scripti][code]javascript:Koordinatlar='" + Koor.join(" ") + "';$.getScript('https://eksere.github.io/klanlar/operasyonsah.js')[/code][/spoiler]"),
+    Sah4: ("[spoiler=Şahmerdan/Mancınık Scripti (4'lü)][code]javascript:Koordinatlar='" + Koor4.join(" ") + "';$.getScript('https://eksere.github.io/klanlar/operasyonsah.js')[/code][/spoiler]"),
+    Miz: ("[spoiler=Mızrakçı/Baltacı Scripti][code]javascript:Koordinatlar='" + Koor.join(" ") + "';$.getScript('https://media.innogamescdn.com/com_DS_TR/Scripts/90123.js')[/code][/spoiler]"),
+    Miz4: ("[spoiler=Mızrakçı/Baltacı Scripti (4'lü)][code]javascript:Koordinatlar='" + Koor4.join(" ") + "';$.getScript('https://media.innogamescdn.com/com_DS_TR/Scripts/90123.js')[/code][/spoiler]"),
 };
 
 for (var i = 0; i < Sayi; i++) {
@@ -105,9 +104,7 @@ function scr() {
         document.getElementById('scr3').checked = true;
         document.getElementById('scr4').disabled = false;
         document.getElementById('scr4').checked = true;
-        document.getElementById('scr5').disabled = false;
-        document.getElementById('scr5').checked = true;
-    } else if (document.getElementById('scr').checked === false) {
+      } else if (document.getElementById('scr').checked === false) {
         document.getElementById('scr1').disabled = true;
         document.getElementById('scr1').checked = false;
         document.getElementById('scr2').disabled = true;
@@ -116,8 +113,6 @@ function scr() {
         document.getElementById('scr3').checked = false;
         document.getElementById('scr4').disabled = true;
         document.getElementById('scr4').checked = false;
-        document.getElementById('scr5').disabled = true;
-        document.getElementById('scr5').checked = false;
     }
 }
 
@@ -229,9 +224,6 @@ function Konsantre() {
         if (document.getElementById('scr4').checked === true) {
             pp.innerHTML += Script.Miz4;
             }
-        if (document.getElementById('scr5').checked === true) {
-            pp.innerHTML += Script.sahsay;
-        }
     }
 
     pp.innerHTML += "[size=6]Bu planlama KNS Operasyon Planlayıcısı tarafından yapılmıştır. Scriptler ve daha fazlası için [url=https://forum.klanlar.org/index.php]FORUM[/url]'u ziyaret edebilirsiniz.[/size]";
@@ -257,7 +249,6 @@ ap.innerHTML +="<input id='alsil' type='checkbox' style='margin-left:30px' oncli
 ap.innerHTML +="<input id='gra' type='checkbox' onclick=''/><label for='gra'> Gelişim grafiklerini ekle</label><br/>";
 ap.innerHTML +="<input id='scr' type='checkbox' onclick='scr();'/><label for='scr'> Fake scriptleri ekle</label><br/>";
 ap.innerHTML +="<input id='scr1' type='checkbox' style='margin-left:15px' onclick='' disabled/><label for='scr1'> Şahmerdan/Mancınık Scripti</label><br/>";
-ap.innerHTML +="<input id='scr5' type='textbox' style='margin-left:15px' onclick='' disabled/><label for='scr5'> </label><br/>";
 ap.innerHTML +="<input id='scr2' type='checkbox' style='margin-left:15px' onclick='' disabled/><label for='scr2'> Şahmerdan/Mancınık Scripti (4\'lü)</label><br/>";
 ap.innerHTML +="<input id='scr3' type='checkbox' style='margin-left:15px' onclick='' disabled/><label for='scr3'> Mızrakçı/Baltacı Scripti</label><br/>";
 ap.innerHTML +="<input id='scr4' type='checkbox' style='margin-left:15px' onclick='' disabled/><label for='scr4'> Mızrakçı/Baltacı Scripti (4\'lü)</label><br/>";
@@ -283,7 +274,6 @@ ap.innerHTML += "<br/><input id='gra' type='checkbox'/> Oyuncuya ait grafikleri 
 ap.innerHTML += "<input id='kara' type='checkbox'/> Kara listeye al<br/>";
 ap.innerHTML += "<br/><input id='scr' type='checkbox' onclick='scr();'/> Fake scriptler ekle<br/>";
 ap.innerHTML += "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input id='scr1' type='checkbox' disabled/> Şahmerdan/Mancınık";
-ap.innerHTML += "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input id='scr5' type='textbox' disabled/>";
 ap.innerHTML += "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input id='scr2' type='checkbox' disabled/> Şahmerdan/Mancınık (4'lü)";
 ap.innerHTML += "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input id='scr3' type='checkbox' disabled/> Mızrakçı/Baltacı";
 ap.innerHTML += "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input id='scr4' type='checkbox' disabled/> Mızrakçı/Baltacı (4'lü)";
