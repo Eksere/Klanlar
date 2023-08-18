@@ -232,7 +232,6 @@ function Konsantre() {
         if (document.getElementById('scr5').checked === true) {
             pp.innerHTML += Script.sahsay;
         }
-        }
     }
 
     pp.innerHTML += "[size=6]Bu planlama KNS Operasyon Planlayıcısı tarafından yapılmıştır. Scriptler ve daha fazlası için [url=https://forum.klanlar.org/index.php]FORUM[/url]'u ziyaret edebilirsiniz.[/size]";
