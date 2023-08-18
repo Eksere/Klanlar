@@ -24,7 +24,7 @@ var ram = $('#unit_input_ram').next().html();
 var catapult = $('#unit_input_catapult').next().html();
 
 if (parseInt(ram.match(/\d+/g)) > 0) {
-    $('#unit_input_ram').val('1');
+    $('#unit_input_ram').val('scr5');
 } else if (parseInt(catapult.match(/\d+/g)) > 0) {
     $('#unit_input_catapult').val('1');
 }
