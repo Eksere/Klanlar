@@ -12,6 +12,11 @@ if (!premium) {
 }
 
 
+if (game_data.screen !== 'info_player') {
+    alert('KNS Operasyon Planlayıcısı\n\nBu script sadece oyuncu profillerinde çalışır.');
+    end();
+}
+
 var Koor = $('#villages_list').html().match(/\d+\|\d+/g);
 var s1 = Koor.join('a');
 var s2 = s1.match(/\|/g);
