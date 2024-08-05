@@ -156,9 +156,9 @@ function init(unitInfo) {
 // Helper: Window Content
 function prepareWindowContent(windowBody) {
 let bbCode = `[table]`;
-    const windowHeader = `<h1 class="ra-fs18 ra-fw600">bbCode +${scriptData.name}</h1>`;bbCode += `[/table]`;
+    const windowHeader = bbCode +`<h1 class="ra-fs18 ra-fw600">${scriptData.name}</h1>`;bbCode += `[/table]`;
 
-            return bbCode;
+            
     const windowFooter = `<small><strong>${scriptData.name} ${scriptData.version}</strong> - <a href="${scriptData.authorUrl}" target="_blank" rel="noreferrer noopener">${scriptData.author}</a> - <a href="${scriptData.helpLink}" target="_blank" rel="noreferrer noopener">Help</a></small>`;
     const windowStyle = `
 		<style>
@@ -214,7 +214,7 @@ let bbCode = `[table]`;
 		</body>
 		</html>
 	`;
-
+return bbCode;
     return html;
 }
 
