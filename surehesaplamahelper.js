@@ -129,15 +129,15 @@ try {
 					get_troop(plan[attack]['type']) +
 					' [|] ' +
 					plan[attack]['attacker'] +
-					' [->] ' +
+					' -> ' +
 					plan[attack]['target'] +
 					' [|] [b][color=' +
 					colour +
 					']' +
 					formattedDate +
-					'[/color][/b][url=${
+					'[/color][/b]\n'[url=${
                     window.location.origin
-                }${commandUrl}]${twSDK.tt('Send')}[/url][|]\n';
+                }${commandUrl}]${twSDK.tt('Send')}[/url][|];
 			}
 		}
 		twcode += `[/table]`;	
