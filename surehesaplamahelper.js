@@ -136,9 +136,9 @@ try {
 					colour +
 					']' +
 					formattedDate +
-					'[/color][/b][|][url=${
+					'[/color][/b][|]\n[url=${
                     window.location.origin
-                }${commandUrl}]${twSDK.tt('Send')}[/url][|]\n';
+                }${commandUrl}]${twSDK.tt('Send')}[/url][|]';
 			}
 		}
 			twcode += `[/table]`;
