@@ -141,7 +141,9 @@ try {
 					formattedDate +
 					'[/color][/b][|][url=${window.location.origin}${commandUrl}]Gönder[/url][|]Gönder\n';
 			}
-		}
+		}console.log('commandUrl:', window.location.origin + commandUrl);
+
+		
 			twcode += `[/table]`;
 		return twcode;
 	}
