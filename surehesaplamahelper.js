@@ -64,7 +64,7 @@ try {
 	function get_troop(type) {
 		var unit = '';
 		if (type == 'nobel') {
-			return '[unit]snob[/unit]';
+			return '[*][unit]snob[/unit]';
 		} else if (type == 'nuke') {
 			unitSpeed = jQuery('select#nuke_unit').val();
 		} else if (type == 'support') {
@@ -104,7 +104,7 @@ try {
 	function get_twcode(plan, land_time) {
 		var twcode = `[size=12][b]Saldırı Zamanı: ${land_time}[/b][/size][table]\n`;
     
-		var colour = '[*]';
+		var colour = '';
 		
 		for (attack in plan) {
 			if (
@@ -136,7 +136,7 @@ try {
 					colour +
 					']' +
 					formattedDate +
-					'[/color][/b][*][|]\n';
+					'[/color][/b][|]\n';
 			}
 		}
 			twcode += `[/table]`;
