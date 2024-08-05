@@ -124,8 +124,8 @@ try {
 
 				var formattedDate = launch_time.toString();
 				formattedDate = formatDateTime(formattedDate);		
-				let sitterId = game_data.sitter > 0 ? `t=${game_data.player.id}` : '';
-            let fillRallyPoint = game_data.market !== 'uk' ? `&x=${toX}&y=${toY}${SEND_UNITS}` : '';
+				let sitterId = attack.sitter > 0 ? `t=${attack.player.id}` : '';
+            let fillRallyPoint = attack.market !== 'uk' ? `&x=${toX}&y=${toY}${SEND_UNITS}` : '';
 
             let commandUrl = `/game.php?${sitterId}&village=${villageId}&screen=place${fillRallyPoint}`;
 
