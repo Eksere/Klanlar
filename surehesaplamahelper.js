@@ -132,13 +132,13 @@ try {
 					' -> ' +
 					plan[attack]['target'] +
 					' [|] [b][color=' +
-					colour +
+					colour +`
 					']' +
 					formattedDate +
-					'[/color][/b]\n';
+					'[/color]'+'[/table][/b]\n';
 			}
 		}
-		twcode += `[/table]`;	
+			
 		return twcode;
 	}
 
