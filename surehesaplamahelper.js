@@ -101,7 +101,7 @@ try {
 		return unit;
 	}
 
-	/*function get_twcode(plan, land_time) {
+	function get_twcode(plan, land_time) {
 		var twcode = `[size=12][b]Saldırı Zamanı: ${land_time}[/b][/size][table]\n`;
     
 		var colour = '';
@@ -155,60 +155,8 @@ try {
 		
 			twcode += `[/table]`;
 		return twcode;
-	}*/
-function get_twcode(plan, land_time) {
-    var twcode = `[size=12][b]Saldırı Zamanı: ${land_time}[/b][/size][table]\n`;
+	}
 
-    plan.forEach((command) => {
-        const { id, fromCoord, toCoord, formattedLaunchTime, unit, attacker, target, type, travel_time } = command;
-
-        // `toCoord`'un tanımlı olduğundan emin olun
-        if (toCoord === undefined) {
-            console.error('toCoord is undefined:', command);
-            return; // Bu komutu atla
-        }
-
-        const [toX, toY] = toCoord.split('|');
-
-        let sitterId = game_data.sitter > 0 ? `t=${game_data.player.id}` : '';
-        let fillRallyPoint = game_data.market !== 'uk' ? `&x=${toX}&y=${toY}${SEND_UNITS}` : '';
-
-        let commandUrl = `/game.php?${sitterId}&village=${id}&screen=place${fillRallyPoint}`;
-        let fullUrl = `${window.location.origin}${commandUrl}`;
-
-        // Renk ayarlama
-        let colour = '';
-        if (type === 'nobel') {
-            colour = '#2eb92e';
-        } else if (type === 'nuke') {
-            colour = '#ff0e0e';
-        } else if (type === 'support') {
-            colour = '#0eaeae';
-        }
-
-        // Tarih formatlama
-        let launch_time = new Date(travel_time);
-        let formattedDate = formatDateTime(launch_time.toString());
-
-        // BBCode ekleme
-        twcode +=
-            get_troop(type) +
-            '' +
-            attacker +
-            ' -> ' +
-            target +
-            ' [|] [b][color=' +
-            colour +
-            ']' +
-            formattedDate +
-            '[/color][/b][|][url=' +
-            fullUrl +
-            ']Gönder[/url][|]\n';
-    });
-
-    twcode += `[/table]`;
-    return twcode;
-}
 
 
 
