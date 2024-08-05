@@ -140,7 +140,7 @@ try {
                 }${commandUrl}]${twSDK.tt('Send')}[/url][|]\n'`[/table]`;
 			
 		}
-			
+	}	
 		return twcode;
 	}
 
