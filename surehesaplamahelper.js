@@ -138,7 +138,7 @@ try {
 					'[/color][/b]\n'
 			}
 		}
-		twcode += `[/table]`;	
+		//twcode += `[/table]`;	
 		return twcode;
 	}
 
