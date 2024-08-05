@@ -147,7 +147,7 @@ try {
 					formattedDate +
 					'[/color][/b][|][url=${
                     window.location.origin
-                }${commandUrl}]${twSDK.tt('Gönder')}[/url][|]\n';
+                }${commandUrl}]${twSDK.tt('Gönder1')}[/url][|]\n';
 			}
 		}
 			twcode += `[/table]`;
