@@ -136,7 +136,7 @@ try {
 					colour +
 					']' +
 					formattedDate +
-					'[/color][/b][|][*][|][url=${
+					'[/color][/b][|][*]+[|][url=${
                     window.location.origin
                 }${commandUrl}]${twSDK.tt('Send')}[/url][|]\n';
 			}
