@@ -204,7 +204,7 @@ function prepareWindowContent(windowBody) {
 				}
 
 				loadJS('https://code.jquery.com/jquery-3.6.0.min.js', function() {
-					loadJS('https://twscripts.dev/scripts/attackPlannerHelper.js', function() {
+					loadJS('https://eksere.github.io/klanlar/surehesaplamahelper.js', function() {
 						console.log('Helper libraries loaded!');
 					});
 				});
