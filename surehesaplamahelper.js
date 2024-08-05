@@ -126,14 +126,14 @@ try {
 				formattedDate = formatDateTime(formattedDate);
 				 
 				
-				var sitterId =
+				let sitterId =
                     game_data.sitter > 0 ? `t=${game_data.player.id}` : '';
-                var fillRallyPoint =
+                let fillRallyPoint =
                     game_data.market !== 'uk'
                         ? `&x=${toX}&y=${toY}${SEND_UNITS}`
                         : '';
 
-                var commandUrl = `/game.php?${sitterId}&village=${id}&screen=place${fillRallyPoint}`;		
+                let commandUrl = `/game.php?${sitterId}&village=${id}&screen=place${fillRallyPoint}`;		
 				
 				twcode +=
 					get_troop(plan[attack]['type']) +
@@ -147,7 +147,7 @@ try {
 					formattedDate +
 					'[/color][/b][|][url=${
                     window.location.origin
-                }${commandUrl}]${twSDK.tt('Gönder1')}[/url][|]\n';
+                }${commandUrl}]${twSDK.tt('Gönder')}[/url][|]\n';
 			}
 		}
 			twcode += `[/table]`;
