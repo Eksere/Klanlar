@@ -106,6 +106,8 @@ try {
     
 		var colour = '';
 
+		var colour = '';
+
 		for (attack in plan) {
 			if (
 				plan[attack]['target'] != undefined ||
@@ -129,7 +131,7 @@ try {
 					get_troop(plan[attack]['type']) +
 					' [|] ' +
 					plan[attack]['attacker'] +
-					' - ' +
+					' -> ' +
 					plan[attack]['target'] +
 					' [|] [b][color=' +
 					colour +
