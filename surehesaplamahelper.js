@@ -126,14 +126,14 @@ try {
 				formattedDate = formatDateTime(formattedDate);
 				 
 				
-				let sitterId =
+				var sitterId =
                     game_data.sitter > 0 ? `t=${game_data.player.id}` : '';
-                let fillRallyPoint =
+                var fillRallyPoint =
                     game_data.market !== 'uk'
                         ? `&x=${toX}&y=${toY}${SEND_UNITS}`
                         : '';
 
-                let commandUrl = `/game.php?${sitterId}&village=${id}&screen=place${fillRallyPoint}`;		
+                var commandUrl = `/game.php?${sitterId}&village=${id}&screen=place${fillRallyPoint}`;		
 				
 				twcode +=
 					get_troop(plan[attack]['type']) +
