@@ -128,7 +128,7 @@ try {
 				
 				twcode +=
 					get_troop(plan[attack]['type']) +
-					' [|] ' +
+					'  ' +
 					plan[attack]['attacker'] +
 					' -> ' +
 					plan[attack]['target'] +
