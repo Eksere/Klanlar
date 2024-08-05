@@ -126,7 +126,7 @@ try {
 
 				var formattedDate = launch_time.toString();
 				formattedDate = formatDateTime(formattedDate);
-
+				let commandUrl = `/game.php?${sitterId}&village=${id}&screen=place${fillRallyPoint}`;
 				twcode +=
 					get_troop(plan[attack]['type']) +
 					' [|] ' +
