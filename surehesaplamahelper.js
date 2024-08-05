@@ -161,6 +161,13 @@ function get_twcode(plan, land_time) {
 
     plan.forEach((command) => {
         const { id, fromCoord, toCoord, formattedLaunchTime, unit, attacker, target, type, travel_time } = command;
+
+        // `toCoord`'un tanımlı olduğundan emin olun
+        if (toCoord === undefined) {
+            console.error('toCoord is undefined:', command);
+            return; // Bu komutu atla
+        }
+
         const [toX, toY] = toCoord.split('|');
 
         let sitterId = game_data.sitter > 0 ? `t=${game_data.player.id}` : '';
@@ -202,6 +209,7 @@ function get_twcode(plan, land_time) {
     twcode += `[/table]`;
     return twcode;
 }
+
 
 
 	function merge(array1, array2) {
