@@ -64,7 +64,7 @@ try {
 	function get_troop(type) {
 		var unit = '';
 		if (type == 'nobel') {
-			return '[*][unit]snob[/unit]';
+			return '[*][unit]snob[/unit][|]';
 		} else if (type == 'nuke') {
 			unitSpeed = jQuery('select#nuke_unit').val();
 		} else if (type == 'support') {
