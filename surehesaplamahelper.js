@@ -159,11 +159,8 @@ try {
 function get_twcode(plan, land_time) {
     var twcode = `[size=12][b]Saldırı Zamanı: ${land_time}[/b][/size][table]\n`;
 
-    var colour = '';
-
-    // Plan içindeki her saldırı için
     plan.forEach((command) => {
-        const { id, fromCoord, toCoord, formattedLaunchTime, unit } = command;
+        const { id, fromCoord, toCoord, formattedLaunchTime, unit, attacker, target, type, travel_time } = command;
         const [toX, toY] = toCoord.split('|');
 
         let sitterId = game_data.sitter > 0 ? `t=${game_data.player.id}` : '';
@@ -172,24 +169,27 @@ function get_twcode(plan, land_time) {
         let commandUrl = `/game.php?${sitterId}&village=${id}&screen=place${fillRallyPoint}`;
         let fullUrl = `${window.location.origin}${commandUrl}`;
 
-        if (command['type'] === 'nobel') {
+        // Renk ayarlama
+        let colour = '';
+        if (type === 'nobel') {
             colour = '#2eb92e';
-        } else if (command['type'] === 'nuke') {
+        } else if (type === 'nuke') {
             colour = '#ff0e0e';
-        } else if (command['type'] === 'support') {
+        } else if (type === 'support') {
             colour = '#0eaeae';
         }
 
-        var launch_time = new Date(command['travel_time']);
-        var formattedDate = launch_time.toString();
-        formattedDate = formatDateTime(formattedDate);
+        // Tarih formatlama
+        let launch_time = new Date(travel_time);
+        let formattedDate = formatDateTime(launch_time.toString());
 
+        // BBCode ekleme
         twcode +=
-            get_troop(command['type']) +
+            get_troop(type) +
             '' +
-            command['attacker'] +
+            attacker +
             ' -> ' +
-            command['target'] +
+            target +
             ' [|] [b][color=' +
             colour +
             ']' +
@@ -202,6 +202,7 @@ function get_twcode(plan, land_time) {
     twcode += `[/table]`;
     return twcode;
 }
+
 
 	function merge(array1, array2) {
 		for (element in array2) {
