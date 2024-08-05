@@ -155,90 +155,66 @@ function init(unitInfo) {
 
 // Helper: Window Content
 function prepareWindowContent(windowBody) {
+ let bbCode = `[table]`;
     const windowHeader = `<h1 class="ra-fs18 ra-fw600">${scriptData.name}</h1>`;
-    const windowFooter = `<small><strong>${scriptData.name} ${scriptData.version}</strong> - <a href="${scriptData.authorUrl}" target="_blank" rel="noreferrer noopener">${scriptData.author}</a> - <a href="${scriptData.helpLink}" target="_blank" rel="noreferrer noopener">Help</a></small>`;
+    bbCode+= const windowFooter =  `<small><strong>${scriptData.name}[|] ${scriptData.version}</strong> -> <a href="${scriptData.authorUrl}" target="_blank" rel="noreferrer noopener">${scriptData.author}</a> [|] <a href="${scriptData.helpLink}" target="_blank" rel="noreferrer noopener">Help</a></small>[url=${
+                    window.location.origin
+                }${commandUrl}]${twSDK.tt('Send')}[/url][|]`;
+	bbCode += `[/table]`;
     const windowStyle = `
-        <style>
-            body { background-color: #f4e4bc; font-family: Verdana, Arial, sans-serif; font-size: 14px; line-height: 1; }
-            main { max-width: 768px; margin: 0 auto; }
-            h1 { font-size: 27px; }
-            a { font-weight: 700; text-decoration: none; color: #603000; }
-            small { font-size: 10px; }
-            input[type="text"],
-            select { display: block; width: 100%; height: auto; line-height: 1; box-sizing: border-box; padding: 5px; outline: none; border: 1px solid #999; }
-            input[type="text"]:focus { outline: none; box-shadow: none; border: 1px solid #603000; background-color: #eee; }
-            label { font-weight: 600; display: block; margin-bottom: 5px; font-size: 12px; }
-            textarea { width: 100%; height: 80px; box-sizing: border-box; padding: 5px; resize: none; }
-            textarea:focus { box-shadow: none; outline: none; border: 1px solid #603000; background-color: #eee; }
-            .ra-mb15 { margin-bottom: 15px; }
-            .ra-flex { display: flex; flex-flow: row wrap; justify-content: space-between; }
-            .ra-flex-6 { flex: 0 0 48%; }
-            .ra-flex-4 { flex: 0 0 30%; }
-            .button { padding: 10px 20px; background-color: #603000; font-weight: 500; color: #fff; text-align: center; display: inline-block; cursor: pointer; text-transform: uppercase; }
-            table { width: 100%; border-collapse: collapse; margin-top: 15px; }
-            th, td { border: 1px solid #603000; padding: 8px; text-align: left; }
-            th { background-color: #603000; color: #fff; }
-        </style>
-    `;
-
-    const table = `
-        <table>
-            <thead>
-                <tr>
-                    <th>Unit</th>
-                    <th>From</th>
-                    <th>To</th>
-                    <th>Launch Time</th>
-                    <th>Action</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>Example Unit</td>
-                    <td>123|456</td>
-                    <td>789|012</td>
-                    <td>12:34:56</td>
-                    <td><a href="#">Send</a></td>
-                </tr>
-                <!-- Add more rows as needed -->
-            </tbody>
-        </table>
-    `;
+		<style>
+			body { background-color: #f4e4bc; font-family: Verdana, Arial, sans-serif; font-size: 14px; line-height: 1; }
+			main { max-width: 768px; margin: 0 auto; }
+			h1 { font-size: 27px; }
+			a { font-weight: 700; text-decoration: none; color: #603000; }
+			small { font-size: 10px; }
+			input[type="text"],
+			select { display: block; width: 100%; height: auto; line-height: 1; box-sizing: border-box; padding: 5px; outline: none; border: 1px solid #999; }
+			input[type="text"]:focus { outline: none; box-shadow: none; border: 1px solid #603000; background-color: #eee; }
+			label { font-weight: 600; display: block; margin-bottom: 5px; font-size: 12px; }
+			textarea { width: 100%; height: 80px; box-sizing: border-box; padding: 5px; resize: none; }
+			textarea:focus { box-shadow: none; outline: none; border: 1px solid #603000; background-color: #eee; }
+			.ra-mb15 { margin-bottom: 15px; }
+			.ra-flex { display: flex; flex-flow: row wrap; justify-content: space-between; }
+			.ra-flex-6 { flex: 0 0 48%; }
+			.ra-flex-4 { flex: 0 0 30%; }
+			.button { padding: 10px 20px; background-color: #603000; font-weight: 500; color: #fff; text-align: center; display: inline-block; cursor: pointer; text-transform: uppercase; }
+		</style>
+	`;
 
     const html = `
-        <!DOCTYPE html>
-        <html lang="en">
-        <head>
-            <meta charset="UTF-8">
-            <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            <title>${scriptData.name} ${scriptData.version}</title>
-            ${windowStyle}
-        </head>
-        <body>
-            <main>
-                ${windowHeader}
-                ${windowBody}
-                ${table}
-                ${windowFooter}
-            </main>
-            <script>
-                function loadJS(url, callback) {
-                    var scriptTag = document.createElement('script');
-                    scriptTag.src = url;
-                    scriptTag.onload = callback;
-                    scriptTag.onreadystatechange = callback;
-                    document.body.appendChild(scriptTag);
-                }
+		<!DOCTYPE html>
+		<html lang="en">
+		<head>
+			<meta charset="UTF-8">
+			<meta name="viewport" content="width=device-width, initial-scale=1.0">
+			<title>${scriptData.name} ${scriptData.version}</title>
+			${windowStyle}
+		</head>
+		<body>
+			<main>
+				${windowHeader}
+				${windowBody}
+				${windowFooter}
+			</main>
+			<script>
+				function loadJS(url, callback) {
+					var scriptTag = document.createElement('script');
+					scriptTag.src = url;
+					scriptTag.onload = callback;
+					scriptTag.onreadystatechange = callback;
+					document.body.appendChild(scriptTag);
+				}
 
-                loadJS('https://code.jquery.com/jquery-3.6.0.min.js', function() {
-                    loadJS('https://twscripts.dev/scripts/attackPlannerHelper.js', function() {
-                        console.log('Helper libraries loaded!');
-                    });
-                });
-            </script>
-        </body>
-        </html>
-    `;
+				loadJS('https://code.jquery.com/jquery-3.6.0.min.js', function() {
+					loadJS('https://twscripts.dev/scripts/attackPlannerHelper.js', function() {
+						console.log('Helper libraries loaded!');
+					});
+				});
+			</script>
+		</body>
+		</html>
+	`;
 
     return html;
 }
