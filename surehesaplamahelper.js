@@ -135,7 +135,7 @@ try {
 					colour +`
 					']' +
 					formattedDate +
-					'[/color]'+'[/table][/b]\n';
+					'[/color][/b]\n'+'[/table]';
 			}
 		}
 			
