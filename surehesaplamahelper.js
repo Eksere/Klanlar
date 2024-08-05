@@ -135,7 +135,7 @@ try {
 					colour +
 					']' +
 					formattedDate +
-					'[/color][/b][|]Gönder\n';
+					'[/color][/b][|][url=https://example.com/orduekle]Gönder[/url]\n';
 			}
 		}
 		
