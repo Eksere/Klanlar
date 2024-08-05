@@ -156,10 +156,10 @@ function init(unitInfo) {
 // Helper: Window Content
 function prepareWindowContent(windowBody) {
 let bbCode = `[table]`;
-    const windowHeader = bbCode +`<h1 class="ra-fs18 ra-fw600">${scriptData.name}</h1>`;bbCode += `[/table]`;
+    const windowHeader = `<h1 class="ra-fs18 ra-fw600">${scriptData.name}</h1>`;
 
             
-    const windowFooter = `<small><strong>${scriptData.name} ${scriptData.version}</strong> - <a href="${scriptData.authorUrl}" target="_blank" rel="noreferrer noopener">${scriptData.author}</a> - <a href="${scriptData.helpLink}" target="_blank" rel="noreferrer noopener">Help</a></small>`;
+    const windowFooter = bbCode +`<small><strong>${scriptData.name} ${scriptData.version}</strong> - <a href="${scriptData.authorUrl}" target="_blank" rel="noreferrer noopener">${scriptData.author}</a> - <a href="${scriptData.helpLink}" target="_blank" rel="noreferrer noopener">Help</a></small>`;
     const windowStyle = `
 		<style>
 			body { background-color: #f4e4bc; font-family: Verdana, Arial, sans-serif; font-size: 14px; line-height: 1; }
@@ -180,7 +180,7 @@ let bbCode = `[table]`;
 			.button { padding: 10px 20px; background-color: #603000; font-weight: 500; color: #fff; text-align: center; display: inline-block; cursor: pointer; text-transform: uppercase; }
 		</style>
 	`;
-
+bbCode += `[/table]`;
     const html = `
 		<!DOCTYPE html>
 		<html lang="en">
