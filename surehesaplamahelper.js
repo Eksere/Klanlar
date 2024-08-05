@@ -105,9 +105,7 @@ try {
 		var twcode = `[size=12][b]Saldırı Zamanı: ${land_time}[/b][/size][table][*]\n\n`;
     
 		var colour = '';
-
-		var colour = '';
-
+		
 		for (attack in plan) {
 			if (
 				plan[attack]['target'] != undefined ||
@@ -126,6 +124,17 @@ try {
 
 				var formattedDate = launch_time.toString();
 				formattedDate = formatDateTime(formattedDate);
+				commands.forEach((command) => {
+                const { id, fromCoord, toCoord, formattedLaunchTime, unit } =
+                    command;
+                const [toX, toY] = toCoord.split('|');
+
+                let sitterId =
+                    game_data.sitter > 0 ? `t=${game_data.player.id}` : '';
+                let fillRallyPoint =
+                    game_data.market !== 'uk'	
+				? `&x=${toX}&y=${toY}${SEND_UNITS}`
+                      		   : '';		
 				let commandUrl = `/game.php?${sitterId}&village=${id}&screen=place${fillRallyPoint}`;
 				twcode +=
 					get_troop(plan[attack]['type']) +
