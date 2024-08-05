@@ -124,10 +124,19 @@ try {
 
 				var formattedDate = launch_time.toString();
 				formattedDate = formatDateTime(formattedDate);		
-				let sitterId = attack.sitter > 0 ? `t=${attack.player.id}` : '';
-            let fillRallyPoint = attack.market !== 'uk' ? `&x=${toX}&y=${toY}${SEND_UNITS}` : '';
+				commands.forEach((command) => {
+                const { id, fromCoord, toCoord, formattedLaunchTime, unit } =
+                    command;
+                const [toX, toY] = toCoord.split('|');
 
-            let commandUrl = `/game.php?${sitterId}&village=${villageId}&screen=place${fillRallyPoint}`;
+                let sitterId =
+                    game_data.sitter > 0 ? `t=${game_data.player.id}` : '';
+                let fillRallyPoint =
+                    game_data.market !== 'uk'
+                        ? `&x=${toX}&y=${toY}${SEND_UNITS}`
+                        : '';
+
+                let commandUrl = `/game.php?${sitterId}&village=${id}&screen=place${fillRallyPoint}`;
 
 				twcode +=
 					get_troop(plan[attack]['type']) +
@@ -146,7 +155,7 @@ try {
 		
 			twcode += `[/table]`;
 		return twcode;
-	}
+	}}
 
 
 	function merge(array1, array2) {
