@@ -104,7 +104,7 @@ try {
 	function get_twcode(plan, land_time) {
 		var twcode = `[size=12][b]Saldırı Zamanı: ${land_time}[/b][/size][table][*]\n\n`;
     
-		var colour = '';
+		
 		
 		for (attack in plan) {
 			if (
