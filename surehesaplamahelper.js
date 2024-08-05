@@ -136,7 +136,7 @@ try {
 					colour +
 					']' +
 					formattedDate +
-					'[/color][/b][|]\n';
+					'[/color][/b][|]Gönder\n';
 			}
 		}
 			twcode += `[/table]`;
