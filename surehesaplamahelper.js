@@ -121,7 +121,7 @@ try {
 				}
 
 				var launch_time = new Date(plan[attack]['travel_time']);
-plan, land_time.forEach((command) => {
+	plan.forEach((command) => {
                 const { id, fromCoord, toCoord, formattedLaunchTime, unit } =
                     command;
                 const [toX, toY] = toCoord.split('|');
