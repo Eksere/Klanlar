@@ -101,7 +101,7 @@ try {
 		return unit;
 	}
 
-/*	function get_twcode(plan, land_time) {
+	function get_twcode(plan, land_time) {
 		var twcode = `[size=12][b]Saldırı Zamanı: ${land_time}[/b][/size][table]\n`;
     
 		var colour = '';
@@ -124,7 +124,11 @@ try {
 
 				var formattedDate = launch_time.toString();
 				formattedDate = formatDateTime(formattedDate);		
-				
+				let sitterId = game_data.sitter > 0 ? `t=${game_data.player.id}` : '';
+            let fillRallyPoint = game_data.market !== 'uk' ? `&x=${toX}&y=${toY}${SEND_UNITS}` : '';
+
+            let commandUrl = `/game.php?${sitterId}&village=${villageId}&screen=place${fillRallyPoint}`;
+
 				twcode +=
 					get_troop(plan[attack]['type']) +
 					'' +
@@ -135,77 +139,13 @@ try {
 					colour +
 					']' +
 					formattedDate +
-					'[/color][/b][|]Gönder\n';
+					'[/color][/b][|][url=${window.location.origin}${commandUrl}]Gönder[/url][|]Gönder\n';
 			}
 		}
 			twcode += `[/table]`;
 		return twcode;
-	}*/
-function get_twcode(plan, land_time) {
-    var twcode = `[size=12][b]Saldırı Zamanı: ${land_time}[/b][/size][table]\n`;
-    
-    var colour = '';
-    
-    for (attack in plan) {
-        if (
-            plan[attack]['target'] != undefined ||
-            plan[attack]['travel_time'] != undefined ||
-            plan[attack]['type'] != undefined
-        ) {
-            if (plan[attack]['type'] == 'nobel') {
-                colour = '#2eb92e';
-            } else if (plan[attack]['type'] == 'nuke') {
-                colour = '#ff0e0e';
-            } else if (plan[attack]['type'] == 'support') {
-                colour = '#0eaeae';
-            }
+	}
 
-            var launch_time = new Date(plan[attack]['travel_time']);
-
-            var formattedDate = launch_time.toString();
-            formattedDate = formatDateTime(formattedDate);		
-            
-            const [toX, toY] = plan[attack]['target'].split('|');
-            const villageId = plan[attack]['village_id']; // Assuming you have village_id in your plan
-
-            let sitterId = game_data.sitter > 0 ? `t=${game_data.player.id}` : '';
-            let fillRallyPoint = game_data.market !== 'uk' ? `&x=${toX}&y=${toY}${SEND_UNITS}` : '';
-
-            let commandUrl = `/game.php?${sitterId}&village=${villageId}&screen=place${fillRallyPoint}`;
-
-            twcode +=
-                `[unit]${get_troop(plan[attack]['type'])}[/unit] ` +
-                `${plan[attack]['attacker']} -> ${plan[attack]['target']} [|] [b][color=${colour}]${formattedDate}[/color][/b][|][url=${window.location.origin}${commandUrl}]Gönder[/url][|]\n`;
-        }
-    }
-    twcode += `[/table]`;
-    return twcode;
-}
-
-function formatDateTime(dateTime) {
-    // Your date formatting function
-    var date = new Date(dateTime);
-    return date.getFullYear() + '-' + 
-           ('0' + (date.getMonth() + 1)).slice(-2) + '-' + 
-           ('0' + date.getDate()).slice(-2) + ' ' + 
-           ('0' + date.getHours()).slice(-2) + ':' + 
-           ('0' + date.getMinutes()).slice(-2) + ':' + 
-           ('0' + date.getSeconds()).slice(-2);
-}
-
-function get_troop(type) {
-    // Your function to get troop type
-    switch (type) {
-        case 'nobel':
-            return 'snob';
-        case 'nuke':
-            return 'ram';
-        case 'support':
-            return 'spear';
-        default:
-            return '';
-    }
-}
 
 	function merge(array1, array2) {
 		for (element in array2) {
