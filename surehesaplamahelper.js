@@ -216,42 +216,34 @@ function get_plan(travel_times, max_attack, type) {
 
 function get_twcode(plan, land_time) {
     var twcode = `[size=12][b]Saldırı Zamanı: ${land_time}[/b][/size][table]\n`;
+    
     var colour = '';
 
     for (let attack in plan) {
-        let planDetails = plan[attack];
-
-        if (
-            planDetails['target'] !== undefined &&
-            planDetails['travel_time'] !== undefined &&
-            planDetails['type'] !== undefined
-        ) {
-            if (planDetails['type'] === 'nobel') {
+        if (plan[attack]['target'] !== undefined || 
+            plan[attack]['travel_time'] !== undefined || 
+            plan[attack]['type'] !== undefined) {
+            
+            if (plan[attack]['type'] === 'nobel') {
                 colour = '#2eb92e';
-            } else if (planDetails['type'] === 'nuke') {
+            } else if (plan[attack]['type'] === 'nuke') {
                 colour = '#ff0e0e';
-            } else if (planDetails['type'] === 'support') {
+            } else if (plan[attack]['type'] === 'support') {
                 colour = '#0eaeae';
             }
 
-            var launch_time = new Date(planDetails['travel_time']);
-            var formattedDate = formatDateTime(launch_time);
+            var launch_time = new Date(plan[attack]['travel_time']);
+            var formattedDate = formatDateTime(launch_time.toString());
 
-            // URL oluşturma
-            var toCoord = planDetails['target'];
-            const [toX, toY] = toCoord.split('|');
-            let sitterId = game_data.player.sitter > 0 ? `t=${game_data.player.id}` : '';
-            let fillRallyPoint = game_data.market !== 'uk' ? `&x=${toX}&y=${toY}${SEND_UNITS}` : '';
-            let commandUrl = `/game.php?${sitterId}&village=${planDetails['attacker']}&screen=place${fillRallyPoint}`;
-
-            console.log("URL oluşturma:", commandUrl); // Debug log
-
-            twcode +=
-                get_troop(planDetails['type']) +
+            // URL'yi oluşturma kısmı
+            var commandUrl = `/game.php?village=${plan[attack]['attacker']}&screen=place`;
+            
+            twcode += 
+                get_troop(plan[attack]['type']) +
                 '' +
-                planDetails['attacker'] +
+                plan[attack]['attacker'] +
                 ' -> ' +
-                planDetails['target'] +
+                plan[attack]['target'] +
                 ' [|] [b][color=' +
                 colour +
                 ']' +
@@ -259,15 +251,16 @@ function get_twcode(plan, land_time) {
                 '[/color][/b][|][url=' +
                 window.location.origin +
                 commandUrl +
-                ']' + twSDK.tt('Send') + '[/url][|]Gönder\n';
-        } else {
-            console.log("Eksik plan detayları:", planDetails); // Debug log
+                ']' +
+                'Send' + // Burada 'Send' yerine twSDK.tt('Send') kullanabilirsiniz
+                '[/url][|]Gönder\n';
         }
     }
 
     twcode += `[/table]`;
     return twcode;
 }
+
 
 
 
