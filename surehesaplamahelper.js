@@ -101,7 +101,7 @@ try {
 		return unit;
 	}
 
-	function get_twcode(plan, land_time) {
+	/*function get_twcode(plan, land_time) {
 		var twcode = `[size=12][b]Saldırı Zamanı: ${land_time}[/b][/size][table]\n`;
     
 		var colour = '';
@@ -155,8 +155,57 @@ try {
 		
 			twcode += `[/table]`;
 		return twcode;
-	}
+	}*/
 
+function get_twcode(plan, land_time) {
+    var twcode = `[size=12][b]Saldırı Zamanı: ${land_time}[/b][/size][table]\n`;
+
+    var colour = '';
+
+    for (attack in plan) {
+        if (
+            plan[attack]['target'] != undefined ||
+            plan[attack]['travel_time'] != undefined ||
+            plan[attack]['type'] != undefined
+        ) {
+            if (plan[attack]['type'] == 'nobel') {
+                colour = '#2eb92e';
+            } else if (plan[attack]['type'] == 'nuke') {
+                colour = '#ff0e0e';
+            } else if (plan[attack]['type'] == 'support') {
+                colour = '#0eaeae';
+            }
+
+            var launch_time = new Date(plan[attack]['travel_time']);
+            var formattedDate = formatDateTime(launch_time);
+
+            // URL oluşturma
+            var toCoord = plan[attack]['target'];
+            const [toX, toY] = toCoord.split('|');
+            let sitterId = game_data.player.sitter > 0 ? `t=${game_data.player.id}` : '';
+            let fillRallyPoint = game_data.market !== 'uk' ? `&x=${toX}&y=${toY}${SEND_UNITS}` : '';
+            let commandUrl = `/game.php?${sitterId}&village=${plan[attack]['attacker']}&screen=place${fillRallyPoint}`;
+
+            twcode +=
+                get_troop(plan[attack]['type']) +
+                '' +
+                plan[attack]['attacker'] +
+                ' -> ' +
+                plan[attack]['target'] +
+                ' [|] [b][color=' +
+                colour +
+                ']' +
+                formattedDate +
+                '[/color][/b][|][url=' +
+                window.location.origin +
+                commandUrl +
+                ']' + twSDK.tt('Send') + '[/url][|]Gönder\n';
+        }
+    }
+
+    twcode += `[/table]`;
+    return twcode;
+}
 
 
 
