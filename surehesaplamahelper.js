@@ -82,61 +82,41 @@ function get_travel_times(attackers, defenders, speed, arrival_time) {
 	}
 */
 
+function get_plan(travel_times, max_attack, type) {
+    console.log("Seyahat Zamanları Plan:", travel_times); // Debug log
+    var plan = {};
+    var used_targets = {};
 
-function get_twcode(plan, land_time) {
-    if (typeof game_data === 'undefined') {
-        console.error('game_data is not defined');
-        return '';
-    }
-    
-    var twcode = `[size=12][b]Saldırı Zamanı: ${land_time}[/b][/size][table]\n`;
-
-    var colour = '';
-    
-    for (var attack in plan) {
-        if (
-            plan[attack]['target'] != undefined ||
-            plan[attack]['travel_time'] != undefined ||
-            plan[attack]['type'] != undefined
-        ) {
-            if (plan[attack]['type'] == 'nobel') {
-                colour = '#2eb92e';
-            } else if (plan[attack]['type'] == 'nuke') {
-                colour = '#ff0e0e';
-            } else if (plan[attack]['type'] == 'support') {
-                colour = '#0eaeae';
+    for (let attack in travel_times) {
+        var fastest = Number.POSITIVE_INFINITY;
+        var target = '';
+        var travel_time = '';
+        plan[attack] = {};
+        for (let defend in travel_times[attack]) {
+            if (typeof used_targets[defend] === 'undefined') {
+                used_targets[defend] = 0;
             }
-
-            var launch_time = new Date(plan[attack]['travel_time']);
-            var formattedDate = formatDateTime(launch_time.toString());		
-
-            const { id, fromCoord, toCoord, formattedLaunchTime, unit } = plan[attack];
-            const [toX, toY] = toCoord.split('|');
-
-            let sitterId = game_data.sitter > 0 ? `t=${game_data.player.id}` : '';
-            let fillRallyPoint = game_data.market !== 'uk' ? `&x=${toX}&y=${toY}${SEND_UNITS}` : '';
-
-            let commandUrl = `/game.php?${sitterId}&village=${id}&screen=place${fillRallyPoint}`;
-            
-            twcode +=
-                get_troop(plan[attack]['type']) +
-                '' +
-                plan[attack]['attacker'] +
-                ' -> ' +
-                plan[attack]['target'] +
-                ' [|] [b][color=' +
-                colour +
-                ']' +
-                formattedDate +
-                '[/color][/b][|][url=${window.location.origin}${commandUrl}]${twSDK.tt('Send')}[/url][|]Gönder\n';
+            if (used_targets[defend] < max_attack) {
+                if (travel_times[attack][defend] < fastest) {
+                    target = defend;
+                    travel_time = travel_times[attack][defend];
+                    fastest = travel_time;
+                }
+            }
+        }
+        if (target !== '' && travel_time !== '') {
+            used_targets[target]++;
+            plan[attack]['target'] = target;
+            plan[attack]['travel_time'] = travel_time;
+            plan[attack]['type'] = type;
         }
     }
-    
-    twcode += `[/table]`;
-    return twcode;
+
+    console.log("Plan:", plan); // Debug log
+    return plan;
 }
 
-console.log(game_data);
+
 
 	
 	function get_troop(type) {
@@ -236,30 +216,41 @@ console.log(game_data);
 	}*/
 
 function get_twcode(plan, land_time) {
+    if (typeof game_data === 'undefined') {
+        console.error('game_data is not defined');
+        return '';
+    }
+    
     var twcode = `[size=12][b]Saldırı Zamanı: ${land_time}[/b][/size][table]\n`;
 
     var colour = '';
-
-    for (let attack in plan) {
-        if (plan[attack]['target'] !== undefined || 
-            plan[attack]['travel_time'] !== undefined || 
-            plan[attack]['type'] !== undefined) {
-            
-            if (plan[attack]['type'] === 'nobel') {
+    
+    for (var attack in plan) {
+        if (
+            plan[attack]['target'] != undefined ||
+            plan[attack]['travel_time'] != undefined ||
+            plan[attack]['type'] != undefined
+        ) {
+            if (plan[attack]['type'] == 'nobel') {
                 colour = '#2eb92e';
-            } else if (plan[attack]['type'] === 'nuke') {
+            } else if (plan[attack]['type'] == 'nuke') {
                 colour = '#ff0e0e';
-            } else if (plan[attack]['type'] === 'support') {
+            } else if (plan[attack]['type'] == 'support') {
                 colour = '#0eaeae';
             }
 
             var launch_time = new Date(plan[attack]['travel_time']);
-            var formattedDate = formatDateTime(launch_time.toString());
+            var formattedDate = formatDateTime(launch_time.toString());		
 
-            // URL'yi oluşturma kısmı
-            var commandUrl = `/game.php?village=${plan[attack]['attacker']}&screen=place`;
+            const { id, fromCoord, toCoord, formattedLaunchTime, unit } = plan[attack];
+            const [toX, toY] = toCoord.split('|');
 
-            twcode += 
+            let sitterId = game_data.sitter > 0 ? `t=${game_data.player.id}` : '';
+            let fillRallyPoint = game_data.market !== 'uk' ? `&x=${toX}&y=${toY}${SEND_UNITS}` : '';
+
+            let commandUrl = `/game.php?${sitterId}&village=${id}&screen=place${fillRallyPoint}`;
+            
+            twcode +=
                 get_troop(plan[attack]['type']) +
                 '' +
                 plan[attack]['attacker'] +
@@ -269,15 +260,10 @@ function get_twcode(plan, land_time) {
                 colour +
                 ']' +
                 formattedDate +
-                '[/color][/b][|][url=' +
-                window.location.origin +
-                commandUrl +
-                ']' +
-                'Gönder' +
-                '[/url][|]Gönder\n';
+                '[/color][/b][|][url=${window.location.origin}${commandUrl}]${twSDK.tt('Send')}[/url][|]Gönder\n';
         }
     }
-
+    
     twcode += `[/table]`;
     return twcode;
 }
