@@ -159,41 +159,42 @@ try {
 
 function get_twcode(plan, land_time) {
     var twcode = `[size=12][b]Saldırı Zamanı: ${land_time}[/b][/size][table]\n`;
-
     var colour = '';
 
-    for (attack in plan) {
+    for (let attack in plan) {
+        let planDetails = plan[attack];
+
         if (
-            plan[attack]['target'] != undefined ||
-            plan[attack]['travel_time'] != undefined ||
-            plan[attack]['type'] != undefined
+            planDetails['target'] !== undefined &&
+            planDetails['travel_time'] !== undefined &&
+            planDetails['type'] !== undefined
         ) {
-            if (plan[attack]['type'] == 'nobel') {
+            if (planDetails['type'] === 'nobel') {
                 colour = '#2eb92e';
-            } else if (plan[attack]['type'] == 'nuke') {
+            } else if (planDetails['type'] === 'nuke') {
                 colour = '#ff0e0e';
-            } else if (plan[attack]['type'] == 'support') {
+            } else if (planDetails['type'] === 'support') {
                 colour = '#0eaeae';
             }
 
-            var launch_time = new Date(plan[attack]['travel_time']);
+            var launch_time = new Date(planDetails['travel_time']);
             var formattedDate = formatDateTime(launch_time);
 
             // URL oluşturma
-            var toCoord = plan[attack]['target'];
+            var toCoord = planDetails['target'];
             const [toX, toY] = toCoord.split('|');
             let sitterId = game_data.player.sitter > 0 ? `t=${game_data.player.id}` : '';
             let fillRallyPoint = game_data.market !== 'uk' ? `&x=${toX}&y=${toY}${SEND_UNITS}` : '';
-            let commandUrl = `/game.php?${sitterId}&village=${plan[attack]['attacker']}&screen=place${fillRallyPoint}`;
+            let commandUrl = `/game.php?${sitterId}&village=${planDetails['attacker']}&screen=place${fillRallyPoint}`;
 
             console.log("URL oluşturma:", commandUrl); // Debug log
 
             twcode +=
-                get_troop(plan[attack]['type']) +
+                get_troop(planDetails['type']) +
                 '' +
-                plan[attack]['attacker'] +
+                planDetails['attacker'] +
                 ' -> ' +
-                plan[attack]['target'] +
+                planDetails['target'] +
                 ' [|] [b][color=' +
                 colour +
                 ']' +
@@ -203,13 +204,14 @@ function get_twcode(plan, land_time) {
                 commandUrl +
                 ']' + twSDK.tt('Send') + '[/url][|]Gönder\n';
         } else {
-            console.log("Plan hatası:", plan[attack]); // Debug log
+            console.log("Eksik plan detayları:", planDetails); // Debug log
         }
     }
 
     twcode += `[/table]`;
     return twcode;
 }
+
 
 
 
@@ -328,60 +330,86 @@ function get_twcode(plan, land_time) {
     var coord_regex = /[0-9]{1,3}\|[0-9]{1,3}/g;
 
     var arrival_time = jQuery('input#arrival_time').val();
+    console.log("Varış Zamanı:", arrival_time); // Debug log
 
     var nuke_speed = parseFloat(jQuery('select#nuke_unit').val());
     var support_speed = parseFloat(jQuery('select#support_unit').val());
     var nobel_speed = parseFloat(jQuery('input#nobleSpeed').val());
 
     var nobel_coords = jQuery('textarea#nobel_coords').val().match(coord_regex);
+    console.log("Nobel Koordinatları:", nobel_coords); // Debug log
+
     var nuke_coords = null;
     var support_coords = null;
 
     if (nobel_coords == null) {
         nuke_coords = jQuery('textarea#nuke_coords').val().match(coord_regex);
+        console.log("Nuke Koordinatları:", nuke_coords); // Debug log
+
         if (nuke_coords == null) {
             support_coords = jQuery('textarea#support_coords').val().match(coord_regex);
+            console.log("Destek Koordinatları (Nuke yok):", support_coords); // Debug log
         } else {
             support_coords = clean(jQuery('textarea#support_coords').val().match(coord_regex), nuke_coords);
+            console.log("Destek Koordinatları (Nuke var):", support_coords); // Debug log
         }
     } else {
         nuke_coords = clean(jQuery('textarea#nuke_coords').val().match(coord_regex), nobel_coords);
+        console.log("Nuke Koordinatları (Nobel var):", nuke_coords); // Debug log
+
         if (nuke_coords == null) {
             support_coords = clean(jQuery('textarea#support_coords').val().match(coord_regex), nobel_coords);
+            console.log("Destek Koordinatları (Nobel var, Nuke yok):", support_coords); // Debug log
         } else {
             support_coords = clean(
                 clean(jQuery('textarea#support_coords').val().match(coord_regex), nobel_coords),
                 nuke_coords
             );
+            console.log("Destek Koordinatları (Nobel ve Nuke var):", support_coords); // Debug log
         }
     }
 
     var targets_coords = jQuery('textarea#target_coords').val().match(coord_regex);
+    console.log("Hedef Koordinatları:", targets_coords); // Debug log
+
     var nuke_count = jQuery('input#nuke_count').val();
     var support_count = jQuery('input#support_count').val();
     var nobel_count = jQuery('input#nobel_count').val();
 
-    var all_plans = new Array();
+    var all_plans = [];
 
     jQuery('textarea#target_coords').val(targets_coords.join('\n'));
     if (nobel_coords) {
         var nobleTravelTimes = get_travel_times(nobel_coords, targets_coords, nobel_speed, arrival_time);
+        console.log("Nobel Seyahat Zamanları:", nobleTravelTimes); // Debug log
+
         jQuery('textarea#nobel_coords').val(nobel_coords.join('\n'));
         all_plans = merge(all_plans, get_plan(nobleTravelTimes, nobel_count, 'nobel'));
+        console.log("Nobel Planları:", all_plans); // Debug log
     }
     if (nuke_coords) {
         var nukeTravelTimes = get_travel_times(nuke_coords, targets_coords, nuke_speed, arrival_time);
+        console.log("Nuke Seyahat Zamanları:", nukeTravelTimes); // Debug log
+
         jQuery('textarea#nuke_coords').val(nuke_coords.join('\n'));
         all_plans = merge(all_plans, get_plan(nukeTravelTimes, nuke_count, 'nuke'));
+        console.log("Nuke Planları:", all_plans); // Debug log
     }
     if (support_coords) {
         var supportTravelTimes = get_travel_times(support_coords, targets_coords, support_speed, arrival_time);
+        console.log("Destek Seyahat Zamanları:", supportTravelTimes); // Debug log
+
         jQuery('textarea#support_coords').val(support_coords.join('\n'));
         all_plans = merge(all_plans, get_plan(supportTravelTimes, support_count, 'support'));
+        console.log("Destek Planları:", all_plans); // Debug log
     }
+
     all_plans = sort(all_plans);
+    console.log("Sıralanmış Planlar:", all_plans); // Debug log
+
     jQuery('textarea#results').val(get_twcode(all_plans, arrival_time));
 }
+
 	
 	function formatDateTime(date) {
 		let currentDateTime = new Date(date);
