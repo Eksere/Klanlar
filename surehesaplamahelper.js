@@ -216,7 +216,7 @@ function get_plan(travel_times, max_attack, type) {
 
 function get_twcode(plan, land_time) {
     var twcode = `[size=12][b]Saldırı Zamanı: ${land_time}[/b][/size][table]\n`;
-    
+
     var colour = '';
 
     for (let attack in plan) {
@@ -237,7 +237,7 @@ function get_twcode(plan, land_time) {
 
             // URL'yi oluşturma kısmı
             var commandUrl = `/game.php?village=${plan[attack]['attacker']}&screen=place`;
-            
+
             twcode += 
                 get_troop(plan[attack]['type']) +
                 '' +
@@ -252,7 +252,7 @@ function get_twcode(plan, land_time) {
                 window.location.origin +
                 commandUrl +
                 ']' +
-                'Send' + // Burada 'Send' yerine twSDK.tt('Send') kullanabilirsiniz
+                'Gönder' +
                 '[/url][|]Gönder\n';
         }
     }
@@ -260,6 +260,7 @@ function get_twcode(plan, land_time) {
     twcode += `[/table]`;
     return twcode;
 }
+
 
 
 
