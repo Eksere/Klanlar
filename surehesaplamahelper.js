@@ -10,7 +10,7 @@ try {
 			unitInfo = xml2json(jQuery(response));
 		});
 
-	function get_travel_times(attackers, defenders, speed, arrival_time) {
+	/*function get_travel_times(attackers, defenders, speed, arrival_time) {
 		var travel_times = new Array();
 
 		for (var i = 0; i < attackers.length; i++) {
@@ -27,8 +27,28 @@ try {
 		}
 
 		return travel_times;
-	}
+	}*/
 
+
+function get_travel_times(attackers, defenders, speed, arrival_time) {
+    var travel_times = {};
+
+    for (var i = 0; i < attackers.length; i++) {
+        var attacker = attackers[i].split('|');
+        travel_times[attackers[i]] = {};
+        for (var j = 0; j < defenders.length; j++) {
+            var defender = defenders[j].split('|');
+            var distance = calculateDistance(attackers[i], defenders[j]);
+            var currentLaunchTime = fnCalculateLaunchTime(attackers[i], defenders[j], speed, arrival_time);
+            travel_times[attackers[i]][defenders[j]] = currentLaunchTime.getTime();
+        }
+    }
+
+    console.log("Seyahat Zamanları:", travel_times); // Debug log
+    return travel_times;
+}
+
+	/*
 	function get_plan(travel_times, max_attack, type) {
 		console.log(travel_times);
 		var plan = new Array();
@@ -60,7 +80,44 @@ try {
 		}
 		return plan;
 	}
+*/
 
+
+function get_plan(travel_times, max_attack, type) {
+    console.log("Seyahat Zamanları Plan:", travel_times); // Debug log
+    var plan = {};
+    var used_targets = {};
+
+    for (let attack in travel_times) {
+        var fastest = Number.POSITIVE_INFINITY;
+        var target = '';
+        var travel_time = '';
+        plan[attack] = {};
+        for (let defend in travel_times[attack]) {
+            if (typeof used_targets[defend] === 'undefined') {
+                used_targets[defend] = 0;
+            }
+            if (used_targets[defend] < max_attack) {
+                if (travel_times[attack][defend] < fastest) {
+                    target = defend;
+                    travel_time = travel_times[attack][defend];
+                    fastest = travel_time;
+                }
+            }
+        }
+        if (target !== '' && travel_time !== '') {
+            used_targets[target]++;
+            plan[attack]['target'] = target;
+            plan[attack]['travel_time'] = travel_time;
+            plan[attack]['type'] = type;
+        }
+    }
+
+    console.log("Plan:", plan); // Debug log
+    return plan;
+}
+
+	
 	function get_troop(type) {
 		var unit = '';
 		if (type == 'nobel') {
@@ -235,7 +292,7 @@ function get_twcode(plan, land_time) {
 		return cleaned;
 	}
 
-	function sort(array) {
+	/*function sort(array) {
 		var stored_by_time = new Array();
 		var sorted = new Array();
 		var keys = new Array();
@@ -267,8 +324,51 @@ function get_twcode(plan, land_time) {
 			sorted.push(plan);
 		}
 		return sorted;
-	}
+	}*/
 
+
+
+function sort(array) {
+    var stored_by_time = {};
+    var sorted = [];
+    var keys = [];
+    var increment = 0.000000000001;
+
+    for (let element in array) {
+        if (typeof array[element]['travel_time'] !== 'undefined') {
+            var time = array[element]['travel_time'];
+            if (typeof stored_by_time[time] !== 'undefined') {
+                time += increment;
+                increment += increment;
+            }
+            stored_by_time[time] = array[element];
+            stored_by_time[time]['attacker'] = element;
+        }
+    }
+
+    for (let element in stored_by_time) {
+        keys.push(element);
+    }
+
+    keys.sort(function (b, a) {
+        return b - a;
+    });
+
+    for (let key in keys) {
+        var plan = {};
+        plan['attacker'] = stored_by_time[keys[key]]['attacker'];
+        plan['target'] = stored_by_time[keys[key]]['target'];
+        plan['type'] = stored_by_time[keys[key]]['type'];
+        plan['travel_time'] = stored_by_time[keys[key]]['travel_time'];
+        sorted.push(plan);
+    }
+
+    console.log("Sıralanmış Planlar:", sorted); // Debug log
+    return sorted;
+}
+
+
+	
 	/*function handleSubmit() {
 		var coord_regex = /[0-9]{1,3}\|[0-9]{1,3}/g;
 
