@@ -407,8 +407,11 @@ function get_twcode(plan, land_time) {
     all_plans = sort(all_plans);
     console.log("Sıralanmış Planlar:", all_plans); // Debug log
 
-    jQuery('textarea#results').val(get_twcode(all_plans, arrival_time));
+    var twcode = get_twcode(all_plans, arrival_time);
+    console.log("TW Kod:", twcode); // Debug log
+    jQuery('textarea#results').val(twcode);
 }
+
 
 	
 	function formatDateTime(date) {
