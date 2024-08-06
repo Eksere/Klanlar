@@ -186,6 +186,8 @@ function get_twcode(plan, land_time) {
             let fillRallyPoint = game_data.market !== 'uk' ? `&x=${toX}&y=${toY}${SEND_UNITS}` : '';
             let commandUrl = `/game.php?${sitterId}&village=${plan[attack]['attacker']}&screen=place${fillRallyPoint}`;
 
+            console.log("URL oluşturma:", commandUrl); // Debug log
+
             twcode +=
                 get_troop(plan[attack]['type']) +
                 '' +
@@ -200,12 +202,15 @@ function get_twcode(plan, land_time) {
                 window.location.origin +
                 commandUrl +
                 ']' + twSDK.tt('Send') + '[/url][|]Gönder\n';
+        } else {
+            console.log("Plan hatası:", plan[attack]); // Debug log
         }
     }
 
     twcode += `[/table]`;
     return twcode;
 }
+
 
 
 
@@ -262,7 +267,7 @@ function get_twcode(plan, land_time) {
 		return sorted;
 	}
 
-	function handleSubmit() {
+	/*function handleSubmit() {
 		var coord_regex = /[0-9]{1,3}\|[0-9]{1,3}/g;
 
 		var arrival_time = jQuery('input#arrival_time').val();
@@ -318,7 +323,66 @@ function get_twcode(plan, land_time) {
 		all_plans = sort(all_plans);
 		jQuery('textarea#results').val(get_twcode(all_plans, arrival_time));
 	}
+*/
+	function handleSubmit() {
+    var coord_regex = /[0-9]{1,3}\|[0-9]{1,3}/g;
 
+    var arrival_time = jQuery('input#arrival_time').val();
+
+    var nuke_speed = parseFloat(jQuery('select#nuke_unit').val());
+    var support_speed = parseFloat(jQuery('select#support_unit').val());
+    var nobel_speed = parseFloat(jQuery('input#nobleSpeed').val());
+
+    var nobel_coords = jQuery('textarea#nobel_coords').val().match(coord_regex);
+    var nuke_coords = null;
+    var support_coords = null;
+
+    if (nobel_coords == null) {
+        nuke_coords = jQuery('textarea#nuke_coords').val().match(coord_regex);
+        if (nuke_coords == null) {
+            support_coords = jQuery('textarea#support_coords').val().match(coord_regex);
+        } else {
+            support_coords = clean(jQuery('textarea#support_coords').val().match(coord_regex), nuke_coords);
+        }
+    } else {
+        nuke_coords = clean(jQuery('textarea#nuke_coords').val().match(coord_regex), nobel_coords);
+        if (nuke_coords == null) {
+            support_coords = clean(jQuery('textarea#support_coords').val().match(coord_regex), nobel_coords);
+        } else {
+            support_coords = clean(
+                clean(jQuery('textarea#support_coords').val().match(coord_regex), nobel_coords),
+                nuke_coords
+            );
+        }
+    }
+
+    var targets_coords = jQuery('textarea#target_coords').val().match(coord_regex);
+    var nuke_count = jQuery('input#nuke_count').val();
+    var support_count = jQuery('input#support_count').val();
+    var nobel_count = jQuery('input#nobel_count').val();
+
+    var all_plans = new Array();
+
+    jQuery('textarea#target_coords').val(targets_coords.join('\n'));
+    if (nobel_coords) {
+        var nobleTravelTimes = get_travel_times(nobel_coords, targets_coords, nobel_speed, arrival_time);
+        jQuery('textarea#nobel_coords').val(nobel_coords.join('\n'));
+        all_plans = merge(all_plans, get_plan(nobleTravelTimes, nobel_count, 'nobel'));
+    }
+    if (nuke_coords) {
+        var nukeTravelTimes = get_travel_times(nuke_coords, targets_coords, nuke_speed, arrival_time);
+        jQuery('textarea#nuke_coords').val(nuke_coords.join('\n'));
+        all_plans = merge(all_plans, get_plan(nukeTravelTimes, nuke_count, 'nuke'));
+    }
+    if (support_coords) {
+        var supportTravelTimes = get_travel_times(support_coords, targets_coords, support_speed, arrival_time);
+        jQuery('textarea#support_coords').val(support_coords.join('\n'));
+        all_plans = merge(all_plans, get_plan(supportTravelTimes, support_count, 'support'));
+    }
+    all_plans = sort(all_plans);
+    jQuery('textarea#results').val(get_twcode(all_plans, arrival_time));
+}
+	
 	function formatDateTime(date) {
 		let currentDateTime = new Date(date);
 
