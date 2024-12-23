@@ -671,3 +671,49 @@ function displayCategory(category) {
         }
     }
 }
+// html oluşturma
+let html = `
+<table id="worldStats" class="vis" width="100%">
+    <tr>
+        <th>World</th>
+        <th>Spending</th>
+        <th>Farming</th>
+        <th>Difference</th>
+    </tr>`;
+
+// Her dünya için harcama ve kasma bilgilerini listeleme
+for (let i = 0; i < Object.keys(worldDataBase).length; i++) {
+    let world = Object.keys(worldDataBase)[i];
+    let spending = worldDataBase[world]["Spending"];
+    let farming = worldDataBase[world]["Farming"];
+    let difference = farming - spending;
+
+    html += `
+    <tr>
+        <td>${world}</td>
+        <td>${spending}</td>
+        <td>${farming}</td>
+        <td>${difference}</td>
+    </tr>`;
+}
+
+// Tabloyu kapatma
+html += "</table>";
+
+// HTML içeriğini sayfada görüntüleme (örneğin bir div'e)
+$("#statsContainer").html(html);
+
+// Fonksiyon ile kategori görüntüleme (önceden sağladığınız fonksiyon)
+function displayCategory(category) {
+    allCategories = ["overview", "purchaseHistory", "giftReceived", "giftSent", "worldReward", "yearlyReward", "refunds"];
+
+    $("#" + category).eq(0).css("display", "");
+    $("#" + category + "Button").attr("class", "btn evt-cancel-btn btn-confirm-no");
+    for (var i = 0; i < allCategories.length; i++) {
+        if (category != allCategories[i]) {
+            $("#" + allCategories[i]).css("display", "none");
+            $("#" + allCategories[i] + "Button").attr("class", "btn evt-confirm-btn btn-confirm-yes");
+        }
+    }
+}
+
