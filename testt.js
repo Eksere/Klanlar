@@ -160,27 +160,39 @@ $.getAll(URLs,
                 break;
             }
             else {
-                // buying
-                if (tempRows[j + 2].children[2].innerText.indexOf(langShinko[game_data.locale]["Purchase"]) > -1) {
-                    //console.log("Found a purchase!");
-                    if (typeof worldDataBase[tempRows[j + 2].children[1].innerText] == "undefined") {
-                        worldDataBase[tempRows[j + 2].children[1].innerText] = { "Purchases": 0, "Spending": 0, "Farming": 0 };
-                    }
-                    purchases.push({ "Date": tempRows[j + 2].children[0].innerText, "World": tempRows[j + 2].children[1].innerText, "Transaction": tempRows[j + 2].children[2].innerText, "Amount": tempRows[j + 2].children[3].innerText, "newTotal": tempRows[j + 2].children[4].innerText, "moreInformation": tempRows[j + 2].children[5].innerText });
-                    worldDataBase[tempRows[j + 2].children[1].innerText]["Purchases"] += parseInt(tempRows[j + 2].children[3].innerText);
-                    totalBought += parseInt(tempRows[j + 2].children[3].innerText);
-                    thisPageAmount++;
-                }
-                // spending
-                if (tempRows[j + 2].children[2].innerText.indexOf(langShinko[game_data.locale]["Premium Exchange"]) > -1 || tempRows[j + 2].children[2].innerText.indexOf(langShinko[game_data.locale]["Points redeemed"]) > -1) {
-                    //console.log("Found a spending!");
-                    totalSpent += parseInt(tempRows[j + 2].children[3].innerText);
-                    if (typeof worldDataBase[tempRows[j + 2].children[1].innerText] == "undefined") {
-                        worldDataBase[tempRows[j + 2].children[1].innerText] = { "Purchases": 0, "Spending": 0, "Farming": 0 };
-                    }
-                    worldDataBase[tempRows[j + 2].children[1].innerText]["Spending"] += -parseInt(tempRows[j + 2].children[3].innerText);
-                    thisPageAmount++;
-                }
+    // Buying Transactions
+    if (tempRows[j + 2].children[2].innerText.includes(langShinko[game_data.locale]["Purchase"])) {
+        if (!worldDataBase[tempRows[j + 2].children[1].innerText]) {
+            worldDataBase[tempRows[j + 2].children[1].innerText] = { "Purchases": 0, "Spending": 0, "Farming": 0 };
+        }
+        const purchaseAmount = parseInt(tempRows[j + 2].children[3].innerText, 10);
+        purchases.push({
+            "Date": tempRows[j + 2].children[0].innerText,
+            "World": tempRows[j + 2].children[1].innerText,
+            "Transaction": tempRows[j + 2].children[2].innerText,
+            "Amount": purchaseAmount,
+            "newTotal": tempRows[j + 2].children[4].innerText,
+            "moreInformation": tempRows[j + 2].children[5].innerText
+        });
+        worldDataBase[tempRows[j + 2].children[1].innerText]["Purchases"] += purchaseAmount;
+        totalBought += purchaseAmount;
+        thisPageAmount++;
+    }
+
+    // Spending Transactions
+    const spendingTransaction = tempRows[j + 2].children[2].innerText;
+    if (spendingTransaction.includes(langShinko[game_data.locale]["Premium Exchange"]) || 
+        spendingTransaction.includes(langShinko[game_data.locale]["Points redeemed"])) {
+        const spendingAmount = parseInt(tempRows[j + 2].children[3].innerText, 10);
+        totalSpent += spendingAmount;
+        if (!worldDataBase[tempRows[j + 2].children[1].innerText]) {
+            worldDataBase[tempRows[j + 2].children[1].innerText] = { "Purchases": 0, "Spending": 0, "Farming": 0 };
+        }
+        worldDataBase[tempRows[j + 2].children[1].innerText]["Spending"] += -spendingAmount;
+        thisPageAmount++;
+    }
+}
+
                 //pp farm
                 if (tempRows[j + 2].children[2].innerText.indexOf(langShinko[game_data.locale]["Transfer"]) > -1 && (tempRows[j + 2].children[5].innerText.indexOf(langShinko[game_data.locale]["Sold"]) > -1 || tempRows[j + 2].children[5].innerText.indexOf(langShinko[game_data.locale]["Premium Exchange"]) > -1)) {
                     //console.log("Found a pp farm!");
