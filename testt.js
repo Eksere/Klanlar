@@ -275,7 +275,7 @@ if (tempRows && tempRows.length > 0) {
         if (thisPageAmount > tempRows.length - 2) {
             console.log("EXTRA ENTRIES ON PAGE " + (i + 1) + ": " + (thisPageAmount - tempRows.length - 2));
         }
-    },
+    }
     () => {
         //console.log("Total bought: " + totalBought);
         //console.table(purchases);
