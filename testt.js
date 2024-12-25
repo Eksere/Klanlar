@@ -246,9 +246,6 @@ if (tempRows[j + 2].children[2].innerText.indexOf(langShinko[game_data.locale]["
                     thisPageAmount++;
                 }
             }
-
-
-        }
         if (thisPageAmount < tempRows.length - 2) {
             console.log("MISSING ENTRIES ON PAGE " + (i + 1) + ": " + (tempRows.length - 2 - thisPageAmount));
         }
