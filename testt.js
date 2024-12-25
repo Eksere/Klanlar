@@ -160,24 +160,16 @@ $.getAll(URLs,
                 break;
             }
             else {
-                if (tempRows[j + 2].children[2].innerText.indexOf(langShinko[game_data.locale]["Purchase"]) > -1) {
-    console.log("Found a purchase row: ", tempRows[j + 2].innerText);
-    let purchaseAmount = parseInt(tempRows[j + 2].children[3].innerText);
-    if (!isNaN(purchaseAmount)) {
-        purchases.push({
-            Date: tempRows[j + 2].children[0].innerText,
-            World: tempRows[j + 2].children[1].innerText,
-            Transaction: tempRows[j + 2].children[2].innerText,
-            Amount: purchaseAmount,
-            newTotal: tempRows[j + 2].children[4].innerText,
-            moreInformation: tempRows[j + 2].children[5].innerText
-        });
-        worldDataBase[tempRows[j + 2].children[1].innerText]["Purchases"] += purchaseAmount;
-        totalBought += purchaseAmount;
-    } else {
-        console.error("Invalid amount for purchase: ", tempRows[j + 2].innerText);
-    }
-}
+                // buying
+                if (tempRows[j + 2].children[2].innerText.indexOf(langShinko[game_data.locale]["Premium Exchange"]) > -1 || tempRows[j + 2].children[2].innerText.indexOf(langShinko[game_data.locale]["Points redeemed"]) > -1) {
+                    //console.log("Found a spending!");
+                    totalSpent += parseInt(tempRows[j + 2].children[3].innerText);
+                    if (typeof worldDataBase[tempRows[j + 2].children[1].innerText] == "undefined") {
+                        worldDataBase[tempRows[j + 2].children[1].innerText] = { "Purchases": 0, "Spending": 0, "Farming": 0 };
+                    }
+                    worldDataBase[tempRows[j + 2].children[1].innerText]["p"] += -parseInt(tempRows[j + 2].children[3].innerText);
+                    thisPageAmount++;
+                }
                 // spending
                 if (tempRows[j + 2].children[2].innerText.indexOf(langShinko[game_data.locale]["Premium Exchange"]) > -1 || tempRows[j + 2].children[2].innerText.indexOf(langShinko[game_data.locale]["Points redeemed"]) > -1) {
                     //console.log("Found a spending!");
