@@ -463,7 +463,7 @@ console.log("Çiftçilik Detayları:", farming);
         </div>
         `);
         displayCategory("overview");
-    },
+    ,
     (error) => {
         console.error(error);
     });
