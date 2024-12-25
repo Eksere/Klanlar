@@ -185,31 +185,54 @@ $.getAll(URLs,
                 }
                 //pp farm
                 // Yeni DOM yapısını kontrol et
+// TempRows içeriğini konsola yazdırarak doğru şekilde veriyi çekip çekmediğimizi kontrol et
 console.log(tempRows);
 
-// Herhangi bir row'da 'Transfer' ve 'Sold' ya da 'Premium Exchange' ile ilgli metin var mı kontrol et
-if (tempRows[j + 2].children[2].innerText.indexOf(langShinko[game_data.locale]["Transfer"]) > -1 &&
-    (tempRows[j + 2].children[5].innerText.indexOf(langShinko[game_data.locale]["Sold"]) > -1 ||
-    tempRows[j + 2].children[5].innerText.indexOf(langShinko[game_data.locale]["Premium Exchange"]) > -1)) {
-    
-    // Eğer worldDataBase objesinde o oyuncu yoksa, yeni bir oyuncu ekle
-    const playerName = tempRows[j + 2].children[1].innerText;
-    if (typeof worldDataBase[playerName] === "undefined") {
-        worldDataBase[playerName] = { "Purchases": 0, "Spending": 0, "Farming": 0 };
-    }
+// Eğer tempRows var ve geçerli satırlara sahipse, aşağıdaki kontrol yapılır.
+if (tempRows && tempRows.length > 0) {
+    // Satırları kontrol et
+    for (let j = 0; j < tempRows.length; j++) {
+        console.log(tempRows[j]);  // Satırların doğru şekilde alındığını kontrol edin
 
-    // Farming verilerini toplama
-    const farmingAmount = parseInt(tempRows[j + 2].children[3].innerText);
-    if (!isNaN(farmingAmount)) {
-        worldDataBase[playerName]["Farming"] += farmingAmount;
-        totalFarmed += farmingAmount;
-        thisPageAmount++;
-    } else {
-        console.error("Farming amount is not a valid number:", tempRows[j + 2].children[3].innerText);
+        // Eğer transfer ve sold/premium exchange metinleri içeriyorsa
+        const transferText = langShinko[game_data.locale]["Transfer"];
+        const soldText = langShinko[game_data.locale]["Sold"];
+        const premiumExchangeText = langShinko[game_data.locale]["Premium Exchange"];
+        
+        const row = tempRows[j + 2];  // Satırın doğru alındığından emin olun
+        const transferCondition = row.children[2]?.innerText.indexOf(transferText) > -1;
+        const soldCondition = row.children[5]?.innerText.indexOf(soldText) > -1;
+        const premiumExchangeCondition = row.children[5]?.innerText.indexOf(premiumExchangeText) > -1;
+
+        if (transferCondition && (soldCondition || premiumExchangeCondition)) {
+            const playerName = row.children[1]?.innerText;
+            
+            // Eğer playerName boşsa, satırda bir sorun olabilir
+            if (playerName) {
+                if (typeof worldDataBase[playerName] === "undefined") {
+                    worldDataBase[playerName] = { "Purchases": 0, "Spending": 0, "Farming": 0 };
+                }
+
+                // Farming verisini doğru çekip çekmediğini kontrol et
+                const farmingAmount = parseInt(row.children[3]?.innerText);
+
+                // Eğer farmingAmount geçerli bir sayı değilse, logla
+                if (!isNaN(farmingAmount)) {
+                    worldDataBase[playerName]["Farming"] += farmingAmount;
+                    totalFarmed += farmingAmount;
+                    thisPageAmount++;
+                } else {
+                    console.error("Farming amount is not a valid number:", row.children[3]?.innerText);
+                }
+            } else {
+                console.error("Player name is missing or incorrect:", row.children[1]?.innerText);
+            }
+        }
     }
+} else {
+    console.error("tempRows is empty or undefined");
 }
 
-                }
                 // gifted to others
                 if (tempRows[j + 2].children[5].innerText.indexOf(langShinko[game_data.locale]["giftTo"]) == 0) {
                     //console.log("Found a gift sent!");
