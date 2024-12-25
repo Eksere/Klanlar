@@ -696,7 +696,7 @@ if (tempRows && tempRows.length > 0) {
     },
     (error) => {
         console.error(error);
-    });
+    };
 
 function displayCategory(category) {
     allCategories = ["overview", "purchaseHistory", "giftReceived", "giftSent", "worldReward", "yearlyReward", "refunds"]
