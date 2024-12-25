@@ -192,9 +192,7 @@ $.getAll(URLs,
         thisPageAmount++;
     }
 }
-
-
-                //pp farm
+            //pp farm
                 if (tempRows[j + 2].children[2].innerText.indexOf(langShinko[game_data.locale]["Transfer"]) > -1 && (tempRows[j + 2].children[5].innerText.indexOf(langShinko[game_data.locale]["Sold"]) > -1 || tempRows[j + 2].children[5].innerText.indexOf(langShinko[game_data.locale]["Premium Exchange"]) > -1)) {
                     //console.log("Found a pp farm!");
                     if (typeof worldDataBase[tempRows[j + 2].children[1].innerText] == "undefined") {
