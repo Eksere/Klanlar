@@ -710,3 +710,4 @@ function displayCategory(category) {
         }
     }
 }
+    }
