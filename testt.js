@@ -49,164 +49,20 @@ else {
     var skip=false;
 }
 var langShinko = {
-    "en_DK": {
-        "Purchase": "Purchase", //bought pp, 3rd cell
-        "Premium Exchange": "Premium Exchange", //purchases from exchange 3rd cell
-        "Points redeemed": "Points redeemed", //reduction building time or account manager/premium account/LA or events, 3rd cell
-        "Transfer": "Transfer", //sold to pp exchange 3rd cell
-        "Sold": "sold", //text in the last cell when selling res to pp exchange last cell
-        "giftTo": "to: ", //gift to last cell
-        "giftFrom": "from: ", //gift from last cell
-        "Free premium points": "Free premium points", //yearly reward
-        "Endgame reward": "Endgame reward", //world reward
-        "Manually": "Manually", // Manual refund received
-        "Withdrawn": "Withdrawn" // refund received
-    },
-    "en_GB": {
-        "Purchase": "Purchase", //bought pp, 3rd cell
-        "Premium Exchange": "Premium Exchange", //purchases from exchange 3rd cell
-        "Points redeemed": "Points redeemed", //reduction building time or account manager/premium account/LA or events, 3rd cell
-        "Transfer": "Transfer", //sold to pp exchange 3rd cell
-        "Sold": "sold", //text in the last cell when selling res to pp exchange last cell
-        "giftTo": "to: ", //gift to last cell
-        "giftFrom": "from: ", //gift from last cell
-        "Free premium points": "Free premium points", //yearly reward
-        "Endgame reward": "Endgame reward", //world reward
-        "Manually": "Manually", // Manual refund received
-        "Withdrawn": "Withdrawn" // refund received
-    },
-    "en_US": {
-        "Purchase": "Purchase", //bought pp, 3rd cell
-        "Premium Exchange": "Premium Exchange", //purchases from exchange 3rd cell
-        "Points redeemed": "Points redeemed", //reduction building time or account manager/premium account/LA or events, 3rd cell
-        "Transfer": "Transfer", //sold to pp exchange 3rd cell
-        "Sold": "sold", //text in the last cell when selling res to pp exchange last cell
-        "giftTo": "to: ", //gift to last cell
-        "giftFrom": "from: ", //gift from last cell
-        "Free premium points": "Free premium points", //yearly reward
-        "Endgame reward": "Endgame reward", //world reward
-        "Manually": "Manually", // Manual refund received
-        "Withdrawn": "Withdrawn" // refund received
-    },
-    "nl_NL": {
-        "Purchase": "Koop",
-        "Premium Exchange": "Premium Beurs",
-        "Points redeemed": "Ingezet",
-        "Transfer": "Overdragen",
-        "Sold": "Gehandeld voor",
-        "giftTo": "to: ",
-        "giftFrom": "from: ",
-        "Free premium points": "Free premium points", //yearly reward
-        "Endgame reward": "Endgame reward", //world reward
-        "Manually": "Manually", // Manual refund received
-        "Withdrawn": "Withdrawn" // refund received
-    },
-    "it_IT": {
-        "Purchase": "Ottieni",
-        "Premium Exchange": "Cambio del Premium",
-        "Points redeemed": "Utilizzati",
-        "Transfer": "Trasferisci",
-        "Sold": "venduto",
-        "giftTo": "to: ",
-        "giftFrom": "from: ",
-        "Free premium points": "Free premium points", //yearly reward
-        "Endgame reward": "Endgame reward", //world reward
-        "Manually": "Manually", // Manual refund received
-        "Withdrawn": "Withdrawn" // refund received
-    },
-    "el_GR": {
-        "Purchase": "Î‘Î³Î¿ÏÎ¬",
-        "Premium Exchange": "Î‘Î½Ï„Î±Î»Î»Î±ÎºÏ„Î®ÏÎ¹Î¿",
-        "Points redeemed": "Î‘Î»Î»Î±Î³Î® Ï€ÏŒÎ½Ï„Ï‰Î½",
-        "Transfer": "ÎœÎµÏ„Î±Ï†Î¿ÏÎ¬",
-        "Sold": "Î Î¿Ï…Î»Î®Î¸Î·ÎºÎµ",
-        "giftTo": "to:",
-        "giftFrom": "from: ",
-        "Free premium points": "Free premium points", //yearly reward
-        "Endgame reward": "Endgame reward", //world reward
-        "Manually": "Manually", // Manual refund received
-        "Withdrawn": "Withdrawn" // refund received
-    },
-    "ar_AE": {
-        "Purchase": "Ø´Ø±Ø§Ø¡",
-        "Premium Exchange": "Ù…ØµØ±Ù Ù†Ù‚Ø§Ø· Ø§Ù„ØªÙ…ÙŠØ²",
-        "Points redeemed": "Ø§Ù„Ù†Ù‚Ø§Ø· Ø§Ù„Ù…Ø³ØªØ®Ø¯Ù…Ù‡",
-        "Transfer": "Ø§Ø±Ø³Ø§Ù„ ",
-        "Sold": " ØªÙ… Ø¨ÙŠØ¹",
-        "giftTo": "to:",
-        "giftFrom": "from: ",
-        "Free premium points": "Free premium points", //yearly reward
-        "Endgame reward": "Endgame reward", //world reward
-        "Manually": "Manually", // Manual refund received
-        "Withdrawn": "Withdrawn" // refund received
-    },
-    "pt_BR": {
-        "Purchase": "Compra",
-        "Premium Exchange": "Troca Premium",
-        "Points redeemed": "Utilizado",
-        "Transfer": "Transferir",
-        "Sold": "vendido",
-        "giftTo": "to: ",
-        "giftFrom": "from: ",
-        "Free premium points": "Free premium points", //yearly reward
-        "Endgame reward": "Endgame reward", //world reward
-        "Manually": "Manually", // Manual refund received
-        "Withdrawn": "Withdrawn" // refund received
-    },
-    "de_DE": {
-        "Purchase": "Kauf",
-        "Premium Exchange": "Premium-Depot",
-        "Points redeemed": " Eingesetzt ",
-        "Transfer": "Ãœbertragen",
-        "Sold": "verkauft",
-        "giftTo": "to: ",
-        "giftFrom": "from: ",
-        "Free premium points": "Free premium points", //yearly reward
-        "Endgame reward": "Endgame reward", //world reward
-        "Manually": "Manually", // Manual refund received
-        "Withdrawn": "Withdrawn" // refund received
-    },
-    "sv_SE": {
-        "Purchase": "KÃ¶p", //bought pp, 3rd cell
-        "Premium Exchange": "PremiumBÃ¶rsen", //purchases from exchange 3rd cell
-        "Points redeemed": "UtlÃ¶sta PoÃ¤ng", //reduction building time or account manager/premium account/LA or events, 3rd cell
-        "Transfer": "Ã–verfÃ¶r", //sold to pp exchange 3rd cell
-        "Sold": "SÃ¥lda", //text in the last cell when selling res to pp exchange last cell
-        "giftTo": "to: ", //gift to last cell
-        "giftFrom": "from: ", //gift from last cell,
-        "Free premium points": "Free premium points", //yearly reward
-        "Endgame reward": "Endgame reward", //world reward
-        "Manually": "Manually", // Manual refund received
-        "Withdrawn": "Withdrawn" // refund received
-    },
-    "pt_PT": {
-        "Purchase": "Compra", //bought pp, 3rd cell
-        "Premium Exchange": "Troca Premium", //purchases from exchange 3rd cell
-        "Points redeemed": "Utilizados", //reduction building time or account manager/premium account/LA or events, 3rd cell
-        "Transfer": "Transferir", //sold to pp exchange 3rd cell
-        "Sold": "vendido", //text in the last cell when selling res to pp exchange last cell
-        "giftTo": "to: ", //gift to last cell
-        "giftFrom": "from: ", //gift from last cell
-        "Free premium points": "Pontos premium gratuitos", //yearly reward
-        "Endgame reward": "Recompensa de fim de jogo", //world reward
-        "Manually": "Manualmente", // Manual refund received
-        "Withdrawn": "Withdrawn" // refund received
-    },
-    "ro_RO": {
-        "Purchase": "CumpÃ„Æ’rare", //bought pp, 3rd cell
-        "Premium Exchange": "Depozit Premium", //purchases from exchange 3rd cell
-        "Points redeemed": "Activat", //reduction building time or account manager/premium account/LA or events, 3rd cell
-        "Transfer": "Transmite", //sold to pp exchange 3rd cell
-        "Sold": "vÃƒÂ¢ndut", //text in the last cell when selling res to pp exchange last cell
-        "giftTo": "to: ", //gift to last cell
-        "giftFrom": "from: ", //gift from last cell
-        "Free premium points": "Puncte-Premium gratis", //free pp, like anniversary
-        "Endgame reward": "Endgame reward", //world reward
-        "Manually": "Manually", // Manual refund received
-        "Withdrawn": "Withdrawn", // refund received
-        "recruit": "RecompensÃ„Æ’ de recrutare jucÃ„Æ’tori" //pp you get for reffering a friend (old)
+    
+    "tr_TR": { // Turkish (Turkey) translations
+        "Purchase": "Satın Almak",
+        "Premium Exchange": "Premium Takası",
+        "Points redeemed": "Puanlar bozduruldu",
+        "Transfer": "Transfer",
+        "Sold": "Satıldı",
+        "giftTo": "hedef: ",
+        "giftFrom": "gönderen: ",
+        "Free premium points": "Ücretsiz Premium Puanlar",
+        "Endgame reward": "Oyun Sonu Ödülü",
+        "Manually": "Manuel",
+        "Withdrawn": "Geri Çekildi"
     }
-
 }
 
 if (game_data.player.sitter > 0) {
@@ -306,7 +162,7 @@ $.getAll(URLs,
             }
             else {
                 // buying
-                if (tempRows[j + 2].children[2].innerText.indexOf(langShinko[game_data.locale]["Purchase"]) > -1) {
+                if (tempRows[j + 2].children[2].innerText.indexOf(langShinko[game_data.locale]["Premium Exchange"]) > -1 || tempRows[j + 2].children[2].innerText.indexOf(langShinko[game_data.locale]["Points redeemed"]) > -1) {
                     //console.log("Found a purchase!");
                     if (typeof worldDataBase[tempRows[j + 2].children[1].innerText] == "undefined") {
                         worldDataBase[tempRows[j + 2].children[1].innerText] = { "Purchases": 0, "Spending": 0, "Farming": 0 };
