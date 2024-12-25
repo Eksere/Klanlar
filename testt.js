@@ -159,7 +159,7 @@ $.getAll(URLs,
                 skip=true;
                 break;
             }
-            else {
+           else {
     // Buying Transactions
     if (tempRows[j + 2].children[2].innerText.includes(langShinko[game_data.locale]["Purchase"])) {
         if (!worldDataBase[tempRows[j + 2].children[1].innerText]) {
@@ -192,6 +192,7 @@ $.getAll(URLs,
         thisPageAmount++;
     }
 }
+
 
                 //pp farm
                 if (tempRows[j + 2].children[2].innerText.indexOf(langShinko[game_data.locale]["Transfer"]) > -1 && (tempRows[j + 2].children[5].innerText.indexOf(langShinko[game_data.locale]["Sold"]) > -1 || tempRows[j + 2].children[5].innerText.indexOf(langShinko[game_data.locale]["Premium Exchange"]) > -1)) {
