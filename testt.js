@@ -184,14 +184,31 @@ $.getAll(URLs,
                     thisPageAmount++;
                 }
                 //pp farm
-                if (tempRows[j + 2].children[2].innerText.indexOf(langShinko[game_data.locale]["Transfer"]) > -1 && (tempRows[j + 2].children[5].innerText.indexOf(langShinko[game_data.locale]["Sold"]) > -1 || tempRows[j + 2].children[5].innerText.indexOf(langShinko[game_data.locale]["Premium Exchange"]) > -1)) {
-                    //console.log("Found a pp farm!");
-                    if (typeof worldDataBase[tempRows[j + 2].children[1].innerText] == "undefined") {
-                        worldDataBase[tempRows[j + 2].children[1].innerText] = { "Purchases": 0, "Spending": 0, "Farming": 0 };
-                    }
-                    worldDataBase[tempRows[j + 2].children[1].innerText]["Farming"] += parseInt(tempRows[j + 2].children[3].innerText);
-                    totalFarmed += parseInt(tempRows[j + 2].children[3].innerText);
-                    thisPageAmount++;
+                // Yeni DOM yapısını kontrol et
+console.log(tempRows);
+
+// Herhangi bir row'da 'Transfer' ve 'Sold' ya da 'Premium Exchange' ile ilgli metin var mı kontrol et
+if (tempRows[j + 2].children[2].innerText.indexOf(langShinko[game_data.locale]["Transfer"]) > -1 &&
+    (tempRows[j + 2].children[5].innerText.indexOf(langShinko[game_data.locale]["Sold"]) > -1 ||
+    tempRows[j + 2].children[5].innerText.indexOf(langShinko[game_data.locale]["Premium Exchange"]) > -1)) {
+    
+    // Eğer worldDataBase objesinde o oyuncu yoksa, yeni bir oyuncu ekle
+    const playerName = tempRows[j + 2].children[1].innerText;
+    if (typeof worldDataBase[playerName] === "undefined") {
+        worldDataBase[playerName] = { "Purchases": 0, "Spending": 0, "Farming": 0 };
+    }
+
+    // Farming verilerini toplama
+    const farmingAmount = parseInt(tempRows[j + 2].children[3].innerText);
+    if (!isNaN(farmingAmount)) {
+        worldDataBase[playerName]["Farming"] += farmingAmount;
+        totalFarmed += farmingAmount;
+        thisPageAmount++;
+    } else {
+        console.error("Farming amount is not a valid number:", tempRows[j + 2].children[3].innerText);
+    }
+}
+
                 }
                 // gifted to others
                 if (tempRows[j + 2].children[5].innerText.indexOf(langShinko[game_data.locale]["giftTo"]) == 0) {
