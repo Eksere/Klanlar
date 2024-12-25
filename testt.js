@@ -242,7 +242,7 @@ $.getAll(URLs,
             }
 
 
-        }
+        
         if (thisPageAmount < tempRows.length - 2) {
             console.log("MISSING ENTRIES ON PAGE " + (i + 1) + ": " + (tempRows.length - 2 - thisPageAmount));
         }
