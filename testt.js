@@ -1,3 +1,4 @@
+
 if (window.location.href.indexOf('premium&mode=log&page=') < 0) {
     //relocate
     window.location.assign(game_data.link_base_pure + "premium&mode=log&page=0");
@@ -161,18 +162,7 @@ $.getAll(URLs,
                 break;
             }
             else {
-                // buying
-                 if (tempRows[j + 2].children[2].innerText.indexOf(langShinko[game_data.locale]["Purchase"]) > -1) {
-                    //console.log("Found a purchase!");
-                     totalSpent += parseInt(tempRows[j + 2].children[3].innerText);
-                    if (typeof worldDataBase[tempRows[j + 2].children[1].innerText] == "undefined") {
-                        worldDataBase[tempRows[j + 2].children[1].innerText] = { "Purchases": 0, "Spending": 0, "Farming": 0 };
-                    }
-                    purchases.push({ "Date": tempRows[j + 2].children[0].innerText, "World": tempRows[j + 2].children[1].innerText, "Transaction": tempRows[j + 2].children[2].innerText, "Amount": tempRows[j + 2].children[3].innerText, "newTotal": tempRows[j + 2].children[4].innerText, "moreInformation": tempRows[j + 2].children[5].innerText });
-                    worldDataBase[tempRows[j + 2].children[1].innerText]["Purchases"] += parseInt(tempRows[j + 2].children[3].innerText);
-                    totalBought += parseInt(tempRows[j + 2].children[3].innerText);
-                    thisPageAmount++;
-                }
+                
                 // spending
                 if (tempRows[j + 2].children[2].innerText.indexOf(langShinko[game_data.locale]["Premium Exchange"]) > -1 || tempRows[j + 2].children[2].innerText.indexOf(langShinko[game_data.locale]["Points redeemed"]) > -1) {
                     //console.log("Found a spending!");
@@ -184,55 +174,15 @@ $.getAll(URLs,
                     thisPageAmount++;
                 }
                 //pp farm
-                // Yeni DOM yapısını kontrol et
-// TempRows içeriğini konsola yazdırarak doğru şekilde veriyi çekip çekmediğimizi kontrol et
-console.log(tempRows);
-
-// Eğer tempRows var ve geçerli satırlara sahipse, aşağıdaki kontrol yapılır.
-if (tempRows && tempRows.length > 0) {
-    // Satırları kontrol et
-    for (let j = 0; j < tempRows.length; j++) {
-        console.log(tempRows[j]);  // Satırların doğru şekilde alındığını kontrol edin
-
-        // Eğer transfer ve sold/premium exchange metinleri içeriyorsa
-        const transferText = langShinko[game_data.locale]["Transfer"];
-        const soldText = langShinko[game_data.locale]["Sold"];
-        const premiumExchangeText = langShinko[game_data.locale]["Premium Exchange"];
-        
-        const row = tempRows[j + 2];  // Satırın doğru alındığından emin olun
-        const transferCondition = row.children[2]?.innerText.indexOf(transferText) > -1;
-        const soldCondition = row.children[5]?.innerText.indexOf(soldText) > -1;
-        const premiumExchangeCondition = row.children[5]?.innerText.indexOf(premiumExchangeText) > -1;
-
-        if (transferCondition && (soldCondition || premiumExchangeCondition)) {
-            const playerName = row.children[1]?.innerText;
-            
-            // Eğer playerName boşsa, satırda bir sorun olabilir
-            if (playerName) {
-                if (typeof worldDataBase[playerName] === "undefined") {
-                    worldDataBase[playerName] = { "Purchases": 0, "Spending": 0, "Farming": 0 };
-                }
-
-                // Farming verisini doğru çekip çekmediğini kontrol et
-                const farmingAmount = parseInt(row.children[3]?.innerText);
-
-                // Eğer farmingAmount geçerli bir sayı değilse, logla
-                if (!isNaN(farmingAmount)) {
-                    worldDataBase[playerName]["Farming"] += farmingAmount;
-                    totalFarmed += farmingAmount;
+                if (tempRows[j + 2].children[2].innerText.indexOf(langShinko[game_data.locale]["Transfer"]) > -1 && (tempRows[j + 2].children[5].innerText.indexOf(langShinko[game_data.locale]["Sold"]) > -1 || tempRows[j + 2].children[5].innerText.indexOf(langShinko[game_data.locale]["Premium Exchange"]) > -1)) {
+                    //console.log("Found a pp farm!");
+                    if (typeof worldDataBase[tempRows[j + 2].children[1].innerText] == "undefined") {
+                        worldDataBase[tempRows[j + 2].children[1].innerText] = { "Purchases": 0, "Spending": 0, "Farming": 0 };
+                    }
+                    worldDataBase[tempRows[j + 2].children[1].innerText]["Farming"] += parseInt(tempRows[j + 2].children[3].innerText);
+                    totalFarmed += parseInt(tempRows[j + 2].children[3].innerText);
                     thisPageAmount++;
-                } else {
-                    console.error("Farming amount is not a valid number:", row.children[3]?.innerText);
                 }
-            } else {
-                console.error("Player name is missing or incorrect:", row.children[1]?.innerText);
-            }
-        }
-    }
-} else {
-    console.error("tempRows is empty or undefined");
-}
-
                 // gifted to others
                 if (tempRows[j + 2].children[5].innerText.indexOf(langShinko[game_data.locale]["giftTo"]) == 0) {
                     //console.log("Found a gift sent!");
@@ -269,13 +219,16 @@ if (tempRows && tempRows.length > 0) {
                     thisPageAmount++;
                 }
             }
+
+
+        }
         if (thisPageAmount < tempRows.length - 2) {
             console.log("MISSING ENTRIES ON PAGE " + (i + 1) + ": " + (tempRows.length - 2 - thisPageAmount));
         }
         if (thisPageAmount > tempRows.length - 2) {
             console.log("EXTRA ENTRIES ON PAGE " + (i + 1) + ": " + (thisPageAmount - tempRows.length - 2));
         }
-    }
+    },
     () => {
         //console.log("Total bought: " + totalBought);
         //console.table(purchases);
@@ -696,7 +649,7 @@ if (tempRows && tempRows.length > 0) {
     },
     (error) => {
         console.error(error);
-    };
+    });
 
 function displayCategory(category) {
     allCategories = ["overview", "purchaseHistory", "giftReceived", "giftSent", "worldReward", "yearlyReward", "refunds"]
