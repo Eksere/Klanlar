@@ -162,8 +162,9 @@ $.getAll(URLs,
             }
             else {
                 // buying
-                if (tempRows[j + 2].children[2].innerText.indexOf(langShinko[game_data.purchase]["Premium Exchange"]) > -1 || tempRows[j + 2].children[2].innerText.indexOf(langShinko[game_data.purchase]["Points redeemed"]) > -1) {
+                 if (tempRows[j + 2].children[2].innerText.indexOf(langShinko[game_data.locale]["Purchase"]) > -1) {
                     //console.log("Found a purchase!");
+                     totalSpent += parseInt(tempRows[j + 2].children[3].innerText);
                     if (typeof worldDataBase[tempRows[j + 2].children[1].innerText] == "undefined") {
                         worldDataBase[tempRows[j + 2].children[1].innerText] = { "Purchases": 0, "Spending": 0, "Farming": 0 };
                     }
