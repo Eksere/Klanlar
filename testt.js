@@ -75,21 +75,9 @@ else {
 
 amountOfPages = parseInt($(".paged-nav-item")[$(".paged-nav-item").length - 1].href.match(/page=(\d+)/)[1]);
 let width;
-if ($("#contentContainer")[0]) {
-    width = $("#contentContainer")[0].clientWidth;
-    $("#contentContainer").eq(0).prepend(`
-<div id="progressbar" class="progress-bar progress-bar-alive">
-<span id="count" class="label">0/${amountOfPages.length}</span>
-<div id="progress"><span id="count2" class="label" style="width: ${width}px;">0/${amountOfPages.length}</span></div>
-</div>`);
-}
+if ($("#contentContainer")[0]) {}
 else {
-    width = $("#mobileHeader")[0].clientWidth;
-    $("#mobileHeader").eq(0).prepend(`
-<div id="progressbar" class="progress-bar progress-bar-alive">
-<span id="count" class="label">0/${amountOfPages.length}</span>
-<div id="progress"><span id="count2" class="label" style="width: ${width}px;">0/${amountOfPages.length}</span></div>
-</div>`);
+    
 }
 
 var URLs = [];
