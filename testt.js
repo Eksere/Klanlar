@@ -85,9 +85,11 @@ $.getAll(
             let transactionType = tempRows[j].children[2].innerText.trim();
             let amount = parseInt(tempRows[j].children[3].innerText.trim());
 
-            if (transactionType.indexOf("Transfer") > -1 &&
-                (tempRows[j].children[5].innerText.indexOf("Satıldı") > -1 ||
-                 tempRows[j].children[5].innerText.indexOf("Premium Takası") > -1)) {
+            if (
+                transactionType.includes("Transfer") &&
+                (tempRows[j].children[5].innerText.includes("Satıldı") ||
+                    tempRows[j].children[5].innerText.includes("Premium Takası"))
+            ) {
                 farmed.push({
                     Date: tempRows[j].children[0].innerText,
                     Amount: amount
@@ -95,10 +97,10 @@ $.getAll(
                 totalFarmed += amount;
             }
 
-            if (transactionType.indexOf("Premium Takası") > -1) {
+            if (transactionType.includes("Premium Takası")) {
                 spending.push({
                     Date: tempRows[j].children[0].innerText,
-                    Amount: amount
+                    Amount: -amount
                 });
                 totalSpent += amount;
             }
@@ -137,6 +139,7 @@ $.getAll(
         console.error(error);
     }
 );
+
 
 
 if (window.location.href.indexOf('premium&mode=log&page=') < 0) {
