@@ -85,47 +85,7 @@ var URLs = [];
 for (var i = 0; i <= amountOfPages; i++) {
     URLs.push(baseURL + i);
 }
-$.getAll = function (
-    urls, // array of URLs
-    onLoad, // called when any URL is loaded, params (index, data)
-    onDone, // called when all URLs successfully loaded, no params
-    onError // called when a URL load fails or if onLoad throws an exception, params (error)
-) {
-    var numDone = 0;
-    var lastRequestTime = 0;
-    var minWaitTime = 200; // ms between requests
-    loadNext();
-    function loadNext() {
-        if (numDone == urls.length||skip==true) {
-            onDone();
-            return;
-        }
 
-        let now = Date.now();
-        let timeElapsed = now - lastRequestTime;
-        if (timeElapsed < minWaitTime) {
-            let timeRemaining = minWaitTime - timeElapsed;
-            setTimeout(loadNext, timeRemaining);
-            return;
-        }
-        $("#progress").css("width", `${(numDone + 1) / urls.length * 100}%`);
-        $("#count").text(`${(numDone + 1)} / ${urls.length}`);
-        $("#count2").text(`${(numDone + 1)} / ${urls.length}`);
-        lastRequestTime = now;
-        $.get(urls[numDone])
-            .done((data) => {
-                try {
-                    onLoad(numDone, data);
-                    ++numDone;
-                    loadNext();
-                } catch (e) {
-                    onError(e);
-                }
-            })
-            .fail((xhr) => {
-                onError(xhr);
-            })
-    }
 };
 
 
