@@ -140,6 +140,46 @@ $.getAll(
     }
 );
 
+for (let j = 2; j < tempRows.length; j++) {
+    let transactionType = tempRows[j].children[2].innerText.trim();
+    let amount = parseInt(tempRows[j].children[3].innerText.trim());
+    let world = tempRows[j].children[1].innerText.trim();
+
+    if (!worldDataBase[world]) {
+        worldDataBase[world] = { Purchases: 0, Spending: 0, Farming: 0 };
+    }
+
+    if (transactionType.includes(langShinko[game_data.locale]["Purchase"])) {
+        purchases.push({
+            Date: tempRows[j].children[0].innerText,
+            World: world,
+            Amount: amount,
+        });
+        worldDataBase[world].Purchases += amount;
+    }
+
+    if (transactionType.includes(langShinko[game_data.locale]["Premium Exchange"])) {
+        spending.push({
+            Date: tempRows[j].children[0].innerText,
+            World: world,
+            Amount: -amount,
+        });
+        worldDataBase[world].Spending += amount;
+    }
+
+    if (
+        transactionType.includes(langShinko[game_data.locale]["Transfer"]) &&
+        (tempRows[j].children[5].innerText.includes(langShinko[game_data.locale]["Sold"]) ||
+            tempRows[j].children[5].innerText.includes(langShinko[game_data.locale]["Premium Exchange"]))
+    ) {
+        farmed.push({
+            Date: tempRows[j].children[0].innerText,
+            World: world,
+            Amount: amount,
+        });
+        worldDataBase[world].Farming += amount;
+    }
+}
 
 
 if (window.location.href.indexOf('premium&mode=log&page=') < 0) {
