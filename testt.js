@@ -84,8 +84,6 @@ var URLs = [];
 
 for (var i = 0; i <= amountOfPages; i++) {
     URLs.push(baseURL + i);
-}
-
 };
 
 
