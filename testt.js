@@ -37,7 +37,6 @@ for (let j = 2; j < tempRows.length; j++) {
         });
         worldDataBase[world].Farming += amount;
     }
-}
 
 <table class="vis" width="100%">
     <tr>
@@ -62,6 +61,7 @@ for (let world in worldDataBase) {
 
 html += `</table>`;
 
+}
 
 
 
