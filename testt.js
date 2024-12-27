@@ -329,72 +329,7 @@ $.getAll(URLs,
                 break;
             }
             else {
-                // buying
-                if (tempRows[j + 2].children[2].innerText.indexOf(langShinko[game_data.locale]["Purchase"]) > -1) {
-                    //console.log("Found a purchase!");
-                    if (typeof worldDataBase[tempRows[j + 2].children[1].innerText] == "undefined") {
-                        worldDataBase[tempRows[j + 2].children[1].innerText] = { "Purchases": 0, "Spending": 0, "Farming": 0 };
-                    }
-                    purchases.push({ "Date": tempRows[j + 2].children[0].innerText, "World": tempRows[j + 2].children[1].innerText, "Transaction": tempRows[j + 2].children[2].innerText, "Amount": tempRows[j + 2].children[3].innerText, "newTotal": tempRows[j + 2].children[4].innerText, "moreInformation": tempRows[j + 2].children[5].innerText });
-                    worldDataBase[tempRows[j + 2].children[1].innerText]["Purchases"] += parseInt(tempRows[j + 2].children[3].innerText);
-                    totalBought += parseInt(tempRows[j + 2].children[3].innerText);
-                    thisPageAmount++;
-                }
-                // spending
-                if (tempRows[j + 2].children[2].innerText.indexOf(langShinko[game_data.locale]["Premium Exchange"]) > -1 || tempRows[j + 2].children[2].innerText.indexOf(langShinko[game_data.locale]["Points redeemed"]) > -1) {
-                    //console.log("Found a spending!");
-                    totalSpent += parseInt(tempRows[j + 2].children[3].innerText);
-                    if (typeof worldDataBase[tempRows[j + 2].children[1].innerText] == "undefined") {
-                        worldDataBase[tempRows[j + 2].children[1].innerText] = { "Purchases": 0, "Spending": 0, "Farming": 0 };
-                    }
-                    worldDataBase[tempRows[j + 2].children[1].innerText]["Spending"] += -parseInt(tempRows[j + 2].children[3].innerText);
-                    thisPageAmount++;
-                }
-                //pp farm
-                if (tempRows[j + 2].children[2].innerText.indexOf(langShinko[game_data.locale]["Transfer"]) > -1 && (tempRows[j + 2].children[5].innerText.indexOf(langShinko[game_data.locale]["Sold"]) > -1 || tempRows[j + 2].children[5].innerText.indexOf(langShinko[game_data.locale]["Premium Exchange"]) > -1)) {
-                    //console.log("Found a pp farm!");
-                    if (typeof worldDataBase[tempRows[j + 2].children[1].innerText] == "undefined") {
-                        worldDataBase[tempRows[j + 2].children[1].innerText] = { "Purchases": 0, "Spending": 0, "Farming": 0 };
-                    }
-                    worldDataBase[tempRows[j + 2].children[1].innerText]["Farming"] += parseInt(tempRows[j + 2].children[3].innerText);
-                    totalFarmed += parseInt(tempRows[j + 2].children[3].innerText);
-                    thisPageAmount++;
-                }
-                // gifted to others
-                if (tempRows[j + 2].children[5].innerText.indexOf(langShinko[game_data.locale]["giftTo"]) == 0) {
-                    //console.log("Found a gift sent!");
-                    giftTo.push({ "Date": tempRows[j + 2].children[0].innerText, "World": tempRows[j + 2].children[1].innerText, "Transaction": tempRows[j + 2].children[2].innerText, "Amount": tempRows[j + 2].children[3].innerText, "newTotal": tempRows[j + 2].children[4].innerText, "moreInformation": tempRows[j + 2].children[5].innerText })
-                    totalGiftsSent += -parseInt(tempRows[j + 2].children[3].innerText);
-                    thisPageAmount++;
-                }
-                // gifts received
-                if (tempRows[j + 2].children[5].innerText.indexOf(langShinko[game_data.locale]["giftFrom"]) > -1) {
-                    //console.log("Found a gift received!");
-                    giftFrom.push({ "Date": tempRows[j + 2].children[0].innerText, "World": tempRows[j + 2].children[1].innerText, "Transaction": tempRows[j + 2].children[2].innerText, "Amount": tempRows[j + 2].children[3].innerText, "newTotal": tempRows[j + 2].children[4].innerText, "moreInformation": tempRows[j + 2].children[5].innerText })
-                    totalGiftsReceived += parseInt(tempRows[j + 2].children[3].innerText);
-                    thisPageAmount++;
-                }
-                // yearly reward
-                if (tempRows[j + 2].children[2].innerText.indexOf(langShinko[game_data.locale]["Free premium points"]) > -1) {
-                    //console.log("Found a yearly reward received!");
-                    yearlyReward.push({ "Date": tempRows[j + 2].children[0].innerText, "World": tempRows[j + 2].children[1].innerText, "Transaction": tempRows[j + 2].children[2].innerText, "Amount": tempRows[j + 2].children[3].innerText, "newTotal": tempRows[j + 2].children[4].innerText, "moreInformation": tempRows[j + 2].children[5].innerText })
-                    totalYearlyReward += parseInt(tempRows[j + 2].children[3].innerText);
-                    thisPageAmount++;
-                }
-                // endgame reward
-                if (tempRows[j + 2].children[2].innerText.indexOf(langShinko[game_data.locale]["Endgame reward"]) > -1) {
-                    //console.log("Found a endgame reward received!");
-                    worldReward.push({ "Date": tempRows[j + 2].children[0].innerText, "World": tempRows[j + 2].children[1].innerText, "Transaction": tempRows[j + 2].children[2].innerText, "Amount": tempRows[j + 2].children[3].innerText, "newTotal": tempRows[j + 2].children[4].innerText, "moreInformation": tempRows[j + 2].children[5].innerText })
-                    totalWorldReward += parseInt(tempRows[j + 2].children[3].innerText);
-                    thisPageAmount++;
-                }
-                // refunds
-                if (tempRows[j + 2].children[2].innerText.indexOf(langShinko[game_data.locale]["Withdrawn"]) > -1 || tempRows[j + 2].children[2].innerText.indexOf(langShinko[game_data.locale]["Manually"]) > -1) {
-                    //console.log("Found a refund received!");
-                    refunds.push({ "Date": tempRows[j + 2].children[0].innerText, "World": tempRows[j + 2].children[1].innerText, "Transaction": tempRows[j + 2].children[2].innerText, "Amount": tempRows[j + 2].children[3].innerText, "newTotal": tempRows[j + 2].children[4].innerText, "moreInformation": tempRows[j + 2].children[5].innerText })
-                    totalRefunds += parseInt(tempRows[j + 2].children[3].innerText);
-                    thisPageAmount++;
-                }
+                
             }
 
 
