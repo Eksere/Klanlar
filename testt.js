@@ -770,4 +770,5 @@ function displayCategory(category) {
         }
     }
 }
-
+    }
+    
