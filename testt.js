@@ -215,74 +215,7 @@ $.getAll(URLs,
         console.error(error);
     });
 
-        <tr>
-            <th colspan=7>
-                <center>PP Purchase log</center>
-            </th>
-        </tr>
-        <tr>
-            <th colspan=7>
-            <center><h2>Total pp spent: ${-totalSpent} pp</h2></center>
-            </th>
-        </tr>
-        <tr>
-            <th colspan=7>
-            <center><h2>Total pp farmed: ${totalFarmed} pp</h2></center>
-            </th>
-        </tr>
-        <tr>
-            <th colspan=7>
-                <center><h2>Total pp bought: ${totalBought} pp</h2></center>
-            </th>
-        </tr>
-        <tr>
-            <th colspan=7>
-                <center><h2>Total gifts received: ${totalGiftsReceived} pp</h2></center>
-            </th>
-        </tr>
-        <tr>
-            <th colspan=7>
-                <center><h2>Total gifts sent: ${totalGiftsSent} pp</h2></center>
-            </th>
-        </tr>
-        <tr>
-            <th colspan=7>
-                <center><h2>Total yearly gifts: ${totalYearlyReward} pp</h2></center>
-            </th>
-        </tr>
-        <tr>
-            <th colspan=7>
-                <center><h2>Total world reward: ${totalWorldReward} pp</h2></center>
-            </th>
-        </tr>
-        <tr>
-            <th colspan=7>
-                <center><h2>Total refunds: ${totalRefunds} pp</h2></center>
-            </th>
-        </tr>
-        <tr>
-            <td>
-                <input type="button" style="display: inline;" class="btn evt-confirm-btn btn-confirm-yes" id="overviewButton" onclick="displayCategory('overview')" value="Overview"/>
-            </td>
-            <td>
-                <input type="button" style="display: inline;" class="btn evt-confirm-btn btn-confirm-yes" id="purchaseHistoryButton" onclick="displayCategory('purchaseHistory')" value="Purchase History"/>
-            </td>
-            <td>
-                <input type="button" style="display: inline;" class="btn evt-confirm-btn btn-confirm-yes" id="giftReceivedButton" onclick="displayCategory('giftReceived')" value="Gifts received"/>
-            </td>
-            <td>
-                <input type="button" style="display: inline;" class="btn evt-confirm-btn btn-confirm-yes" id="giftSentButton" onclick="displayCategory('giftSent')" value="Gifts sent"/>
-            </td>
-            <td>
-                <input type="button" style="display: inline;" class="btn evt-confirm-btn btn-confirm-yes" id="yearlyRewardButton" onclick="displayCategory('yearlyReward')" value="Yearly rewards"/>
-            </td>
-            <td>
-                <input type="button" style="display: inline;" class="btn evt-confirm-btn btn-confirm-yes" id="worldRewardButton" onclick="displayCategory('worldReward')" value="Win rewards"/>
-            </td>
-            <td>
-                <input type="button" style="display: inline;" class="btn evt-confirm-btn btn-confirm-yes" id="refundButton" onclick="displayCategory('refunds')" value="Refunds"/>
-            </td>
-        </tr>`;
+        
 
         //purchase history
         html += `
