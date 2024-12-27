@@ -180,7 +180,7 @@ for (let j = 2; j < tempRows.length; j++) {
         }
         if (thisPageAmount > tempRows.length - 2) {
             console.log("EXTRA ENTRIES ON PAGE " + (i + 1) + ": " + (thisPageAmount - tempRows.length - 2));
-        },
+        }
     () => {
         //console.log("Total bought: " + totalBought);
         //console.table(purchases);
