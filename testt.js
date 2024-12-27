@@ -82,12 +82,7 @@ if ($("#contentContainer")[0]) {
 </div>`);
 }
 else {
-    width = $("#mobileHeader")[0].clientWidth;
-    $("#mobileHeader").eq(0).prepend(`
-<div id="progressbar" class="progress-bar progress-bar-alive">
-<span id="count" class="label">0/${amountOfPages.length}</span>
-<div id="progress"><span id="count2" class="label" style="width: ${width}px;">0/${amountOfPages.length}</span></div>
-</div>`);
+    
 }
 
 var URLs = [];
@@ -328,14 +323,6 @@ $.getAll(URLs,
         </tr>
         `;
         for (var i = 0; i < Object.keys(worldDataBase).length; i++) {
-            html += `
-            <tr>
-                <td colspan=2>${Object.keys(worldDataBase)[i]}</td>
-                <td>${worldDataBase[Object.keys(worldDataBase)[i]]["Purchases"]}</td>
-                <td>${worldDataBase[Object.keys(worldDataBase)[i]]["Spending"]}</td>
-                <td>${worldDataBase[Object.keys(worldDataBase)[i]]["Farming"]}</td>
-                <td>${worldDataBase[Object.keys(worldDataBase)[i]]["Farming"] - worldDataBase[Object.keys(worldDataBase)[i]]["Spending"] + worldDataBase[Object.keys(worldDataBase)[i]]["Purchases"]}
-            </tr>`
         }
         html += "</table>"
 
@@ -364,27 +351,6 @@ $.getAll(URLs,
                 </th>
             </tr>`;
         for (var i = 0; i < giftFrom.length; i++) {
-            html += `
-            <tr>
-                <td>
-                    ${giftFrom[i].Date}
-                </td>
-                <td>
-                    ${giftFrom[i].World}
-                </td>
-                <td>
-                    ${giftFrom[i].Transaction}
-                </td>
-                <td>
-                    ${giftFrom[i].Amount}
-                </td>
-                <td>
-                    ${giftFrom[i].newTotal}
-                </td>
-                <td>
-                    ${giftFrom[i].moreInformation}
-                </td>
-            </tr>`
         }
         html += "</table>";
 
@@ -412,27 +378,6 @@ $.getAll(URLs,
                 </th>
             </tr>`;
         for (var i = 0; i < giftTo.length; i++) {
-            html += `
-            <tr>
-                <td>
-                    ${giftTo[i].Date}
-                </td>
-                <td>
-                    ${giftTo[i].World}
-                </td>
-                <td>
-                    ${giftTo[i].Transaction}
-                </td>
-                <td>
-                    ${giftTo[i].Amount}
-                </td>
-                <td>
-                    ${giftTo[i].newTotal}
-                </td>
-                <td>
-                    ${giftTo[i].moreInformation}
-                </td>
-            </tr>`
         }
         html += "</table>";
 
@@ -460,27 +405,6 @@ $.getAll(URLs,
                  </th>
              </tr>`;
         for (var i = 0; i < yearlyReward.length; i++) {
-            html += `
-             <tr>
-                 <td>
-                     ${yearlyReward[i].Date}
-                 </td>
-                 <td>
-                     ${yearlyReward[i].World}
-                 </td>
-                 <td>
-                     ${yearlyReward[i].Transaction}
-                 </td>
-                 <td>
-                     ${yearlyReward[i].Amount}
-                 </td>
-                 <td>
-                     ${yearlyReward[i].newTotal}
-                 </td>
-                 <td>
-                     ${yearlyReward[i].moreInformation}
-                 </td>
-             </tr>`
         }
         html += "</table>";
 
@@ -508,27 +432,6 @@ $.getAll(URLs,
                    </th>
                </tr>`;
         for (var i = 0; i < worldReward.length; i++) {
-            html += `
-               <tr>
-                   <td>
-                       ${worldReward[i].Date}
-                   </td>
-                   <td>
-                       ${worldReward[i].World}
-                   </td>
-                   <td>
-                       ${worldReward[i].Transaction}
-                   </td>
-                   <td>
-                       ${worldReward[i].Amount}
-                   </td>
-                   <td>
-                       ${worldReward[i].newTotal}
-                   </td>
-                   <td>
-                       ${worldReward[i].moreInformation}
-                   </td>
-               </tr>`
         }
         html += "</table>";
 
@@ -556,27 +459,6 @@ $.getAll(URLs,
                     </th>
                 </tr>`;
         for (var i = 0; i < refunds.length; i++) {
-            html += `
-                <tr>
-                    <td>
-                        ${refunds[i].Date}
-                    </td>
-                    <td>
-                        ${refunds[i].World}
-                    </td>
-                    <td>
-                        ${refunds[i].Transaction}
-                    </td>
-                    <td>
-                        ${refunds[i].Amount}
-                    </td>
-                    <td>
-                        ${refunds[i].newTotal}
-                    </td>
-                    <td>
-                        ${refunds[i].moreInformation}
-                    </td>
-                </tr>`
         }
         html += "</table>";
 
