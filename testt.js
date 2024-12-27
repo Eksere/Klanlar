@@ -230,7 +230,7 @@ else {
 }
 
 amountOfPages = parseInt($(".paged-nav-item")[$(".paged-nav-item").length - 1].href.match(/page=(\d+)/)[1]);
-let width;
+
 if ($("#contentContainer")[0]) {
     width = $("#contentContainer")[0].clientWidth;
     $("#contentContainer").eq(0).prepend(`
