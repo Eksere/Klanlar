@@ -541,7 +541,7 @@ $.getAll(URLs,
    
     (error) => {
         console.error(error);
-    });
+    };
 
 function displayCategory(category) {
     allCategories = ["overview", "purchaseHistory", "giftReceived", "giftSent", "worldReward", "yearlyReward", "refunds"]
