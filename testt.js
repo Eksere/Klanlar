@@ -49,7 +49,7 @@ else {
     var skip=false;
 }
 var langShinko = {
-    "tr_TR": { // Turkish (Turkey) translations
+      "tr_TR": { // Turkish (Turkey) translations
         "Purchase": "Satın Almak",
         "Premium Exchange": "Premium Takası",
         "Points redeemed": "Puanlar bozduruldu",
@@ -77,16 +77,16 @@ if ($("#contentContainer")[0]) {
     width = $("#contentContainer")[0].clientWidth;
     $("#contentContainer").eq(0).prepend(`
 <div id="progressbar" class="progress-bar progress-bar-alive">
-<span id="count" class="label">0/${amountOfPages}</span>
-<div id="progress"><span id="count2" class="label" style="width: ${width}px;">0/${amountOfPages}</span></div>
+<span id="count" class="label">0/${amountOfPages.length}</span>
+<div id="progress"><span id="count2" class="label" style="width: ${width}px;">0/${amountOfPages.length}</span></div>
 </div>`);
 }
 else {
     width = $("#mobileHeader")[0].clientWidth;
     $("#mobileHeader").eq(0).prepend(`
 <div id="progressbar" class="progress-bar progress-bar-alive">
-<span id="count" class="label">0/${amountOfPages}</span>
-<div id="progress"><span id="count2" class="label" style="width: ${width}px;">0/${amountOfPages}</span></div>
+<span id="count" class="label">0/${amountOfPages.length}</span>
+<div id="progress"><span id="count2" class="label" style="width: ${width}px;">0/${amountOfPages.length}</span></div>
 </div>`);
 }
 
@@ -106,7 +106,7 @@ $.getAll = function (
     var minWaitTime = 200; // ms between requests
     loadNext();
     function loadNext() {
-        if (numDone == urls.length || skip == true) {
+        if (numDone == urls.length||skip==true) {
             onDone();
             return;
         }
@@ -134,88 +134,139 @@ $.getAll = function (
             })
             .fail((xhr) => {
                 onError(xhr);
-            });
+            })
     }
 };
+
 
 $.getAll(URLs,
     (i, data) => {
         console.log("Grabbing page " + i);
         tempRows = $(data).find("table .vis> tbody > tr");
         if (i == 0) {
-            // Remember the last entry to stop duplicates
+            //we are on first page, check what the last entry is so we can remember for next time at the end
+            //storing both time, and change, so if multiple changes happen on same time, we can stop at the correct one
             lastDate = tempRows[2].children[0].innerText.trim();
             lastChange = tempRows[2].children[3].innerText.trim();
         }
         var thisPageAmount = 0;
         for (var j = 0; j < tempRows.length - 2; j++) {
             if (tempRows[j + 2].children[0].innerText.trim() == stopDate && tempRows[j + 2].children[3].innerText.trim() == stopChange) {
+                //REACHED LAST ENTRY, SKIP THE REST
                 console.log("REACHED PREVIOUS LAST ENTRY");
                 i = URLs.length;
-                numDone = URLs.length;
-                skip = true;
+                numDone=URLs.length;
+                skip=true;
                 break;
             }
             else {
-                let transactionType = tempRows[j + 2].children[2].innerText.trim();
-                let world = tempRows[j + 2].children[1].innerText.trim();
-                let amount = parseInt(tempRows[j + 2].children[3].innerText.trim());
-
-                if (!worldDataBase[world]) {
-                    worldDataBase[world] = { "Purchases": 0, "Spending": 0, "Farming": 0 };
-                }
-
-                if (transactionType.includes(langShinko[game_data.locale]["Purchase"])) {
-                    purchases.push({ "Date": tempRows[j + 2].children[0].innerText, "World": world, "Amount": amount });
-                    worldDataBase[world]["Purchases"] += amount;
-                    totalBought += amount;
-                }
-
-                if (transactionType.includes(langShinko[game_data.locale]["Premium Exchange"])) {
-                    spending.push({ "Date": tempRows[j + 2].children[0].innerText, "World": world, "Amount": -amount });
-                    worldDataBase[world]["Spending"] += amount;
-                    totalSpent += amount;
-                }
-
-                if (transactionType.includes(langShinko[game_data.locale]["Transfer"]) &&
-                    (tempRows[j + 2].children[5].innerText.includes(langShinko[game_data.locale]["Sold"]) ||
-                        tempRows[j + 2].children[5].innerText.includes(langShinko[game_data.locale]["Premium Exchange"]))) {
-                    farmed.push({ "Date": tempRows[j + 2].children[0].innerText, "World": world, "Amount": amount });
-                    worldDataBase[world]["Farming"] += amount;
-                    totalFarmed += amount;
-                }
+                
             }
+
+
+        }
+        if (thisPageAmount < tempRows.length - 2) {
+            console.log("MISSING ENTRIES ON PAGE " + (i + 1) + ": " + (tempRows.length - 2 - thisPageAmount));
+        }
+        if (thisPageAmount > tempRows.length - 2) {
+            console.log("EXTRA ENTRIES ON PAGE " + (i + 1) + ": " + (thisPageAmount - tempRows.length - 2));
         }
     },
     () => {
-        let html = `<table class="vis" width="100%">
-            <tr>
-                <th>World</th>
-                <th>Purchases</th>
-                <th>Spending</th>
-                <th>Farmed</th>
-                <th>Difference</th>
-            </tr>`;
-
-        for (let world in worldDataBase) {
-            let data = worldDataBase[world];
-            html += `<tr>
-                <td>${world}</td>
-                <td>${data.Purchases}</td>
-                <td>${data.Spending}</td>
-                <td>${data.Farming}</td>
-                <td>${data.Farming + data.Purchases - data.Spending}</td>
-            </tr>`;
+        //console.log("Total bought: " + totalBought);
+        //console.table(purchases);
+        // store all data for next time
+        var storeData={ 
+            "lastDate": lastDate, 
+            "lastChange": lastChange,
+            "purchases":purchases,
+            "spending":spending,
+            "farmed":farmed,
+            "worldReward":worldReward,
+            "yearlyReward":yearlyReward,
+            "refunds":refunds,
+            "totalRefunds":totalRefunds,
+            "totalYearlyReward":totalYearlyReward,
+            "totalBought":totalBought,
+            "totalSpent":totalSpent,
+            "totalFarmed":totalFarmed,
+            "totalGiftsReceived":totalGiftsReceived,
+            "totalWorldReward":totalWorldReward,
+            "totalGiftsSent":totalGiftsSent,
+            "giftTo":giftTo,
+            "giftFrom":giftFrom,
+            "worldDataBase":worldDataBase,
         }
-
-        html += `</table>`;
-        $("#contentContainer").html(html);
-    },
-    (error) => {
-        console.error(error);
-    });
-
-        
+        localStorage.setItem("PPLogShinko", JSON.stringify(storeData));
+        html = `
+        <tr>
+            <th colspan=7>
+                <center>PP Purchase log</center>
+            </th>
+        </tr>
+        <tr>
+            <th colspan=7>
+            <center><h2>Total pp spent: ${-totalSpent} pp</h2></center>
+            </th>
+        </tr>
+        <tr>
+            <th colspan=7>
+            <center><h2>Total pp farmed: ${totalFarmed} pp</h2></center>
+            </th>
+        </tr>
+        <tr>
+            <th colspan=7>
+                <center><h2>Total pp bought: ${totalBought} pp</h2></center>
+            </th>
+        </tr>
+        <tr>
+            <th colspan=7>
+                <center><h2>Total gifts received: ${totalGiftsReceived} pp</h2></center>
+            </th>
+        </tr>
+        <tr>
+            <th colspan=7>
+                <center><h2>Total gifts sent: ${totalGiftsSent} pp</h2></center>
+            </th>
+        </tr>
+        <tr>
+            <th colspan=7>
+                <center><h2>Total yearly gifts: ${totalYearlyReward} pp</h2></center>
+            </th>
+        </tr>
+        <tr>
+            <th colspan=7>
+                <center><h2>Total world reward: ${totalWorldReward} pp</h2></center>
+            </th>
+        </tr>
+        <tr>
+            <th colspan=7>
+                <center><h2>Total refunds: ${totalRefunds} pp</h2></center>
+            </th>
+        </tr>
+        <tr>
+            <td>
+                <input type="button" style="display: inline;" class="btn evt-confirm-btn btn-confirm-yes" id="overviewButton" onclick="displayCategory('overview')" value="Overview"/>
+            </td>
+            <td>
+                <input type="button" style="display: inline;" class="btn evt-confirm-btn btn-confirm-yes" id="purchaseHistoryButton" onclick="displayCategory('purchaseHistory')" value="Purchase History"/>
+            </td>
+            <td>
+                <input type="button" style="display: inline;" class="btn evt-confirm-btn btn-confirm-yes" id="giftReceivedButton" onclick="displayCategory('giftReceived')" value="Gifts received"/>
+            </td>
+            <td>
+                <input type="button" style="display: inline;" class="btn evt-confirm-btn btn-confirm-yes" id="giftSentButton" onclick="displayCategory('giftSent')" value="Gifts sent"/>
+            </td>
+            <td>
+                <input type="button" style="display: inline;" class="btn evt-confirm-btn btn-confirm-yes" id="yearlyRewardButton" onclick="displayCategory('yearlyReward')" value="Yearly rewards"/>
+            </td>
+            <td>
+                <input type="button" style="display: inline;" class="btn evt-confirm-btn btn-confirm-yes" id="worldRewardButton" onclick="displayCategory('worldReward')" value="Win rewards"/>
+            </td>
+            <td>
+                <input type="button" style="display: inline;" class="btn evt-confirm-btn btn-confirm-yes" id="refundButton" onclick="displayCategory('refunds')" value="Refunds"/>
+            </td>
+        </tr>`;
 
         //purchase history
         html += `
@@ -538,10 +589,10 @@ $.getAll(URLs,
         </div>
         `);
         displayCategory("overview");
-   
+    },
     (error) => {
         console.error(error);
-    };
+    });
 
 function displayCategory(category) {
     allCategories = ["overview", "purchaseHistory", "giftReceived", "giftSent", "worldReward", "yearlyReward", "refunds"]
