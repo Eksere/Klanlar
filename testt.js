@@ -538,7 +538,7 @@ $.getAll(URLs,
         </div>
         `);
         displayCategory("overview");
-    },
+   
     (error) => {
         console.error(error);
     });
