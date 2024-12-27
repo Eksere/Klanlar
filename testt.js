@@ -1,3 +1,78 @@
+for (let j = 2; j < tempRows.length; j++) {
+    let transactionType = tempRows[j].children[2].innerText.trim();
+    let amount = parseInt(tempRows[j].children[3].innerText.trim());
+    let world = tempRows[j].children[1].innerText.trim();
+
+    if (!worldDataBase[world]) {
+        worldDataBase[world] = { Purchases: 0, Spending: 0, Farming: 0 };
+    }
+
+    // Satın Alma (Purchases)
+    if (transactionType.includes(langShinko[game_data.locale]["Purchase"])) {
+        purchases.push({
+            Date: tempRows[j].children[0].innerText,
+            World: world,
+            Amount: amount,
+        });
+        worldDataBase[world].Purchases += amount;
+    }
+
+    // Harcamalar (Spending)
+    if (transactionType.includes(langShinko[game_data.locale]["Premium Exchange"])) {
+        spending.push({
+            Date: tempRows[j].children[0].innerText,
+            World: world,
+            Amount: -amount,
+        });
+        worldDataBase[world].Spending += amount;
+    }
+
+    // Kasılan Premium Puanlar (Farmed)
+    if (
+        transactionType.includes(langShinko[game_data.locale]["Transfer"]) &&
+        (tempRows[j].children[5].innerText.includes(langShinko[game_data.locale]["Sold"]) ||
+            tempRows[j].children[5].innerText.includes(langShinko[game_data.locale]["Premium Exchange"]))
+    ) {
+        farmed.push({
+            Date: tempRows[j].children[0].innerText,
+            World: world,
+            Amount: amount,
+        });
+        worldDataBase[world].Farming += amount;
+    }
+}
+html += `
+<table class="vis" width="100%">
+    <tr>
+        <th>World</th>
+        <th>Purchases</th>
+        <th>Spending</th>
+        <th>Farmed</th>
+        <th>Difference</th>
+    </tr>`;
+
+for (let world in worldDataBase) {
+    let data = worldDataBase[world];
+    html += `
+    <tr>
+        <td>${world}</td>
+        <td>${data.Purchases}</td>
+        <td>${data.Spending}</td>
+        <td>${data.Farming}</td>
+        <td>${data.Farming + data.Purchases - data.Spending}</td>
+    </tr>`;
+}
+
+html += `</table>`;
+
+
+
+
+
+
+
+
+
 if (window.location.href.indexOf('premium&mode=log&page=') < 0) {
     //relocate
     window.location.assign(game_data.link_base_pure + "premium&mode=log&page=0");
