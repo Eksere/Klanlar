@@ -171,4 +171,14 @@ for (let world in worldDataBase) {
 html += `</table>`;
 $("#contentContainer").html(html);
 
+function displayCategory(category) {
+    allCategories = ["overview", "purchaseHistory", "giftReceived", "giftSent", "worldReward", "yearlyReward", "refunds"]
 
+    $("#" + category).eq(0).css("display", "")
+    $("#" + category + "Button").attr("class", "btn evt-cancel-btn btn-confirm-no");
+    for (var i = 0; i < allCategories.length; i++) {
+        if (category != allCategories[i]) {
+            $("#" + allCategories[i]).css("display", "none");
+            $("#" + allCategories[i] + "Button").attr("class", "btn evt-confirm-btn btn-confirm-yes");
+        }
+    }
