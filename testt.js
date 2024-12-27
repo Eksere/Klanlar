@@ -49,163 +49,6 @@ else {
     var skip=false;
 }
 var langShinko = {
-    "en_DK": {
-        "Purchase": "Purchase", //bought pp, 3rd cell
-        "Premium Exchange": "Premium Exchange", //purchases from exchange 3rd cell
-        "Points redeemed": "Points redeemed", //reduction building time or account manager/premium account/LA or events, 3rd cell
-        "Transfer": "Transfer", //sold to pp exchange 3rd cell
-        "Sold": "sold", //text in the last cell when selling res to pp exchange last cell
-        "giftTo": "to: ", //gift to last cell
-        "giftFrom": "from: ", //gift from last cell
-        "Free premium points": "Free premium points", //yearly reward
-        "Endgame reward": "Endgame reward", //world reward
-        "Manually": "Manually", // Manual refund received
-        "Withdrawn": "Withdrawn" // refund received
-    },
-    "en_GB": {
-        "Purchase": "Purchase", //bought pp, 3rd cell
-        "Premium Exchange": "Premium Exchange", //purchases from exchange 3rd cell
-        "Points redeemed": "Points redeemed", //reduction building time or account manager/premium account/LA or events, 3rd cell
-        "Transfer": "Transfer", //sold to pp exchange 3rd cell
-        "Sold": "sold", //text in the last cell when selling res to pp exchange last cell
-        "giftTo": "to: ", //gift to last cell
-        "giftFrom": "from: ", //gift from last cell
-        "Free premium points": "Free premium points", //yearly reward
-        "Endgame reward": "Endgame reward", //world reward
-        "Manually": "Manually", // Manual refund received
-        "Withdrawn": "Withdrawn" // refund received
-    },
-    "en_US": {
-        "Purchase": "Purchase", //bought pp, 3rd cell
-        "Premium Exchange": "Premium Exchange", //purchases from exchange 3rd cell
-        "Points redeemed": "Points redeemed", //reduction building time or account manager/premium account/LA or events, 3rd cell
-        "Transfer": "Transfer", //sold to pp exchange 3rd cell
-        "Sold": "sold", //text in the last cell when selling res to pp exchange last cell
-        "giftTo": "to: ", //gift to last cell
-        "giftFrom": "from: ", //gift from last cell
-        "Free premium points": "Free premium points", //yearly reward
-        "Endgame reward": "Endgame reward", //world reward
-        "Manually": "Manually", // Manual refund received
-        "Withdrawn": "Withdrawn" // refund received
-    },
-    "nl_NL": {
-        "Purchase": "Koop",
-        "Premium Exchange": "Premium Beurs",
-        "Points redeemed": "Ingezet",
-        "Transfer": "Overdragen",
-        "Sold": "Gehandeld voor",
-        "giftTo": "to: ",
-        "giftFrom": "from: ",
-        "Free premium points": "Free premium points", //yearly reward
-        "Endgame reward": "Endgame reward", //world reward
-        "Manually": "Manually", // Manual refund received
-        "Withdrawn": "Withdrawn" // refund received
-    },
-    "it_IT": {
-        "Purchase": "Ottieni",
-        "Premium Exchange": "Cambio del Premium",
-        "Points redeemed": "Utilizzati",
-        "Transfer": "Trasferisci",
-        "Sold": "venduto",
-        "giftTo": "to: ",
-        "giftFrom": "from: ",
-        "Free premium points": "Free premium points", //yearly reward
-        "Endgame reward": "Endgame reward", //world reward
-        "Manually": "Manually", // Manual refund received
-        "Withdrawn": "Withdrawn" // refund received
-    },
-    "el_GR": {
-        "Purchase": "Î‘Î³Î¿ÏÎ¬",
-        "Premium Exchange": "Î‘Î½Ï„Î±Î»Î»Î±ÎºÏ„Î®ÏÎ¹Î¿",
-        "Points redeemed": "Î‘Î»Î»Î±Î³Î® Ï€ÏŒÎ½Ï„Ï‰Î½",
-        "Transfer": "ÎœÎµÏ„Î±Ï†Î¿ÏÎ¬",
-        "Sold": "Î Î¿Ï…Î»Î®Î¸Î·ÎºÎµ",
-        "giftTo": "to:",
-        "giftFrom": "from: ",
-        "Free premium points": "Free premium points", //yearly reward
-        "Endgame reward": "Endgame reward", //world reward
-        "Manually": "Manually", // Manual refund received
-        "Withdrawn": "Withdrawn" // refund received
-    },
-    "ar_AE": {
-        "Purchase": "Ø´Ø±Ø§Ø¡",
-        "Premium Exchange": "Ù…ØµØ±Ù Ù†Ù‚Ø§Ø· Ø§Ù„ØªÙ…ÙŠØ²",
-        "Points redeemed": "Ø§Ù„Ù†Ù‚Ø§Ø· Ø§Ù„Ù…Ø³ØªØ®Ø¯Ù…Ù‡",
-        "Transfer": "Ø§Ø±Ø³Ø§Ù„ ",
-        "Sold": " ØªÙ… Ø¨ÙŠØ¹",
-        "giftTo": "to:",
-        "giftFrom": "from: ",
-        "Free premium points": "Free premium points", //yearly reward
-        "Endgame reward": "Endgame reward", //world reward
-        "Manually": "Manually", // Manual refund received
-        "Withdrawn": "Withdrawn" // refund received
-    },
-    "pt_BR": {
-        "Purchase": "Compra",
-        "Premium Exchange": "Troca Premium",
-        "Points redeemed": "Utilizado",
-        "Transfer": "Transferir",
-        "Sold": "vendido",
-        "giftTo": "to: ",
-        "giftFrom": "from: ",
-        "Free premium points": "Free premium points", //yearly reward
-        "Endgame reward": "Endgame reward", //world reward
-        "Manually": "Manually", // Manual refund received
-        "Withdrawn": "Withdrawn" // refund received
-    },
-    "de_DE": {
-        "Purchase": "Kauf",
-        "Premium Exchange": "Premium-Depot",
-        "Points redeemed": " Eingesetzt ",
-        "Transfer": "Ãœbertragen",
-        "Sold": "verkauft",
-        "giftTo": "to: ",
-        "giftFrom": "from: ",
-        "Free premium points": "Free premium points", //yearly reward
-        "Endgame reward": "Endgame reward", //world reward
-        "Manually": "Manually", // Manual refund received
-        "Withdrawn": "Withdrawn" // refund received
-    },
-    "sv_SE": {
-        "Purchase": "KÃ¶p", //bought pp, 3rd cell
-        "Premium Exchange": "PremiumBÃ¶rsen", //purchases from exchange 3rd cell
-        "Points redeemed": "UtlÃ¶sta PoÃ¤ng", //reduction building time or account manager/premium account/LA or events, 3rd cell
-        "Transfer": "Ã–verfÃ¶r", //sold to pp exchange 3rd cell
-        "Sold": "SÃ¥lda", //text in the last cell when selling res to pp exchange last cell
-        "giftTo": "to: ", //gift to last cell
-        "giftFrom": "from: ", //gift from last cell,
-        "Free premium points": "Free premium points", //yearly reward
-        "Endgame reward": "Endgame reward", //world reward
-        "Manually": "Manually", // Manual refund received
-        "Withdrawn": "Withdrawn" // refund received
-    },
-    "pt_PT": {
-        "Purchase": "Compra", //bought pp, 3rd cell
-        "Premium Exchange": "Troca Premium", //purchases from exchange 3rd cell
-        "Points redeemed": "Utilizados", //reduction building time or account manager/premium account/LA or events, 3rd cell
-        "Transfer": "Transferir", //sold to pp exchange 3rd cell
-        "Sold": "vendido", //text in the last cell when selling res to pp exchange last cell
-        "giftTo": "to: ", //gift to last cell
-        "giftFrom": "from: ", //gift from last cell
-        "Free premium points": "Pontos premium gratuitos", //yearly reward
-        "Endgame reward": "Recompensa de fim de jogo", //world reward
-        "Manually": "Manualmente", // Manual refund received
-        "Withdrawn": "Withdrawn" // refund received
-    },
-    "ro_RO": {
-        "Purchase": "CumpÃ„Æ’rare", //bought pp, 3rd cell
-        "Premium Exchange": "Depozit Premium", //purchases from exchange 3rd cell
-        "Points redeemed": "Activat", //reduction building time or account manager/premium account/LA or events, 3rd cell
-        "Transfer": "Transmite", //sold to pp exchange 3rd cell
-        "Sold": "vÃƒÂ¢ndut", //text in the last cell when selling res to pp exchange last cell
-        "giftTo": "to: ", //gift to last cell
-        "giftFrom": "from: ", //gift from last cell
-        "Free premium points": "Puncte-Premium gratis", //free pp, like anniversary
-        "Endgame reward": "Endgame reward", //world reward
-        "Manually": "Manually", // Manual refund received
-        "Withdrawn": "Withdrawn", // refund received
-        "recruit": "RecompensÃ„Æ’ de recrutare jucÃ„Æ’tori" //pp you get for reffering a friend (old)
-    },
     "tr_TR": { // Turkish (Turkey) translations
         "Purchase": "Satın Almak",
         "Premium Exchange": "Premium Takası",
@@ -296,97 +139,42 @@ $.getAll = function (
 };
 
 
-$.getAll(URLs,
-    (i, data) => {
-        console.log("Grabbing page " + i);
-        tempRows = $(data).find("table .vis> tbody > tr");
-        if (i == 0) {
-            //we are on first page, check what the last entry is so we can remember for next time at the end
-            //storing both time, and change, so if multiple changes happen on same time, we can stop at the correct one
-            lastDate = tempRows[2].children[0].innerText.trim();
-            lastChange = tempRows[2].children[3].innerText.trim();
-        }
-        var thisPageAmount = 0;
-        for (var j = 0; j < tempRows.length - 2; j++) {
-            if (tempRows[j + 2].children[0].innerText.trim() == stopDate && tempRows[j + 2].children[3].innerText.trim() == stopChange) {
-                //REACHED LAST ENTRY, SKIP THE REST
-                console.log("REACHED PREVIOUS LAST ENTRY");
-                i = URLs.length;
-                numDone=URLs.length;
-                skip=true;
-                break;
-            }
-            else {
-                // buying
-                if (tempRows[j + 2].children[2].innerText.indexOf(langShinko[game_data.locale]["Purchase"]) > -1) {
-                    //console.log("Found a purchase!");
-                    if (typeof worldDataBase[tempRows[j + 2].children[1].innerText] == "undefined") {
-                        worldDataBase[tempRows[j + 2].children[1].innerText] = { "Purchases": 0, "Spending": 0, "Farming": 0 };
-                    }
-                    purchases.push({ "Date": tempRows[j + 2].children[0].innerText, "World": tempRows[j + 2].children[1].innerText, "Transaction": tempRows[j + 2].children[2].innerText, "Amount": tempRows[j + 2].children[3].innerText, "newTotal": tempRows[j + 2].children[4].innerText, "moreInformation": tempRows[j + 2].children[5].innerText });
-                    worldDataBase[tempRows[j + 2].children[1].innerText]["Purchases"] += parseInt(tempRows[j + 2].children[3].innerText);
-                    totalBought += parseInt(tempRows[j + 2].children[3].innerText);
-                    thisPageAmount++;
-                }
-                // spending
-                if (tempRows[j + 2].children[2].innerText.indexOf(langShinko[game_data.locale]["Premium Exchange"]) > -1 || tempRows[j + 2].children[2].innerText.indexOf(langShinko[game_data.locale]["Points redeemed"]) > -1) {
-                    //console.log("Found a spending!");
-                    totalSpent += parseInt(tempRows[j + 2].children[3].innerText);
-                    if (typeof worldDataBase[tempRows[j + 2].children[1].innerText] == "undefined") {
-                        worldDataBase[tempRows[j + 2].children[1].innerText] = { "Purchases": 0, "Spending": 0, "Farming": 0 };
-                    }
-                    worldDataBase[tempRows[j + 2].children[1].innerText]["Spending"] += -parseInt(tempRows[j + 2].children[3].innerText);
-                    thisPageAmount++;
-                }
-                //pp farm
-                if (tempRows[j + 2].children[2].innerText.indexOf(langShinko[game_data.locale]["Transfer"]) > -1 && (tempRows[j + 2].children[5].innerText.indexOf(langShinko[game_data.locale]["Sold"]) > -1 || tempRows[j + 2].children[5].innerText.indexOf(langShinko[game_data.locale]["Premium Exchange"]) > -1)) {
-                    //console.log("Found a pp farm!");
-                    if (typeof worldDataBase[tempRows[j + 2].children[1].innerText] == "undefined") {
-                        worldDataBase[tempRows[j + 2].children[1].innerText] = { "Purchases": 0, "Spending": 0, "Farming": 0 };
-                    }
-                    worldDataBase[tempRows[j + 2].children[1].innerText]["Farming"] += parseInt(tempRows[j + 2].children[3].innerText);
-                    totalFarmed += parseInt(tempRows[j + 2].children[3].innerText);
-                    thisPageAmount++;
-                }
-                // gifted to others
-                if (tempRows[j + 2].children[5].innerText.indexOf(langShinko[game_data.locale]["giftTo"]) == 0) {
-                    //console.log("Found a gift sent!");
-                    giftTo.push({ "Date": tempRows[j + 2].children[0].innerText, "World": tempRows[j + 2].children[1].innerText, "Transaction": tempRows[j + 2].children[2].innerText, "Amount": tempRows[j + 2].children[3].innerText, "newTotal": tempRows[j + 2].children[4].innerText, "moreInformation": tempRows[j + 2].children[5].innerText })
-                    totalGiftsSent += -parseInt(tempRows[j + 2].children[3].innerText);
-                    thisPageAmount++;
-                }
-                // gifts received
-                if (tempRows[j + 2].children[5].innerText.indexOf(langShinko[game_data.locale]["giftFrom"]) > -1) {
-                    //console.log("Found a gift received!");
-                    giftFrom.push({ "Date": tempRows[j + 2].children[0].innerText, "World": tempRows[j + 2].children[1].innerText, "Transaction": tempRows[j + 2].children[2].innerText, "Amount": tempRows[j + 2].children[3].innerText, "newTotal": tempRows[j + 2].children[4].innerText, "moreInformation": tempRows[j + 2].children[5].innerText })
-                    totalGiftsReceived += parseInt(tempRows[j + 2].children[3].innerText);
-                    thisPageAmount++;
-                }
-                // yearly reward
-                if (tempRows[j + 2].children[2].innerText.indexOf(langShinko[game_data.locale]["Free premium points"]) > -1) {
-                    //console.log("Found a yearly reward received!");
-                    yearlyReward.push({ "Date": tempRows[j + 2].children[0].innerText, "World": tempRows[j + 2].children[1].innerText, "Transaction": tempRows[j + 2].children[2].innerText, "Amount": tempRows[j + 2].children[3].innerText, "newTotal": tempRows[j + 2].children[4].innerText, "moreInformation": tempRows[j + 2].children[5].innerText })
-                    totalYearlyReward += parseInt(tempRows[j + 2].children[3].innerText);
-                    thisPageAmount++;
-                }
-                // endgame reward
-                if (tempRows[j + 2].children[2].innerText.indexOf(langShinko[game_data.locale]["Endgame reward"]) > -1) {
-                    //console.log("Found a endgame reward received!");
-                    worldReward.push({ "Date": tempRows[j + 2].children[0].innerText, "World": tempRows[j + 2].children[1].innerText, "Transaction": tempRows[j + 2].children[2].innerText, "Amount": tempRows[j + 2].children[3].innerText, "newTotal": tempRows[j + 2].children[4].innerText, "moreInformation": tempRows[j + 2].children[5].innerText })
-                    totalWorldReward += parseInt(tempRows[j + 2].children[3].innerText);
-                    thisPageAmount++;
-                }
-                // refunds
-                if (tempRows[j + 2].children[2].innerText.indexOf(langShinko[game_data.locale]["Withdrawn"]) > -1 || tempRows[j + 2].children[2].innerText.indexOf(langShinko[game_data.locale]["Manually"]) > -1) {
-                    //console.log("Found a refund received!");
-                    refunds.push({ "Date": tempRows[j + 2].children[0].innerText, "World": tempRows[j + 2].children[1].innerText, "Transaction": tempRows[j + 2].children[2].innerText, "Amount": tempRows[j + 2].children[3].innerText, "newTotal": tempRows[j + 2].children[4].innerText, "moreInformation": tempRows[j + 2].children[5].innerText })
-                    totalRefunds += parseInt(tempRows[j + 2].children[3].innerText);
-                    thisPageAmount++;
-                }
-            }
+// worldDataBase değişkenini bir kez tanımlıyoruz
+if (typeof worldDataBase === "undefined") {
+    var worldDataBase = {};
+}
 
+// Her bir satırı işleme
+for (let j = 2; j < tempRows.length; j++) {
+    let transactionType = tempRows[j].children[2].innerText.trim();
+    let amount = parseInt(tempRows[j].children[3].innerText.trim());
+    let world = tempRows[j].children[1].innerText.trim();
 
-        }
+    // Eğer dünya yoksa, sıfırdan oluştur
+    if (!worldDataBase[world]) {
+        worldDataBase[world] = { Purchases: 0, Spending: 0, Farming: 0 };
+    }
+
+    // Satın alma (Purchases)
+    if (transactionType.includes(langShinko[game_data.locale]["Purchase"])) {
+        worldDataBase[world].Purchases += amount;
+    }
+
+    // Harcamalar (Spending)
+    if (transactionType.includes(langShinko[game_data.locale]["Premium Exchange"])) {
+        worldDataBase[world].Spending += amount;
+    }
+
+    // Kasılan premium puanlar (Farmed)
+    if (
+        transactionType.includes(langShinko[game_data.locale]["Transfer"]) &&
+        (tempRows[j].children[5].innerText.includes(langShinko[game_data.locale]["Sold"]) ||
+            tempRows[j].children[5].innerText.includes(langShinko[game_data.locale]["Premium Exchange"]))
+    ) {
+        worldDataBase[world].Farming += amount;
+    }
+}
+
         if (thisPageAmount < tempRows.length - 2) {
             console.log("MISSING ENTRIES ON PAGE " + (i + 1) + ": " + (tempRows.length - 2 - thisPageAmount));
         }
