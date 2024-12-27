@@ -496,16 +496,7 @@ $.getAll(URLs,
             <th>Difference</th>
         </tr>
         `;
-        for (var i = 0; i < Object.keys(worldDataBase).length; i++) {
-            html += `
-            <tr>
-                <td colspan=2>${Object.keys(worldDataBase)[i]}</td>
-                <td>${worldDataBase[Object.keys(worldDataBase)[i]]["Purchases"]}</td>
-                <td>${worldDataBase[Object.keys(worldDataBase)[i]]["Spending"]}</td>
-                <td>${worldDataBase[Object.keys(worldDataBase)[i]]["Farming"]}</td>
-                <td>${worldDataBase[Object.keys(worldDataBase)[i]]["Farming"] - worldDataBase[Object.keys(worldDataBase)[i]]["Spending"] + worldDataBase[Object.keys(worldDataBase)[i]]["Purchases"]}
-            </tr>`
-        }
+       
         html += "</table>"
 
 
