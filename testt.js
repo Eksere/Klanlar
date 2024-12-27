@@ -139,10 +139,7 @@ $.getAll = function (
 };
 
 
-// worldDataBase değişkenini bir kez tanımlıyoruz
-if (typeof worldDataBase === "undefined") {
-    var worldDataBase = {};
-}
+let worldDataBase = {};
 
 // Her bir satırı işleme
 for (let j = 2; j < tempRows.length; j++) {
@@ -174,6 +171,7 @@ for (let j = 2; j < tempRows.length; j++) {
         worldDataBase[world].Farming += amount;
     }
 }
+
 
         if (thisPageAmount < tempRows.length - 2) {
             console.log("MISSING ENTRIES ON PAGE " + (i + 1) + ": " + (tempRows.length - 2 - thisPageAmount));
