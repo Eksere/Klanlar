@@ -110,7 +110,10 @@ $.getAll(
         console.log("Total farmed: " + totalFarmed);
         console.log("Total spent: " + totalSpent);
 
-        let worldDataBase = {};
+       // worldDataBase değişkenini bir kez tanımlıyoruz
+if (typeof worldDataBase === "undefined") {
+    var worldDataBase = {};
+}
 
 // Her bir satırı işleme
 for (let j = 2; j < tempRows.length; j++) {
@@ -142,6 +145,7 @@ for (let j = 2; j < tempRows.length; j++) {
         worldDataBase[world].Farming += amount;
     }
 }
+
         let html = `
 <table class="vis" width="100%">
     <tr>
