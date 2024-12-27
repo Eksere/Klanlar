@@ -7,7 +7,6 @@ for (let j = 2; j < tempRows.length; j++) {
         worldDataBase[world] = { Purchases: 0, Spending: 0, Farming: 0 };
     }
 
-    // Satın Alma (Purchases)
     if (transactionType.includes(langShinko[game_data.locale]["Purchase"])) {
         purchases.push({
             Date: tempRows[j].children[0].innerText,
@@ -17,7 +16,6 @@ for (let j = 2; j < tempRows.length; j++) {
         worldDataBase[world].Purchases += amount;
     }
 
-    // Harcamalar (Spending)
     if (transactionType.includes(langShinko[game_data.locale]["Premium Exchange"])) {
         spending.push({
             Date: tempRows[j].children[0].innerText,
@@ -27,7 +25,6 @@ for (let j = 2; j < tempRows.length; j++) {
         worldDataBase[world].Spending += amount;
     }
 
-    // Kasılan Premium Puanlar (Farmed)
     if (
         transactionType.includes(langShinko[game_data.locale]["Transfer"]) &&
         (tempRows[j].children[5].innerText.includes(langShinko[game_data.locale]["Sold"]) ||
@@ -41,7 +38,7 @@ for (let j = 2; j < tempRows.length; j++) {
         worldDataBase[world].Farming += amount;
     }
 }
-html += `
+
 <table class="vis" width="100%">
     <tr>
         <th>World</th>
