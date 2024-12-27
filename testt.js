@@ -1001,3 +1001,4 @@ function displayCategory(category) {
         }
     }
 }
+    }
