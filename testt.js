@@ -63,63 +63,7 @@ var langShinko = {
         "Withdrawn": "Geri Çekildi"
     }
 }
-// URLs dizisini başta tanımla
-var URLs = [];
 
-// baseURL, game_data.player.sitter durumuna göre belirleniyor
-var baseURL;
-if (game_data.player.sitter > 0) {
-    baseURL = `/game.php?t=${game_data.player.id}&screen=premium&mode=log&page=`;
-} else {
-    baseURL = "/game.php?&screen=premium&mode=log&page=";
-}
-
-// amountOfPages değişkeni, sayfalama bilgilerini almak için kullanılıyor
-var amountOfPages = parseInt($(".paged-nav-item")[$(".paged-nav-item").length - 1].href.match(/page=(\d+)/)[1]);
-
-// URLs dizisini dinamik olarak doldur
-for (var i = 0; i <= amountOfPages; i++) {
-    URLs.push(baseURL + i);
-}
-
-// $.getAll fonksiyonunu çağırmak için URLs dizisini kullanıyoruz
-$.getAll(URLs,
-    (i, data) => {
-        console.log("Grabbing page " + i);
-        tempRows = $(data).find("table .vis> tbody > tr");
-        
-        // Sayfa içeriğini işleme kısmı
-        tempRows.each((index, row) => {
-            var playerName = $(row).find("td:nth-child(1)").text().trim();
-            var premiumPoints = parseInt($(row).find("td:nth-child(4)").text().trim());
-            var date = $(row).find("td:nth-child(2)").text().trim();
-            
-            // Premium Points ve harcamaları gösterme işlemi
-            if (!playerData[playerName]) {
-                playerData[playerName] = { pointsEarned: 0, pointsSpent: 0 };
-            }
-            
-            // Burada harcama ve kazanç işlemlerini kontrol etmelisiniz
-            if (premiumPoints >= 0) {
-                playerData[playerName].pointsEarned += premiumPoints;
-            } else {
-                playerData[playerName].pointsSpent += Math.abs(premiumPoints);
-            }
-        });
-    },
-    () => {
-        // Tüm sayfalar başarıyla yüklendiğinde yapılacak işlemler
-        console.log("All pages fetched successfully!");
-        
-        // Sonuçları göstermek
-        for (var player in playerData) {
-            console.log(player + ": Kazanılan Puanlar - " + playerData[player].pointsEarned + ", Harcanan Puanlar - " + playerData[player].pointsSpent);
-        }
-    },
-    (error) => {
-        console.error("Error:", error);
-    }
-);
 
 $.getAll(URLs,
     (i, data) => {
@@ -127,7 +71,6 @@ $.getAll(URLs,
         tempRows = $(data).find("table .vis> tbody > tr");
         if (i == 0) {
             //we are on first page, check what the last entry is so we can remember for next time at the end
-            //storing both time, and change, so if multiple changes happen on same time, we can stop at the correct one
             lastDate = tempRows[2].children[0].innerText.trim();
             lastChange = tempRows[2].children[3].innerText.trim();
         }
@@ -210,7 +153,7 @@ $.getAll(URLs,
         }
         localStorage.setItem("PPLogShinko", JSON.stringify(storeData));
 
-        html = `
+        html = ` 
         <tr>
             <th colspan=7>
                 <center>PP Purchase log</center>
@@ -291,7 +234,7 @@ $.getAll(URLs,
         </tr>`;
 
         //purchase history
-        html += `
+        html += ` 
         <table id="purchaseHistory" class="vis" width="100%">
             <tr>
                 <th>
@@ -334,7 +277,7 @@ $.getAll(URLs,
                 <td>
                     ${purchases[i].moreInformation}
                 </td>
-            </tr>`
+            </tr>`;
         }
         html += "</table>";
 
@@ -346,7 +289,7 @@ $.getAll(URLs,
             <th>Purchases</th>
             <th>Spending</th>
             <th>Farmed</th>
-        </tr>`
+        </tr>`;
         for (var world in worldDataBase) {
             html += `
             <tr width="100%">
@@ -371,6 +314,7 @@ $.getAll(URLs,
         $("#PPLog").show();
         $('#overviewButton').click();
     });
+
 
 
 
