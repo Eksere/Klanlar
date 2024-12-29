@@ -1,3 +1,13 @@
+// ==UserScript==
+// @name         Tribal Wars Premium Tracker
+// @namespace    http://tampermonkey.net/
+// @version      2.0
+// @description  Tribal Wars premium puan kazanç, harcama ve satın alma hesaplama scripti
+// @author       YourName
+// @match        https://*.klanlar.org/*
+// @grant        none
+// ==/UserScript==
+
 (function () {
     'use strict';
 
@@ -73,6 +83,7 @@
                 setTimeout(() => fetchDataFromPage(currentPage), 10);
             } else {
                 console.log("Tüm sayfalar çekildi.");
+                updateProgress("Tamamlandı!");
                 displayResults();
             }
         } catch (error) {
@@ -109,7 +120,6 @@
 
     function displayResults() {
         const resultDiv = document.createElement('div');
-        resultDiv.id = 'result-popup'; // Benzersiz ID
         resultDiv.style.position = 'fixed';
         resultDiv.style.top = '50%';
         resultDiv.style.left = '50%';
@@ -121,35 +131,10 @@
         resultDiv.style.maxHeight = '80vh';
         resultDiv.style.overflowY = 'auto';
         resultDiv.style.boxShadow = '0 4px 8px rgba(0, 0, 0, 0.2)';
+
+        // Burada border-image için stilleri doğrudan resultDiv'e ekliyoruz
         resultDiv.style.border = '19px solid #804000';
         resultDiv.style.borderImage = 'url("https://dstr.innogamescdn.com/asset/61bc21fc/graphic/popup/border.png") 19 19 19 19 repeat';
-
-        // Kapatma butonu oluştur
-        const closeButton = document.createElement('button');
-        closeButton.textContent = '✖'; // Buton içeriği
-        closeButton.style.position = 'absolute';
-        closeButton.style.top = '10px';
-        closeButton.style.right = '10px';
-        closeButton.style.fontSize = '20px';
-        closeButton.style.cursor = 'pointer';
-        closeButton.style.color = '#fff';
-        closeButton.style.backgroundColor = 'red';
-        closeButton.style.border = 'none';
-        closeButton.style.borderRadius = '50%';
-        closeButton.style.width = '30px';
-        closeButton.style.height = '30px';
-        closeButton.style.display = 'flex';
-        closeButton.style.alignItems = 'center';
-        closeButton.style.justifyContent = 'center';
-
-        // Buton tıklama olayını bağla
-        closeButton.addEventListener('click', function() {
-            console.log('Kapatma butonuna tıklandı.');
-            resultDiv.remove(); // Pop-up'ı DOM'dan kaldır
-            console.log('Pop-up başarıyla kapatıldı.');
-        });
-
-        resultDiv.appendChild(closeButton); // Butonu pop-up'a ekle
 
         let resultHTML = `
             <table class="vis" width="100%">
@@ -188,10 +173,8 @@
         }
 
         resultHTML += `</table>`;
-        resultDiv.innerHTML += resultHTML;
-        document.body.appendChild(resultDiv); // Pop-up'ı sayfaya ekle
-
-        console.log('Pop-up başarıyla oluşturuldu.');
+        resultDiv.innerHTML = resultHTML;
+        document.body.appendChild(resultDiv);
     }
 
     if (!window.location.href.includes('screen=premium&mode=log')) {
