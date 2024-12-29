@@ -1,586 +1,204 @@
-if (window.location.href.indexOf('premium&mode=log&page=') < 0) {
-    //relocate
-    window.location.assign(game_data.link_base_pure + "premium&mode=log&page=0");
-}
-if (localStorage.getItem("PPLogShinko")) {
-    temp = JSON.parse(localStorage.getItem("PPLogShinko"));
-    console.log("Loading previous data")
-    stopDate = temp.lastDate;
-    stopChange = temp.lastChange;
-    var purchases =temp.purchases;
-    var spending =temp.spending;
-    var farmed =temp.farmed;
-    var worldReward =temp.worldReward;
-    var yearlyReward =temp.yearlyReward;
-    var refunds =temp.refunds;
-    var totalRefunds = temp.totalRefunds;
-    var totalYearlyReward = temp.totalYearlyReward;
-    var totalBought = temp.totalBought;
-    var totalSpent = temp.totalSpent;
-    var totalFarmed = temp.totalFarmed;
-    var totalGiftsReceived = temp.totalGiftsReceived;
-    var totalWorldReward = temp.totalWorldReward;
-    var totalGiftsSent = temp.totalGiftsSent;
-    var giftTo =temp.giftTo;
-    var giftFrom =temp.giftFrom;
-    var worldDataBase=temp.worldDataBase;
-    var skip=false;
-}
-else {
-    stopDate = 0;
-    stopChange = 0;
-    var purchases = [];
-    var spending = [];
-    var farmed = [];
-    var worldReward = [];
-    var yearlyReward = [];
-    var refunds = [];
-    var totalRefunds = 0;
-    var totalYearlyReward = 0;
-    var totalBought = 0;
-    var totalSpent = 0;
-    var totalFarmed = 0;
-    var totalGiftsReceived = 0;
-    var totalWorldReward = 0;
-    var totalGiftsSent = 0;
-    var giftTo = [];
-    var giftFrom = [];
-    var worldDataBase={};
-    var skip=false;
-}
-var langShinko = {
-       "tr_TR": { // Turkish (Turkey) translations
-        "Purchase": "Satın Almak",
-        "Premium Exchange": "Premium Takası",
-        "Points redeemed": "Puanlar bozduruldu",
-        "Transfer": "Transfer",
-        "Sold": "Satıldı",
-        "giftTo": "hedef: ",
-        "giftFrom": "gönderen: ",
-        "Free premium points": "Ücretsiz Premium Puanlar",
-        "Endgame reward": "Oyun Sonu Ödülü",
-        "Manually": "Manuel",
-        "Withdrawn": "Geri Çekildi"
+    let totalPages = 0;
+    let currentPage = 0;
+    let allData = [];
+    let worldData = {};
+    let totalGained = 0;
+    let totalSpent = 0;
+    let totalBought = 0;
+
+    function getTotalPages() {
+        const pageLinks = document.querySelectorAll('.item');
+        const pageSelect = document.querySelector('select');
+        if (pageLinks.length > 0) {
+            totalPages = parseInt(pageLinks[pageLinks.length - 1].textContent.trim()) || 1;
+        } else if (pageSelect) {
+            const options = pageSelect.querySelectorAll('option');
+            totalPages = parseInt(options[options.length - 1].textContent.trim()) || 1;
+        } else {
+            totalPages = 1;
+        }
+        console.log(`Toplam Sayfa Sayısı: ${totalPages}`);
     }
-}
 
+    async function fetchDataFromPage(pageNumber) {
+        const url = `/game.php?village=30549&screen=premium&mode=log&page=${pageNumber}`;
+        console.log(`Veriler Sayfa ${pageNumber}: ${url}`);
+        try {
+            const response = await fetch(url);
+            const html = await response.text();
+            const parser = new DOMParser();
+            const doc = parser.parseFromString(html, 'text/html');
+            const rows = doc.querySelectorAll('.vis tr');
+            rows.forEach(row => {
+                const columns = row.querySelectorAll('td');
+                if (columns.length > 0) {
+                    const amount = parseInt(columns[3].innerText.trim().replace(/[^0-9-]/g, "")) || 0;
+                    const world = columns[1].innerText.trim();
+                    const action = columns[2].innerText.trim().toLowerCase();
 
-$.getAll(URLs,
-    (i, data) => {
-        console.log("Grabbing page " + i);
-        tempRows = $(data).find("table .vis> tbody > tr");
-        if (i == 0) {
-            //we are on first page, check what the last entry is so we can remember for next time at the end
-            lastDate = tempRows[2].children[0].innerText.trim();
-            lastChange = tempRows[2].children[3].innerText.trim();
-        }
-        var thisPageAmount = 0;
-        for (var j = 0; j < tempRows.length - 2; j++) {
-            if (tempRows[j + 2].children[0].innerText.trim() == stopDate && tempRows[j + 2].children[3].innerText.trim() == stopChange) {
-                //REACHED LAST ENTRY, SKIP THE REST
-                console.log("REACHED PREVIOUS LAST ENTRY");
-                i = URLs.length;
-                numDone = URLs.length;
-                skip = true;
-                break;
-            }
-            else {
-                // buying
-                if (tempRows[j + 2].children[2].innerText.indexOf(langShinko[game_data.locale]["Purchase"]) > -1) {
-                    if (typeof worldDataBase[tempRows[j + 2].children[1].innerText] == "undefined") {
-                        worldDataBase[tempRows[j + 2].children[1].innerText] = { "Purchases": 0, "Spending": 0, "Farming": 0 };
-                    }
-                    purchases.push({
-                        "Date": tempRows[j + 2].children[0].innerText,
-                        "World": tempRows[j + 2].children[1].innerText,
-                        "Transaction": tempRows[j + 2].children[2].innerText,
-                        "Amount": tempRows[j + 2].children[3].innerText,
-                        "newTotal": tempRows[j + 2].children[4].innerText,
-                        "moreInformation": tempRows[j + 2].children[5].innerText
+                    allData.push({
+                        action: action,
+                        amount: amount,
+                        date: columns[4].innerText.trim(),
+                        world: world,
                     });
-                    worldDataBase[tempRows[j + 2].children[1].innerText]["Purchases"] += parseInt(tempRows[j + 2].children[3].innerText);
-                    totalBought += parseInt(tempRows[j + 2].children[3].innerText);
-                    thisPageAmount++;
-                }
-                // spending
-                if (tempRows[j + 2].children[2].innerText.indexOf(langShinko[game_data.locale]["Premium Exchange"]) > -1 || tempRows[j + 2].children[2].innerText.indexOf(langShinko[game_data.locale]["Points redeemed"]) > -1) {
-                    totalSpent += parseInt(tempRows[j + 2].children[3].innerText);
-                    if (typeof worldDataBase[tempRows[j + 2].children[1].innerText] == "undefined") {
-                        worldDataBase[tempRows[j + 2].children[1].innerText] = { "Purchases": 0, "Spending": 0, "Farming": 0 };
+
+                    if (amount > 0) {
+                        totalGained += amount;
+                        if (!worldData[world]) {
+                            worldData[world] = { gained: 0, spent: 0, bought: 0 };
+                        }
+                        worldData[world].gained += amount;
+
+                        if (action.includes("satın al")) {
+                            totalBought += amount;
+                            worldData[world].bought += amount;
+                        }
+                    } else if (amount < 0) {
+                        totalSpent += Math.abs(amount);
+                        if (!worldData[world]) {
+                            worldData[world] = { gained: 0, spent: 0, bought: 0 };
+                        }
+                        worldData[world].spent += Math.abs(amount);
                     }
-                    worldDataBase[tempRows[j + 2].children[1].innerText]["Spending"] += -parseInt(tempRows[j + 2].children[3].innerText);
-                    thisPageAmount++;
                 }
-                // pp farm
-                if (tempRows[j + 2].children[2].innerText.indexOf(langShinko[game_data.locale]["Transfer"]) > -1 && (tempRows[j + 2].children[5].innerText.indexOf(langShinko[game_data.locale]["Sold"]) > -1 || tempRows[j + 2].children[5].innerText.indexOf(langShinko[game_data.locale]["Premium Exchange"]) > -1)) {
-                    if (typeof worldDataBase[tempRows[j + 2].children[1].innerText] == "undefined") {
-                        worldDataBase[tempRows[j + 2].children[1].innerText] = { "Purchases": 0, "Spending": 0, "Farming": 0 };
-                    }
-                    worldDataBase[tempRows[j + 2].children[1].innerText]["Farming"] += parseInt(tempRows[j + 2].children[3].innerText);
-                    totalFarmed += parseInt(tempRows[j + 2].children[3].innerText);
-                    thisPageAmount++;
-                }
+            });
+
+            if (pageNumber < totalPages - 1) {
+                currentPage = pageNumber + 1;
+                updateProgress();
+                setTimeout(() => fetchDataFromPage(currentPage), 10);
+            } else {
+                console.log("Tüm sayfalar çekildi.");
+                updateProgress("Tamamlandı!");
+                displayResults();
             }
+        } catch (error) {
+            console.error(`Sayfa ${pageNumber} yüklenirken hata oluştu:`, error);
         }
-        if (thisPageAmount < tempRows.length - 2) {
-            console.log("MISSING ENTRIES ON PAGE " + (i + 1) + ": " + (tempRows.length - 2 - thisPageAmount));
-        }
-        if (thisPageAmount > tempRows.length - 2) {
-            console.log("EXTRA ENTRIES ON PAGE " + (i + 1) + ": " + (thisPageAmount - tempRows.length - 2));
-        }
-    },
-    () => {
-        var storeData = {
-            "lastDate": lastDate,
-            "lastChange": lastChange,
-            "purchases": purchases,
-            "spending": spending,
-            "farmed": farmed,
-            "worldReward": worldReward,
-            "yearlyReward": yearlyReward,
-            "refunds": refunds,
-            "totalRefunds": totalRefunds,
-            "totalYearlyReward": totalYearlyReward,
-            "totalBought": totalBought,
-            "totalSpent": totalSpent,
-            "totalFarmed": totalFarmed,
-            "totalGiftsReceived": totalGiftsReceived,
-            "totalWorldReward": totalWorldReward,
-            "totalGiftsSent": totalGiftsSent,
-            "giftTo": giftTo,
-            "giftFrom": giftFrom,
-            "worldDataBase": worldDataBase,
-        }
-        localStorage.setItem("PPLogShinko", JSON.stringify(storeData));
+    }
 
-        html = ` 
-        <tr>
-            <th colspan=7>
-                <center>PP Purchase log</center>
-            </th>
-        </tr>
-        <tr>
-            <th colspan=7>
-            <center><h2>Total pp spent: ${-totalSpent} pp</h2></center>
-            </th>
-        </tr>
-        <tr>
-            <th colspan=7>
-            <center><h2>Total pp farmed: ${totalFarmed} pp</h2></center>
-            </th>
-        </tr>
-        <tr>
-            <th colspan=7>
-                <center><h2>Total pp bought: ${totalBought} pp</h2></center>
-            </th>
-        </tr>
-        <tr>
-            <th colspan=7>
-                <center><h2>Total gifts received: ${totalGiftsReceived} pp</h2></center>
-            </th>
-        </tr>
-        <tr>
-            <th colspan=7>
-                <center><h2>Total gifts sent: ${totalGiftsSent} pp</h2></center>
-            </th>
-        </tr>
-        <tr>
-            <th colspan=7>
-                <center><h2>Total yearly gifts: ${totalYearlyReward} pp</h2></center>
-            </th>
-        </tr>
-        <tr>
-            <th colspan=7>
-                <center><h2>Total world reward: ${totalWorldReward} pp</h2></center>
-            </th>
-        </tr>
-        <tr>
-            <th colspan=7>
-                <center><h2>Total refunds: ${totalRefunds} pp</h2></center>
-            </th>
-        </tr>
-        <tr>
-            <th colspan=7>
-                <center><h2>Total Harcana Pre: ${totalSpent} pp</h2></center>
-            </th>
-        </tr>
-        <tr>
-            <th colspan=7>
-                <center><h2>Total Toplanan Pre: ${totalFarmed + totalBought} pp</h2></center>
-            </th>
-        </tr>
-        <tr>
-            <td>
-                <input type="button" style="display: inline;" class="btn evt-confirm-btn btn-confirm-yes" id="overviewButton" onclick="displayCategory('overview')" value="Overview"/>
-            </td>
-            <td>
-                <input type="button" style="display: inline;" class="btn evt-confirm-btn btn-confirm-yes" id="purchaseHistoryButton" onclick="displayCategory('purchaseHistory')" value="Purchase History"/>
-            </td>
-            <td>
-                <input type="button" style="display: inline;" class="btn evt-confirm-btn btn-confirm-yes" id="giftReceivedButton" onclick="displayCategory('giftReceived')" value="Gifts received"/>
-            </td>
-            <td>
-                <input type="button" style="display: inline;" class="btn evt-confirm-btn btn-confirm-yes" id="giftSentButton" onclick="displayCategory('giftSent')" value="Gifts sent"/>
-            </td>
-            <td>
-                <input type="button" style="display: inline;" class="btn evt-confirm-btn btn-confirm-yes" id="yearlyRewardButton" onclick="displayCategory('yearlyReward')" value="Yearly rewards"/>
-            </td>
-            <td>
-                <input type="button" style="display: inline;" class="btn evt-confirm-btn btn-confirm-yes" id="worldRewardButton" onclick="displayCategory('worldReward')" value="Win rewards"/>
-            </td>
-            <td>
-                <input type="button" style="display: inline;" class="btn evt-confirm-btn btn-confirm-yes" id="refundButton" onclick="displayCategory('refunds')" value="Refunds"/>
-            </td>
-        </tr>`;
+    function createProgressIndicator() {
+        const progressDiv = document.createElement('div');
+        progressDiv.id = 'progress-indicator';
+        progressDiv.style.position = 'fixed';
+        progressDiv.style.bottom = '500px';
+        progressDiv.style.left = '50%';
+        progressDiv.style.transform = 'translateX(-50%)';
+        progressDiv.style.backgroundColor = 'rgba(0, 0, 0, 0.8)';
+        progressDiv.style.color = '#fff';
+        progressDiv.style.padding = '10px 20px';
+        progressDiv.style.borderRadius = '5px';
+        progressDiv.style.boxShadow = '0 0 15px rgba(0,0,0,0.5)';
+        progressDiv.style.fontSize = '16px';
+        progressDiv.style.zIndex = '9999';
+        progressDiv.style.textAlign = 'center';
+        progressDiv.textContent = 'Hazırlanıyor...';
+        document.body.appendChild(progressDiv);
+        updateProgress();
+    }
 
-        //purchase history
-        html += ` 
-        <table id="purchaseHistory" class="vis" width="100%">
-            <tr>
-                <th>
-                    Date
-                </th>
-                <th>
-                    World
-                </th>
-                <th>
-                    Transaction
-                </th>
-                <th>
-                    Amount
-                </th>
-                <th>
-                    New total
-                </th>
-                <th>
-                    More information
-                </th>
-            </tr>`;
-        for (var i = 0; i < purchases.length; i++) {
-            html += `
-            <tr>
-                <td>
-                    ${purchases[i].Date}
-                </td>
-                <td>
-                    ${purchases[i].World}
-                </td>
-                <td>
-                    ${purchases[i].Transaction}
-                </td>
-                <td>
-                    ${purchases[i].Amount}
-                </td>
-                <td>
-                    ${purchases[i].newTotal}
-                </td>
-                <td>
-                    ${purchases[i].moreInformation}
-                </td>
-            </tr>`;
+    function updateProgress(status = `Sayfa ${currentPage + 1} / ${totalPages} işleniyor...`) {
+        const progressDiv = document.getElementById('progress-indicator');
+        if (progressDiv) {
+            progressDiv.textContent = status;
         }
-        html += "</table>";
+    }
+function displayResults() {
+    const resultDiv = document.createElement('div');
+    resultDiv.id = 'result-popup'; // ID ekledik, kapatma için erişim kolaylığı
+    resultDiv.style.position = 'fixed';
+    resultDiv.style.top = '50%';
+    resultDiv.style.left = '50%';
+    resultDiv.style.transform = 'translate(-50%, -50%)';
+    resultDiv.style.backgroundColor = '#f4e4bc';
+    resultDiv.style.padding = '20px';
+    resultDiv.style.border = '1px solid #ccc';
+    resultDiv.style.zIndex = '9999';
+    resultDiv.style.maxHeight = '80vh';
+    resultDiv.style.overflowY = 'auto';
+    resultDiv.style.boxShadow = '0 4px 8px rgba(0, 0, 0, 0.2)';
+    resultDiv.style.border = '19px solid #804000';
+    resultDiv.style.borderImage = 'url("https://dstr.innogamescdn.com/asset/61bc21fc/graphic/popup/border.png") 19 19 19 19 repeat';
 
-        //overview
-        html += `
-        <table id="overview" class="vis" width="100%">
-        <tr width="100%">
-            <th colspan=2>World</th>
-            <th>Purchases</th>
-            <th>Spending</th>
-            <th>Farmed</th>
-        </tr>`;
-        for (var world in worldDataBase) {
-            html += `
-            <tr width="100%">
-                <td colspan=2>
-                    ${world}
-                </td>
-                <td>
-                    ${worldDataBase[world]["Purchases"]}
-                </td>
-                <td>
-                    ${worldDataBase[world]["Spending"]}
-                </td>
-                <td>
-                    ${worldDataBase[world]["Farming"]}
-                </td>
-            </tr>`;
+    // Kapatma butonu oluştur
+    const closeButton = document.createElement('button');
+    closeButton.textContent = '✖';
+    closeButton.style.position = 'absolute';
+    closeButton.style.top = '10px';
+    closeButton.style.right = '10px';
+    closeButton.style.fontSize = '20px';
+    closeButton.style.cursor = 'pointer';
+    closeButton.style.color = '#fff';
+    closeButton.style.backgroundColor = 'red';
+    closeButton.style.border = 'none';
+    closeButton.style.borderRadius = '50%';
+    closeButton.style.width = '30px';
+    closeButton.style.height = '30px';
+    closeButton.style.display = 'flex';
+    closeButton.style.alignItems = 'center';
+    closeButton.style.justifyContent = 'center';
+
+    // Tıklama olayını ekle
+    closeButton.addEventListener('click', () => {
+        if (resultDiv) {
+            document.body.removeChild(resultDiv); // Pop-up'ı kaldır
         }
-
-        html += "</table>";
-        //show table
-        $("#PPLog").html(html);
-        $("#PPLog").show();
-        $('#overviewButton').click();
     });
 
+    resultDiv.appendChild(closeButton);
 
-
-
-        //gifts received
-        html += `
-        <table id="giftReceived" class="vis" width="100%">
-            <tr width="100%">
-                <th>
-                    Date
-                </th>
-                <th>
-                    World
-                </th>
-                <th>
-                    Transaction
-                </th>
-                <th>
-                    Amount
-                </th>
-                <th>
-                    New total
-                </th>
-                <th>
-                    More information
-                </th>
-            </tr>`;
-        for (var i = 0; i < giftFrom.length; i++) {
-            html += `
+    let resultHTML = `
+        <table class="vis" width="100%">
             <tr>
-                <td>
-                    ${giftFrom[i].Date}
-                </td>
-                <td>
-                    ${giftFrom[i].World}
-                </td>
-                <td>
-                    ${giftFrom[i].Transaction}
-                </td>
-                <td>
-                    ${giftFrom[i].Amount}
-                </td>
-                <td>
-                    ${giftFrom[i].newTotal}
-                </td>
-                <td>
-                    ${giftFrom[i].moreInformation}
-                </td>
-            </tr>`
-        }
-        html += "</table>";
-
-        //gifts sent
-        html += `
-        <table id="giftSent" class="vis" width="100%">
-            <tr width="100%">
-                <th>
-                    Date
-                </th>
-                <th>
-                    World
-                </th>
-                <th>
-                    Transaction
-                </th>
-                <th>
-                    Amount
-                </th>
-                <th>
-                    New total
-                </th>
-                <th>
-                    More information
-                </th>
-            </tr>`;
-        for (var i = 0; i < giftTo.length; i++) {
-            html += `
+                <th colspan="7" style="text-align: center;">PP Satın Alma Kayıtları</th>
+            </tr>
             <tr>
-                <td>
-                    ${giftTo[i].Date}
-                </td>
-                <td>
-                    ${giftTo[i].World}
-                </td>
-                <td>
-                    ${giftTo[i].Transaction}
-                </td>
-                <td>
-                    ${giftTo[i].Amount}
-                </td>
-                <td>
-                    ${giftTo[i].newTotal}
-                </td>
-                <td>
-                    ${giftTo[i].moreInformation}
-                </td>
-            </tr>`
-        }
-        html += "</table>";
+                <th colspan="7" style="text-align: center;"><h2>Toplam pp harcama: ${-totalSpent} pp</h2></th>
+            </tr>
+            <tr>
+                <th colspan="7" style="text-align: center;"><h2>Toplam pp kazanma: ${totalGained} pp</h2></th>
+            </tr>
+            <tr>
+                <th colspan="7" style="text-align: center;"><h2>Toplam pp satın alma: ${totalBought} pp</h2></th>
+            </tr>
+        </table>
+        <h3>Dünya Bazlı Veriler:</h3>
+        <table class="vis" width="100%">
+            <tr>
+                <th>Dünya</th>
+                <th>Kazanılan</th>
+                <th>Harcanan</th>
+                <th>Satın Alınan</th>
+            </tr>
+    `;
 
-        //yearly reward
-        html += `
-         <table id="yearlyReward" class="vis" width="100%">
-             <tr width="100%">
-                 <th>
-                     Date
-                 </th>
-                 <th>
-                     World
-                 </th>
-                 <th>
-                     Transaction
-                 </th>
-                 <th>
-                     Amount
-                 </th>
-                 <th>
-                     New total
-                 </th>
-                 <th>
-                     More information
-                 </th>
-             </tr>`;
-        for (var i = 0; i < yearlyReward.length; i++) {
-            html += `
-             <tr>
-                 <td>
-                     ${yearlyReward[i].Date}
-                 </td>
-                 <td>
-                     ${yearlyReward[i].World}
-                 </td>
-                 <td>
-                     ${yearlyReward[i].Transaction}
-                 </td>
-                 <td>
-                     ${yearlyReward[i].Amount}
-                 </td>
-                 <td>
-                     ${yearlyReward[i].newTotal}
-                 </td>
-                 <td>
-                     ${yearlyReward[i].moreInformation}
-                 </td>
-             </tr>`
-        }
-        html += "</table>";
-
-        //endgame reward
-        html += `
-           <table id="worldReward" class="vis" width="100%">
-               <tr width="100%">
-                   <th>
-                       Date
-                   </th>
-                   <th>
-                       World
-                   </th>
-                   <th>
-                       Transaction
-                   </th>
-                   <th>
-                       Amount
-                   </th>
-                   <th>
-                       New total
-                   </th>
-                   <th>
-                       More information
-                   </th>
-               </tr>`;
-        for (var i = 0; i < worldReward.length; i++) {
-            html += `
-               <tr>
-                   <td>
-                       ${worldReward[i].Date}
-                   </td>
-                   <td>
-                       ${worldReward[i].World}
-                   </td>
-                   <td>
-                       ${worldReward[i].Transaction}
-                   </td>
-                   <td>
-                       ${worldReward[i].Amount}
-                   </td>
-                   <td>
-                       ${worldReward[i].newTotal}
-                   </td>
-                   <td>
-                       ${worldReward[i].moreInformation}
-                   </td>
-               </tr>`
-        }
-        html += "</table>";
-
-        //refunds
-        html += `
-            <table id="refunds" class="vis" width="100%">
-                <tr width="100%">
-                    <th>
-                        Date
-                    </th>
-                    <th>
-                        World
-                    </th>
-                    <th>
-                        Transaction
-                    </th>
-                    <th>
-                        Amount
-                    </th>
-                    <th>
-                        New total
-                    </th>
-                    <th>
-                        More information
-                    </th>
-                </tr>`;
-        for (var i = 0; i < refunds.length; i++) {
-            html += `
-                <tr>
-                    <td>
-                        ${refunds[i].Date}
-                    </td>
-                    <td>
-                        ${refunds[i].World}
-                    </td>
-                    <td>
-                        ${refunds[i].Transaction}
-                    </td>
-                    <td>
-                        ${refunds[i].Amount}
-                    </td>
-                    <td>
-                        ${refunds[i].newTotal}
-                    </td>
-                    <td>
-                        ${refunds[i].moreInformation}
-                    </td>
-                </tr>`
-        }
-        html += "</table>";
-
-        $("#progressbar").remove();
-        Dialog.show("Log:", `
-        <div width="100%">
-            <table class="vis" width="100%">
-            ${html}
-            </table>
-        </div>
-        `);
-        displayCategory("overview");
-    
-    (error) => {
-        console.error(error);
-    };
-
-function displayCategory(category) {
-    allCategories = ["overview", "purchaseHistory", "giftReceived", "giftSent", "worldReward", "yearlyReward", "refunds"]
-
-    $("#" + category).eq(0).css("display", "")
-    $("#" + category + "Button").attr("class", "btn evt-cancel-btn btn-confirm-no");
-    for (var i = 0; i < allCategories.length; i++) {
-        if (category != allCategories[i]) {
-            $("#" + allCategories[i]).css("display", "none");
-            $("#" + allCategories[i] + "Button").attr("class", "btn evt-confirm-btn btn-confirm-yes");
-        }
+    for (let world in worldData) {
+        resultHTML += `
+            <tr>
+                <td>${world}</td>
+                <td>${worldData[world].gained}</td>
+                <td>${worldData[world].spent}</td>
+                <td>${worldData[world].bought}</td>
+            </tr>
+        `;
     }
+
+    resultHTML += `</table>`;
+    resultDiv.innerHTML += resultHTML;
+    document.body.appendChild(resultDiv);
 }
+
+
+
+
+
+    if (!window.location.href.includes('screen=premium&mode=log')) {
+        console.log("Bu script yalnızca premium puan hareketleri sayfasında çalışır.");
+        return;
+    }
+
+    createProgressIndicator();
+    getTotalPages();
+    fetchDataFromPage(currentPage);
+
