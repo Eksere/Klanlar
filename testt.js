@@ -85,6 +85,8 @@
                 console.log("Tüm sayfalar çekildi.");
                 updateProgress("Tamamlandı!");
                 displayResults();
+                // Veriler gösterildikten sonra "progress-indicator" div'ini gizleyelim
+                hideProgressIndicator();
             }
         } catch (error) {
             console.error(`Sayfa ${pageNumber} yüklenirken hata oluştu:`, error);
@@ -115,6 +117,13 @@
         const progressDiv = document.getElementById('progress-indicator');
         if (progressDiv) {
             progressDiv.textContent = status;
+        }
+    }
+
+    function hideProgressIndicator() {
+        const progressDiv = document.getElementById('progress-indicator');
+        if (progressDiv) {
+            progressDiv.style.display = 'none'; // Gizleme işlemi
         }
     }
 
@@ -174,6 +183,25 @@
 
         resultHTML += `</table>`;
         resultDiv.innerHTML = resultHTML;
+
+        // Kapatma butonunu sağ üst köşeye ekleyelim (X butonu)
+        const closeButton = document.createElement('button');
+        closeButton.textContent = 'X';
+        closeButton.style.position = 'absolute';
+        closeButton.style.top = '10px';
+        closeButton.style.right = '10px';
+        closeButton.style.backgroundColor = 'transparent';
+        closeButton.style.color = '#804000';
+        closeButton.style.border = 'none';
+        closeButton.style.fontSize = '20px';
+        closeButton.style.fontWeight = 'bold';
+        closeButton.style.cursor = 'pointer';
+        closeButton.style.padding = '5px 10px';
+        closeButton.onclick = () => {
+            resultDiv.style.display = 'none'; // Sonuçları gizle
+        };
+
+        resultDiv.appendChild(closeButton);
         document.body.appendChild(resultDiv);
     }
 
