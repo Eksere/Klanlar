@@ -1,3 +1,6 @@
+(function () {
+    'use strict';
+
     let totalPages = 0;
     let currentPage = 0;
     let allData = [];
@@ -70,7 +73,6 @@
                 setTimeout(() => fetchDataFromPage(currentPage), 10);
             } else {
                 console.log("Tüm sayfalar çekildi.");
-                updateProgress("Tamamlandı!");
                 displayResults();
             }
         } catch (error) {
@@ -104,94 +106,93 @@
             progressDiv.textContent = status;
         }
     }
-function displayResults() {
-    const resultDiv = document.createElement('div');
-    resultDiv.id = 'result-popup'; // ID ekledik, kapatma için erişim kolaylığı
-    resultDiv.style.position = 'fixed';
-    resultDiv.style.top = '50%';
-    resultDiv.style.left = '50%';
-    resultDiv.style.transform = 'translate(-50%, -50%)';
-    resultDiv.style.backgroundColor = '#f4e4bc';
-    resultDiv.style.padding = '20px';
-    resultDiv.style.border = '1px solid #ccc';
-    resultDiv.style.zIndex = '9999';
-    resultDiv.style.maxHeight = '80vh';
-    resultDiv.style.overflowY = 'auto';
-    resultDiv.style.boxShadow = '0 4px 8px rgba(0, 0, 0, 0.2)';
-    resultDiv.style.border = '19px solid #804000';
-    resultDiv.style.borderImage = 'url("https://dstr.innogamescdn.com/asset/61bc21fc/graphic/popup/border.png") 19 19 19 19 repeat';
 
-    // Kapatma butonu oluştur
-    const closeButton = document.createElement('button');
-    closeButton.textContent = '✖';
-    closeButton.style.position = 'absolute';
-    closeButton.style.top = '10px';
-    closeButton.style.right = '10px';
-    closeButton.style.fontSize = '20px';
-    closeButton.style.cursor = 'pointer';
-    closeButton.style.color = '#fff';
-    closeButton.style.backgroundColor = 'red';
-    closeButton.style.border = 'none';
-    closeButton.style.borderRadius = '50%';
-    closeButton.style.width = '30px';
-    closeButton.style.height = '30px';
-    closeButton.style.display = 'flex';
-    closeButton.style.alignItems = 'center';
-    closeButton.style.justifyContent = 'center';
+    function displayResults() {
+        const resultDiv = document.createElement('div');
+        resultDiv.id = 'result-popup'; // Benzersiz ID
+        resultDiv.style.position = 'fixed';
+        resultDiv.style.top = '50%';
+        resultDiv.style.left = '50%';
+        resultDiv.style.transform = 'translate(-50%, -50%)';
+        resultDiv.style.backgroundColor = '#f4e4bc';
+        resultDiv.style.padding = '20px';
+        resultDiv.style.border = '1px solid #ccc';
+        resultDiv.style.zIndex = '9999';
+        resultDiv.style.maxHeight = '80vh';
+        resultDiv.style.overflowY = 'auto';
+        resultDiv.style.boxShadow = '0 4px 8px rgba(0, 0, 0, 0.2)';
+        resultDiv.style.border = '19px solid #804000';
+        resultDiv.style.borderImage = 'url("https://dstr.innogamescdn.com/asset/61bc21fc/graphic/popup/border.png") 19 19 19 19 repeat';
 
-    // Tıklama olayını ekle
-    closeButton.addEventListener('click', () => {
-        if (resultDiv) {
-            document.body.removeChild(resultDiv); // Pop-up'ı kaldır
-        }
-    });
+        // Kapatma butonu oluştur
+        const closeButton = document.createElement('button');
+        closeButton.textContent = '✖'; // Buton içeriği
+        closeButton.style.position = 'absolute';
+        closeButton.style.top = '10px';
+        closeButton.style.right = '10px';
+        closeButton.style.fontSize = '20px';
+        closeButton.style.cursor = 'pointer';
+        closeButton.style.color = '#fff';
+        closeButton.style.backgroundColor = 'red';
+        closeButton.style.border = 'none';
+        closeButton.style.borderRadius = '50%';
+        closeButton.style.width = '30px';
+        closeButton.style.height = '30px';
+        closeButton.style.display = 'flex';
+        closeButton.style.alignItems = 'center';
+        closeButton.style.justifyContent = 'center';
 
-    resultDiv.appendChild(closeButton);
+        // Buton tıklama olayını bağla
+        closeButton.addEventListener('click', function() {
+            console.log('Kapatma butonuna tıklandı.');
+            resultDiv.remove(); // Pop-up'ı DOM'dan kaldır
+            console.log('Pop-up başarıyla kapatıldı.');
+        });
 
-    let resultHTML = `
-        <table class="vis" width="100%">
-            <tr>
-                <th colspan="7" style="text-align: center;">PP Satın Alma Kayıtları</th>
-            </tr>
-            <tr>
-                <th colspan="7" style="text-align: center;"><h2>Toplam pp harcama: ${-totalSpent} pp</h2></th>
-            </tr>
-            <tr>
-                <th colspan="7" style="text-align: center;"><h2>Toplam pp kazanma: ${totalGained} pp</h2></th>
-            </tr>
-            <tr>
-                <th colspan="7" style="text-align: center;"><h2>Toplam pp satın alma: ${totalBought} pp</h2></th>
-            </tr>
-        </table>
-        <h3>Dünya Bazlı Veriler:</h3>
-        <table class="vis" width="100%">
-            <tr>
-                <th>Dünya</th>
-                <th>Kazanılan</th>
-                <th>Harcanan</th>
-                <th>Satın Alınan</th>
-            </tr>
-    `;
+        resultDiv.appendChild(closeButton); // Butonu pop-up'a ekle
 
-    for (let world in worldData) {
-        resultHTML += `
-            <tr>
-                <td>${world}</td>
-                <td>${worldData[world].gained}</td>
-                <td>${worldData[world].spent}</td>
-                <td>${worldData[world].bought}</td>
-            </tr>
+        let resultHTML = `
+            <table class="vis" width="100%">
+                <tr>
+                    <th colspan="7" style="text-align: center;">PP Satın Alma Kayıtları</th>
+                </tr>
+                <tr>
+                    <th colspan="7" style="text-align: center;"><h2>Toplam pp harcama: ${-totalSpent} pp</h2></th>
+                </tr>
+                <tr>
+                    <th colspan="7" style="text-align: center;"><h2>Toplam pp kazanma: ${totalGained} pp</h2></th>
+                </tr>
+                <tr>
+                    <th colspan="7" style="text-align: center;"><h2>Toplam pp satın alma: ${totalBought} pp</h2></th>
+                </tr>
+            </table>
+            <h3>Dünya Bazlı Veriler:</h3>
+            <table class="vis" width="100%">
+                <tr>
+                    <th>Dünya</th>
+                    <th>Kazanılan</th>
+                    <th>Harcanan</th>
+                    <th>Satın Alınan</th>
+                </tr>
         `;
+
+        for (let world in worldData) {
+            resultHTML += `
+                <tr>
+                    <td>${world}</td>
+                    <td>${worldData[world].gained}</td>
+                    <td>${worldData[world].spent}</td>
+                    <td>${worldData[world].bought}</td>
+                </tr>
+            `;
+        }
+
+        resultHTML += `</table>`;
+        resultDiv.innerHTML += resultHTML;
+        document.body.appendChild(resultDiv); // Pop-up'ı sayfaya ekle
+
+        console.log('Pop-up başarıyla oluşturuldu.');
     }
-
-    resultHTML += `</table>`;
-    resultDiv.innerHTML += resultHTML;
-    document.body.appendChild(resultDiv);
-}
-
-
-
-
 
     if (!window.location.href.includes('screen=premium&mode=log')) {
         console.log("Bu script yalnızca premium puan hareketleri sayfasında çalışır.");
@@ -202,3 +203,4 @@ function displayResults() {
     getTotalPages();
     fetchDataFromPage(currentPage);
 
+})();
