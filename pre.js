@@ -1,13 +1,3 @@
-// ==UserScript==
-// @name         Tribal Wars Premium Tracker
-// @namespace    http://tampermonkey.net/
-// @version      2.0
-// @description  Tribal Wars premium puan kazanç, harcama ve satın alma hesaplama scripti
-// @author       YourName
-// @match        https://*.klanlar.org/*
-// @grant        none
-// ==/UserScript==
-
 (function () {
     'use strict';
 
