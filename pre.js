@@ -186,8 +186,8 @@
     closeButton.href = '#';
     closeButton.setAttribute('data-title', 'Kapat :: klavye kısayolu: <strong>Esc</strong>');
     closeButton.style.position = 'absolute';
-    closeButton.style.top = '-25px'; // Butonun üstteki yeri
-    closeButton.style.right = '-23px'; // Butonun sağdaki yeri
+    closeButton.style.top = '50px'; // Butonun üstteki yeri
+    closeButton.style.right = '700px'; // Butonun sağdaki yeri
     closeButton.style.width = '20px';
     closeButton.style.height = '20px';
     closeButton.style.background = 'url(https://dstr.innogamescdn.com/asset/61bc21fc/graphic/login_close.png) top left no-repeat';
@@ -197,11 +197,13 @@
     closeButton.onclick = (e) => {
         e.preventDefault();
         resultDiv.style.display = 'none'; // Sonuçları gizle
+        closeButton.style.display = 'none';
     };
 
-    resultDiv.appendChild(closeButton);
+    
     document.body.appendChild(resultDiv);
-
+    document.body.appendChild(closeButton);
+     
     // Kaydırma çubuğu için ek stil (WebKit tarayıcıları)
     const style = document.createElement('style');
     style.innerHTML = `
