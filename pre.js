@@ -147,7 +147,7 @@
                 <th colspan="7" style="text-align: center;">PP Satın Alma Kayıtları</th>
             </tr>
             <tr>
-                <th colspan="7" style="text-align: center;"><h2>Toplam Harcanan Premium: ${-totalSpent}</h2></th>
+                <th colspan="7" style="text-align: center;"><h2>Toplam Harcanan Premium: ${totalSpent}</h2></th>
             </tr>
             <tr>
                 <th colspan="7" style="text-align: center;"><h2>Toplam Kasılan Premium: ${totalGained}</h2></th>
