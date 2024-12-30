@@ -185,7 +185,7 @@
     closeButton.classList.add('popup_box_close');
     closeButton.href = '#';
     closeButton.setAttribute('data-title', 'Kapat :: klavye kısayolu: <strong>Esc</strong>');
-    closeButton.style.position = 'absolute';
+    closeButton.style.position = 'fixed';
     closeButton.style.top = '50px'; // Butonun üstteki yeri
     closeButton.style.right = '700px'; // Butonun sağdaki yeri
     closeButton.style.width = '20px';
