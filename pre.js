@@ -142,7 +142,7 @@
         resultDiv.style.border = '19px solid #804000';
         resultDiv.style.borderImage = 'url("https://dstr.innogamescdn.com/asset/61bc21fc/graphic/popup/border.png") 19 19 19 19 repeat';
     let resultHTML = `
-        <table class="vis" width="100%">
+        <table class="vis" width="100%" style="border-spacing: 2px; border-collapse: separate; empty-cells: show !important;">
             <tr>
                 <th colspan="7" style="text-align: center;">PP Satın Alma Kayıtları</th>
             </tr>
