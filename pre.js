@@ -147,13 +147,13 @@
                 <th colspan="7" style="text-align: center;">PP Satın Alma Kayıtları</th>
             </tr>
             <tr>
-                <th colspan="7" style="text-align: center;"><h2>Toplam Harcanan Premium: ${-totalSpent} pp</h2></th>
+                <th colspan="7" style="text-align: center;"><h2>Toplam Harcanan Premium: ${-totalSpent}</h2></th>
             </tr>
             <tr>
-                <th colspan="7" style="text-align: center;"><h2>Toplam Kasılan Premium: ${totalGained} pp</h2></th>
+                <th colspan="7" style="text-align: center;"><h2>Toplam Kasılan Premium: ${totalGained}</h2></th>
             </tr>
             <tr>
-                <th colspan="7" style="text-align: center;"><h2>Toplam Satın Alınan Premium: ${totalBought} pp</h2></th>
+                <th colspan="7" style="text-align: center;"><h2>Toplam Satın Alınan Premium: ${totalBought}</h2></th>
             </tr>
         </table>
         <h3>Dünya Bazlı Veriler:</h3>
