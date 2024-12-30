@@ -117,7 +117,7 @@
         }
     }
 
- function displayResults() {
+function displayResults() {
 
     const resultDiv = document.createElement('div');
     resultDiv.style.position = 'fixed';
@@ -139,6 +139,9 @@
     resultDiv.style.scrollbarWidth = 'thin'; // Firefox için ince kaydırma çubuğu
     resultDiv.style.scrollbarColor = '#888 #f4e4bc'; // Kaydırma çubuğu rengi (thumb ve track)
 
+    // Toplam kazanç ve satın alma farkı
+    const totalDifference = totalGained - totalBought; // Toplam fark hesaplama
+
     let resultHTML = `
         <table class="vis" width="100%" style="border-spacing: 2px; border-collapse: separate; empty-cells: show !important;">
             <tr>
@@ -148,7 +151,7 @@
                 <th colspan="7" style="text-align: center;"><h2>Toplam Harcanan Premium: ${totalSpent}</h2></th>
             </tr>
             <tr>
-                <th colspan="7" style="text-align: center;"><h2>Toplam Kasılan Premium: ${totalGained}</h2></th>
+                <th colspan="7" style="text-align: center;"><h2>Toplam Kasılan Premium: ${totalDifference}</h2></th>
             </tr>
             <tr>
                 <th colspan="7" style="text-align: center;"><h2>Toplam Satın Alınan Premium: ${totalBought}</h2></th>
