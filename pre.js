@@ -138,9 +138,7 @@
     // Kaydırma çubuğunun özelleştirilmesi
     resultDiv.style.scrollbarWidth = 'thin'; // Firefox için ince kaydırma çubuğu
     resultDiv.style.scrollbarColor = '#888 #f4e4bc'; // Kaydırma çubuğu rengi (thumb ve track)
-   // Burada border-image için stilleri doğrudan resultDiv'e ekliyoruz
-        resultDiv.style.border = '19px solid #804000';
-        resultDiv.style.borderImage = 'url("https://dstr.innogamescdn.com/asset/61bc21fc/graphic/popup/border.png") 19 19 19 19 repeat';
+
     let resultHTML = `
         <table class="vis" width="100%" style="border-spacing: 2px; border-collapse: separate; empty-cells: show !important;">
             <tr>
@@ -167,12 +165,16 @@
     `;
 
     for (let world in worldData) {
+        const gained = worldData[world].gained;
+        const bought = worldData[world].bought;
+        const difference = gained - bought; // Çıkarma işlemi
+
         resultHTML += `
             <tr>
                 <td>${world}</td>
-                <td>${worldData[world].gained}</td>
+                <td>${difference}</td>
                 <td>${worldData[world].spent}</td>
-                <td>${worldData[world].bought}</td>
+                <td>${bought}</td>
             </tr>
         `;
     }
@@ -200,10 +202,9 @@
         closeButton.style.display = 'none';
     };
 
-    
     document.body.appendChild(resultDiv);
     document.body.appendChild(closeButton);
-     
+
     // Kaydırma çubuğu için ek stil (WebKit tarayıcıları)
     const style = document.createElement('style');
     style.innerHTML = `
