@@ -1,6 +1,3 @@
-(function () {
-    'use strict';
-
     let totalPages = 0;
     let currentPage = 0;
     let allData = [];
@@ -141,6 +138,7 @@ function displayResults() {
 
     // Toplam kazanç ve satın alma farkı
     const totalDifference = totalGained - totalBought; // Toplam fark hesaplama
+    const mevcutpre = totalDifference + totalBought - totalSpent;
 
     let resultHTML = `
         <table class="vis" width="100%" style="border-spacing: 2px; border-collapse: separate; empty-cells: show !important;">
@@ -157,7 +155,8 @@ function displayResults() {
                 <th colspan="7" style="text-align: center;"><h2>Toplam Satın Alınan Premium: ${totalBought}</h2></th>
             </tr>
         </table>
-        <h3>Dünya Bazlı Veriler:</h3>
+         <h3>Mevcut Premium: ${mevcutpre}</h3>
+         <h3>Dünya Bazlı Veriler:</h3>
         <table class="vis" width="100%">
             <tr>
                 <th>Dünya</th>
@@ -239,4 +238,4 @@ function displayResults() {
     getTotalPages();
     fetchDataFromPage(currentPage);
 
-})();
+();
