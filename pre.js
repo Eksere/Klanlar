@@ -1,3 +1,6 @@
+(function () {
+    'use strict';
+
     let totalPages = 0;
     let currentPage = 0;
     let allData = [];
@@ -238,4 +241,4 @@ function displayResults() {
     getTotalPages();
     fetchDataFromPage(currentPage);
 
-();
+})();
