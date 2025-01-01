@@ -233,7 +233,7 @@ function displayResults() {
 
 
     if (!window.location.href.includes('screen=premium&mode=log')) {
-        console.log("Bu script yalnızca premium puan hareketleri sayfasında çalışır.");
+        alert("Bu script yalnızca premium puan hareketleri sayfasında çalışır.");
         return;
     }
 
